@@ -3,7 +3,7 @@ CC=gcc
 LD=ld
 QEMU=qemu-system-x86_64
 BUILD=build
-CFLAGS=-m32 -ffreestanding -O1 -Wall -Werror -Wextra -std=c11
+CFLAGS=-m32 -ffreestanding -O1 -Wall -Werror -Wextra -std=c11 -fno-pic -fno-pie -no-pie
 all: $(BUILD)/os.bin
 $(BUILD)/kernel.bin: kentry.s kernel.c link.ld
 	@mkdir -p $(BUILD)

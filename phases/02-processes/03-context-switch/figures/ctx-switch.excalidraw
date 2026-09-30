@@ -1,0 +1,1 @@
+{"type":"excalidraw","version":2,"source":"osfs-ctx-switch","elements":[{"type":"rectangle","x":60,"y":60,"width":180,"height":50,"label":"task1 stack+rsp"},{"type":"arrow","x":240,"y":85,"label":"push, stash, load, pop, ret"},{"type":"rectangle","x":420,"y":60,"width":180,"height":50,"label":"task2 stack+rsp"}],"appState":{},"files":{}}

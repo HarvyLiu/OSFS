@@ -1,0 +1,12 @@
+{
+  "lesson": "02-syscalls-strace",
+  "title": "Syscalls, strace Your First Trap",
+  "questions": [
+    {"stage": "pre", "question": "printf vs write?", "options": ["Same", "printf formats in userspace then traps write(); write knocks directly", "write formats", "Neither traps"], "correct": 1, "explanation": "Library = formatting + trap; syscall = the crossing."},
+    {"stage": "check", "question": "write returns fewer bytes than asked. Correct response?", "options": ["Assume done", "Loop until all sent (short writes are legal)", "Abort always", "Retry whole buffer from start"], "correct": 1, "explanation": "Advance by n, resend the remainder."},
+    {"stage": "check", "question": "read's buf after nr bytes needs?", "options": ["Nothing", "Manual buf[nr]=0 (read doesn't terminate)", "Longer buffer", "Second read"], "correct": 1, "explanation": "Count, not string: terminate yourself."},
+    {"stage": "check", "question": "fd -1 + perror means?", "options": ["Success", "Trap failed; reason in errno", "Try again blindly", "Ignore"], "correct": 1, "explanation": "-1 signals, errno explains."},
+    {"stage": "post", "question": "strace -e trace=%file does what?", "options": ["Everything", "Filters to file-family traps (open/openat/stat...)", "Only errors", "Speeds kernel"], "correct": 1, "explanation": "Filters are microscopes for trap families."},
+    {"stage": "post", "question": "Trap vs interrupt (P-02/04)?", "options": ["Unrelated", "Same rails: trap software-raised, IRQ wire-raised; both dispatch+jump+return", "Traps faster always", "IRQs use strace"], "correct": 1, "explanation": "One mechanism, two doorbells."}
+  ]
+}

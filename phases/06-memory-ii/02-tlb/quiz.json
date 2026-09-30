@@ -1,0 +1,12 @@
+{
+  "lesson": "02-tlb",
+  "title": "TLB Behavior",
+  "questions": [
+    {"stage": "pre", "question": "TLB caches what?", "options": ["File data", "Recent VPN->frame answers (walk results)", "Instructions", "Pids"], "correct": 1, "explanation": "Yesterday's walks, keyed by VPN."},
+    {"stage": "check", "question": "Trace 0,1,2,3,0,1,4,0 on 4-FIFO: hits?", "options": ["6", "2 (second 0,1 only; 4 evicts 0)", "0", "8"], "correct": 1, "explanation": "Fill 4, hit 2, evict-then-miss the tail."},
+    {"stage": "check", "question": "EAT with h=2/8?", "options": ["101", "176 ((2*101+6*201)/8)", "201", "150"], "correct": 1, "explanation": "Weighted mean of hit/miss costs."},
+    {"stage": "check", "question": "CR3 reload flushes TLB unless?", "options": ["Never flushes", "ASID/PCID tags entries per space (survive)", "Bigger TLB", "Hugepages"], "correct": 1, "explanation": "Tags disambiguate spaces: no flush needed."},
+    {"stage": "post", "question": "Hot trace 0,0,0,0,1,1,1,1: misses?", "options": ["8", "2 (cold only; locality rewarded)", "0", "4"], "correct": 1, "explanation": "Same cache, opposite behavior: workload is performance."},
+    {"stage": "post", "question": "2M hugepages help TLB by?", "options": ["More entries", "Fewer keys, 512x reach each (coverage, not count)", "Faster RAM", "No faults"], "correct": 1, "explanation": "Reach = entries x size: grow size, cover more."}
+  ]
+}

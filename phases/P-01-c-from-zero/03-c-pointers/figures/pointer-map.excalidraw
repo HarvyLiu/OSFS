@@ -1,0 +1,1 @@
+{"type":"excalidraw","version":2,"source":"osfs-pointer-map","elements":[{"type":"rectangle","x":100,"y":100,"width":220,"height":60,"label":"mailbox #1000: x = 42"},{"type":"rectangle","x":100,"y":200,"width":220,"height":60,"label":"slip p = #1000"},{"type":"arrow","x":200,"y":200,"label":"*p opens #1000"}],"appState":{},"files":{}}

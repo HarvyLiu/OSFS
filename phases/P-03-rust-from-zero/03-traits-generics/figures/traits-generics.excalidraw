@@ -1,0 +1,1 @@
+{"type":"excalidraw","version":2,"source":"osfs-traits-generics","elements":[{"type":"rectangle","x":40,"y":60,"width":180,"height":40,"label":"trait: promise set"},{"type":"rectangle","x":260,"y":60,"width":180,"height":40,"label":"generic: any T keeps it"}],"appState":{},"files":{}}

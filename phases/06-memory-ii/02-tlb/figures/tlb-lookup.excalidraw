@@ -1,0 +1,1 @@
+{"type":"excalidraw","version":2,"source":"osfs-tlb-lookup","elements":[{"type":"rectangle","x":40,"y":60,"width":140,"height":40,"label":"VPN -> TLB?"},{"type":"arrow","x":180,"y":80,"label":"hit: frame / miss: walk"}],"appState":{},"files":{}}

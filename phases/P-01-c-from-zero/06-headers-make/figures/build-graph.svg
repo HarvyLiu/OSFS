@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="440" height="150" role="img" aria-label="build graph">
+<text x="20" y="40" font-family="monospace" font-size="13">vec.h (promise) pasted into vec.c + main.c</text>
+<text x="20" y="62" font-family="monospace" font-size="13">vec.c -c-&gt; vec.o; main.c -c-&gt; main.o; link</text>
+<text x="20" y="84" font-family="monospace" font-size="12">make rebuilds iff prereq newer than target</text>
+<text x="20" y="108" font-family="monospace" font-size="12">editable: build-graph.excalidraw</text>
+</svg>

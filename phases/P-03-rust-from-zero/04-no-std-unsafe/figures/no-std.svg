@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="460" height="150" role="img" aria-label="no std layers">
+<text x="20" y="40" font-family="monospace" font-size="13">core: types traits Option Result atomics</text>
+<text x="20" y="62" font-family="monospace" font-size="13">+ alloc: Vec String Box (needs allocator)</text>
+<text x="20" y="84" font-family="monospace" font-size="13">+ std: threads files println backtrace</text>
+<text x="20" y="108" font-family="monospace" font-size="12">no_std debts: panic_handler + own entry</text>
+<text x="20" y="130" font-family="monospace" font-size="12">editable: no-std.excalidraw</text>
+</svg>

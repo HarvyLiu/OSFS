@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="440" height="170" role="img" aria-label="multilevel walk">
+<text x="20" y="35" font-family="monospace" font-size="13">dir[va&gt;&gt;22] --&gt; table (or NULL = hole)</text>
+<text x="20" y="58" font-family="monospace" font-size="13">table[(va&gt;&gt;12)&amp;3FF] --&gt; frame+P/RW/U</text>
+<text x="20" y="81" font-family="monospace" font-size="13">phys = frame*4096 + (va&amp;FFF)</text>
+<text x="20" y="106" font-family="monospace" font-size="12">faults: -2 dir -3 page -4 ro-write</text>
+<text x="20" y="130" font-family="monospace" font-size="12">empty 4M = 4B NULL, not 4K table</text>
+<text x="20" y="150" font-family="monospace" font-size="12">editable: multilevel-walk.excalidraw</text>
+</svg>

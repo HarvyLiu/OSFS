@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="440" height="140" role="img" aria-label="struct layout">
+<text x="20" y="40" font-family="monospace" font-size="13">pcb_t: [pid][state][rsp][name16] contiguous</text>
+<text x="20" y="62" font-family="monospace" font-size="12">p-&gt;pid = (*p).pid; enum names the states</text>
+<text x="20" y="84" font-family="monospace" font-size="12">table[N] = N cards; UNUSED(0) = free slot</text>
+<text x="20" y="108" font-family="monospace" font-size="12">editable: struct-layout.excalidraw</text>
+</svg>

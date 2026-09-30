@@ -1,0 +1,12 @@
+{
+  "lesson": "03-context-switch",
+  "title": "Context Switch",
+  "questions": [
+    {"stage": "pre", "question": "fork() created PCBs. What does the switch do with them?", "options": ["Deletes them", "Saves old registers/stack-ptr, loads new ones", "Merges them", "Encrypts them"], "correct": 1, "explanation": "Pause = save; resume = restore; rsp swap picks the stack."},
+    {"stage": "check", "question": "Why push callee-saved regs (rbx, rbp, r12-r15)?", "options": ["They are fast", "ABI promises they survive calls; switch must honor that", "They hold the pid", "They disable interrupts"], "correct": 1, "explanation": "Skipping one leaks old task state into the new task."},
+    {"stage": "check", "question": "movq %rsp,(%rdi) + movq %rsi,%rsp do what?", "options": ["Add two numbers", "Stash old stack-ptr, load new stack-ptr (the switch itself)", "Call a function", "Return"], "correct": 1, "explanation": "Two moves = which stack %rsp names is which task runs."},
+    {"stage": "check", "question": "get_rsp returns via?", "options": ["%rdi", "%rax", "Stack", "%rip"], "correct": 1, "explanation": "Integer returns ride %rax per System V."},
+    {"stage": "post", "question": "New task's stack needs what pre-seeded for ret to work?", "options": ["Nothing", "A return address on top (where to land)", "A pid", "An interrupt"], "correct": 1, "explanation": "ret pops the landing address; thread creation plants it (capstone)."},
+    {"stage": "post", "question": "Your sim vs Linux preemption?", "options": ["Same", "Sim is cooperative (you choose); Linux preempts via timer", "Sim is faster", "Linux never switches"], "correct": 1, "explanation": "Policy differs; mechanism (save/restore) is shared."}
+  ]
+}

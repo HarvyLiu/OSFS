@@ -1,0 +1,12 @@
+{
+  "lesson": "03-sema-condvar",
+  "title": "Semaphores, Condvars, Deadlock",
+  "questions": [
+    {"stage": "pre", "question": "04/02 spins; this lesson sleeps. Why?", "options": ["Sleep faster always", "Short+contended: spin; paced waits: surrender CPU (sem/cond)", "Spin broken", "No difference"], "correct": 1, "explanation": "Cost model: burn briefly vs sleep long."},
+    {"stage": "check", "question": "empty=N, full=0 seeds mean?", "options": ["Random", "N free slots, 0 items: pacing starts true", "Both full", "No buffer"], "correct": 1, "explanation": "Initialization is the protocol: counts mirror reality."},
+    {"stage": "check", "question": "while, not if, around wait?", "options": ["Style", "Spurious/stolen wakeups must re-sleep; if proceeds on lies", "Faster", "Needs broadcast"], "correct": 1, "explanation": "Recheck after every wake: the rule is unconditional."},
+    {"stage": "check", "question": "Mutex guards what here (vs sems)?", "options": ["Counts", "Indices/positions; sems pace counts", "Nothing", "Threads"], "correct": 1, "explanation": "Two tools: pace with counts, protect positions."},
+    {"stage": "post", "question": "Deadlock cure used?", "options": ["Timeouts only", "Global lock order (A-then-B everywhere kills circular wait)", "More threads", "Bigger stacks"], "correct": 1, "explanation": "Cheapest Coffman condition to break: the cycle."},
+    {"stage": "post", "question": "Checksum 19900 proves?", "options": ["Order", "Zero loss (order-free invariant over interleavings)", "Speed", "Nothing"], "correct": 1, "explanation": "Sum commutes: assert invariants, not schedules."}
+  ]
+}

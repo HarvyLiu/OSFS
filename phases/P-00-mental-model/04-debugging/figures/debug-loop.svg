@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="440" height="170" role="img" aria-label="debug loop">
+<text x="20" y="30" font-family="monospace" font-size="13">1 reproduce: bob kills, amy lives (discriminate!)</text>
+<text x="20" y="52" font-family="monospace" font-size="13">2 observe: gcc -g, gdb -batch -ex run -ex bt</text>
+<text x="20" y="74" font-family="monospace" font-size="13">frame0 strlen dies, frame1 buggy.c:21 (NULL id)</text>
+<text x="20" y="98" font-family="monospace" font-size="13">3 hypothesize: NULL unchecked? bound &lt; vs &lt;= ?</text>
+<text x="20" y="122" font-family="monospace" font-size="13">4 pin: assert fails before fix, passes after</text>
+<text x="20" y="146" font-family="monospace" font-size="13">fix: if(!id) return 2; i &lt; n (loud vs silent bugs)</text>
+<text x="20" y="162" font-family="monospace" font-size="12">editable: debug-loop.excalidraw</text>
+</svg>

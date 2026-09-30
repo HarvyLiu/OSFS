@@ -1,0 +1,12 @@
+{
+  "lesson": "03-ffs-locality",
+  "title": "FFS Locality",
+  "questions": [
+    {"stage": "pre", "question": "First-fit vs clustered here?", "options": ["Same", "First-fit odds 1-15 (14/14); clustered 41-48 (7/7): 2x", "Clustered worse", "No difference"], "correct": 1, "explanation": "Affinity halves span+gaps, counted."},
+    {"stage": "check", "question": "Span/gaps measure?", "options": ["Speed", "max-min and seek-distance sum (placement quality)", "Size", "Count"], "correct": 1, "explanation": "Metrics, not vibes: placement policy scored."},
+    {"stage": "check", "question": "FFS groups mean?", "options": ["More disks", "Inodes+bitmap+data per group; files near inodes, dirs near parents", "Bigger blocks", "No bitmaps"], "correct": 1, "explanation": "Locality by construction: affinity zones."},
+    {"stage": "check", "question": "Nearest-first (zigzag) vs upward sweep?", "options": ["Same", "Nearest ping-pongs (gaps explode); sweep glides", "Nearest wins", "Both fail"], "correct": 1, "explanation": "Order matters: sweep beats jitter for seeks."},
+    {"stage": "post", "question": "SSDs still care about locality via?", "options": ["Seeks", "Caches/prefetch (currency changes, locality doesn't retire)", "Nothing", "Spinning"], "correct": 1, "explanation": "Contiguity pays in every cache hierarchy."},
+    {"stage": "post", "question": "Scarcity vs policy?", "options": ["Unrelated", "Full disk erases policy differences; plenty reveals them", "Policy always wins", "Size only"], "correct": 1, "explanation": "No room, no choice: capacity moral."}
+  ]
+}

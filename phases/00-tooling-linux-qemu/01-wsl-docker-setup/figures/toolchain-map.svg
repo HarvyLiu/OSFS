@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="460" height="200" role="img" aria-label="toolchain map">
+<rect x="20" y="30" width="150" height="50" fill="none" stroke="currentColor" stroke-width="2"/><text x="30" y="52" font-family="monospace" font-size="12">you</text><text x="30" y="68" font-family="monospace" font-size="12">Win/Mac/Linux</text>
+<text x="180" y="45" font-family="monospace" font-size="12">door 1: WSL/native →</text>
+<text x="180" y="65" font-family="monospace" font-size="12">door 2: docker →</text>
+<rect x="330" y="30" width="120" height="90" fill="none" stroke="currentColor" stroke-width="2"/><text x="340" y="52" font-family="monospace" font-size="12">gcc qemu</text><text x="340" y="68" font-family="monospace" font-size="12">gdb rustc</text><text x="340" y="84" font-family="monospace" font-size="12">make py3</text>
+<text x="20" y="150" font-family="monospace" font-size="12">same verify.py passes in both doors</text>
+<text x="20" y="170" font-family="monospace" font-size="12">editable: toolchain-map.excalidraw</text>
+</svg>

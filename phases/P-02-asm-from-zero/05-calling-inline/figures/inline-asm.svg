@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="460" height="150" role="img" aria-label="inline asm anatomy">
+<text x="20" y="40" font-family="monospace" font-size="13">__asm__(T : outputs : inputs : clobbers)</text>
+<text x="20" y="62" font-family="monospace" font-size="12">%0..%n in order: outputs first, then inputs</text>
+<text x="20" y="84" font-family="monospace" font-size="12">= write, + read/write, r any, a eax, Nd port</text>
+<text x="20" y="106" font-family="monospace" font-size="12">volatile = keep; cc/memory = confess</text>
+<text x="20" y="130" font-family="monospace" font-size="12">editable: inline-asm.excalidraw</text>
+</svg>

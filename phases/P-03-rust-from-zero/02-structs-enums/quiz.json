@@ -1,0 +1,12 @@
+{
+  "lesson": "02-structs-enums",
+  "title": "Structs, Enums, match, Option/Result",
+  "questions": [
+    {"stage": "pre", "question": "Rust enum vs C int state?", "options": ["Same", "Enum makes only listed states spellable; int allows 99", "Enum slower", "Int safer"], "correct": 1, "explanation": "Illegal states become unrepresentable, not merely discouraged."},
+    {"stage": "check", "question": "match missing one variant?", "options": ["Runs default", "Compile error naming it", "Warning only", "Panics"], "correct": 1, "explanation": "Exhaustiveness is mechanical — forgotten cases break builds."},
+    {"stage": "check", "question": "find returns Option because?", "options": ["Style", "Absence is explicit (Some/None), no NULL roulette", "Faster", "Needs heap"], "correct": 1, "explanation": "Callers handle None; the type system checks."},
+    {"stage": "check", "question": "alloc returns Result because?", "options": ["Tradition", "Failure is a value (Err) the caller must handle, not a silent -1", "Slower paths", "Needs exceptions"], "correct": 1, "explanation": "Errors as data with must-use handling."},
+    {"stage": "post", "question": "Why closure blank() in new()?", "options": ["Speed", "Pcb not Copy (owns String), so [x; 4] refused; four calls instead", "Style only", "Needs heap"], "correct": 1, "explanation": "Copy requires bitwise dup safety; String owns heap, so move-only."},
+    {"stage": "post", "question": "C trilogy mapped: leak/double-free/UAF become?", "options": ["Same bugs", "Effort-only leaks, impossible double-free, uncompilable use-after-move", "GC pauses", "Nothing"], "correct": 1, "explanation": "Ownership+drop+move rules erase the classes structurally."}
+  ]
+}

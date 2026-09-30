@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="460" height="160" role="img" aria-label="bounded buffer">
+<text x="20" y="40" font-family="monospace" font-size="13">producer: wait(empty) -&gt; place -&gt; post(full)</text>
+<text x="20" y="62" font-family="monospace" font-size="13">consumer: wait(full) -&gt; take -&gt; post(empty)</text>
+<text x="20" y="84" font-family="monospace" font-size="12">mutex guards indices; sems pace counts</text>
+<text x="20" y="106" font-family="monospace" font-size="12">wait in while (spurious/stolen); order locks A-B</text>
+<text x="20" y="130" font-family="monospace" font-size="12">editable: bounded-buffer.excalidraw</text>
+</svg>

@@ -1,0 +1,1 @@
+{"type":"excalidraw","version":2,"source":"osfs-abstractions","elements":[{"type":"rectangle","x":40,"y":40,"width":180,"height":40,"label":"blocks -> files"},{"type":"rectangle","x":260,"y":40,"width":180,"height":40,"label":"cpu -> processes"},{"type":"rectangle","x":150,"y":110,"width":200,"height":40,"label":"ram -> address spaces"}],"appState":{},"files":{}}

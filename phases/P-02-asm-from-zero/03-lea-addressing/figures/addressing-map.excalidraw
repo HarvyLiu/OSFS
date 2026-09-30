@@ -1,0 +1,1 @@
+{"type":"excalidraw","version":2,"source":"osfs-addressing-map","elements":[{"type":"rectangle","x":60,"y":60,"width":340,"height":40,"label":"offset(base,index,scale): base+i*s+off"}],"appState":{},"files":{}}

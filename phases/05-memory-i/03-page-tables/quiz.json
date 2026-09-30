@@ -1,0 +1,12 @@
+{
+  "lesson": "03-page-tables",
+  "title": "Multi-Level Page Tables",
+  "questions": [
+    {"stage": "pre", "question": "Flat 32-bit table costs per process?", "options": ["4 KiB", "4 MiB (2^20 x 4B) even when mostly empty", "4 bytes", "Nothing"], "correct": 1, "explanation": "Dense array prices the worst case always."},
+    {"stage": "check", "question": "va 0x00401ABC: dir, table idx, offset?", "options": ["dir1 tab1 off0xABC", "dir0 tab4 off0x1ABC", "dir1 tab0 off0", "dir4 tab1 off0xABC"], "correct": 0, "explanation": ">>22=1, (>>12)&3FF=1, &FFF=0xABC."},
+    {"stage": "check", "question": "Empty 4 MiB region costs?", "options": ["One 4K table", "One 4B NULL slot", "One frame", "4 MiB"], "correct": 1, "explanation": "Absence is cheap: NULL dir entry."},
+    {"stage": "check", "question": "Write to RO page returns?", "options": ["0", "-4 (perm fault, distinct from -2/-3 structural)", "-2", "-3"], "correct": 1, "explanation": "Numbered faults triage: structure vs permission."},
+    {"stage": "post", "question": "Unmap then translate gives?", "options": ["Old frame", "-3 (P cleared; absence default)", "-4", "0"], "correct": 1, "explanation": "Presence is a bit; clearing restores default absence."},
+    {"stage": "post", "question": "Root pointer lives where?", "options": ["Stack", "PCB field = CR3 value (one register names universe)", "Heap data", "Code"], "correct": 1, "explanation": "Switch spaces by swapping roots — 02/03's swap, page-flavored."}
+  ]
+}

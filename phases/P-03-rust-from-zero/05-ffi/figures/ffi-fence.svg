@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="460" height="150" role="img" aria-label="ffi fence">
+<text x="20" y="40" font-family="monospace" font-size="13">C struct+extern  &lt;-- regs+offsets --&gt;  repr(C)+no_mangle</text>
+<text x="20" y="62" font-family="monospace" font-size="13">widths fixed: i32/u64 (never long/int)</text>
+<text x="20" y="84" font-family="monospace" font-size="12">nm: T = delivers, U = promises (bilingual)</text>
+<text x="20" y="106" font-family="monospace" font-size="12">one matching target to link; mixed boxes fail</text>
+<text x="20" y="130" font-family="monospace" font-size="12">editable: ffi-fence.excalidraw</text>
+</svg>

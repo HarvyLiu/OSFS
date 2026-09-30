@@ -1,0 +1,12 @@
+{
+  "lesson": "03-shell-capstone",
+  "title": "Shell Capstone",
+  "questions": [
+    {"stage": "pre", "question": "Identity paging proves what?", "options": ["Isolation", "Translation machinery on, transparent (virtual=physical)", "Speed", "Security"], "correct": 1, "explanation": "Map first, isolate later: machinery before policy."},
+    {"stage": "check", "question": "PIC remapped because?", "options": ["Speed", "Default IRQ0 collides with CPU faults (vector 8)", "Style", "QEMU needs"], "correct": 1, "explanation": "IBM 1981 overlap: every OS remaps to 0x20."},
+    {"stage": "check", "question": "iret vs ret?", "options": ["Same", "iret pops eip+cs+eflags (interrupts resume; ret would deafen)", "Faster", "Shorter"], "correct": 1, "explanation": "Full resume: the tick must return the machine whole."},
+    {"stage": "check", "question": "tasks proves switching how?", "options": ["Claims it", "Two esp values 4K apart + spins growing between calls", "Logs", "Speed"], "correct": 1, "explanation": "Evidence: distinct stacks, motion without prompting."},
+    {"stage": "post", "question": "The switch is honestly?", "options": ["Fully preemptive", "Timer-flagged, cooperatively executed (yield at loop top)", "Fake", "Blocking"], "correct": 1, "explanation": "Timer contests, shell yields: hybrid, labeled."},
+    {"stage": "post", "question": "dispatch table is?", "options": ["A shell detail", "Syscalls minus the trap (same shape, no rings yet)", "A bug", "Slow"], "correct": 1, "explanation": "Name->function dispatch: syscall table's civilian cousin."}
+  ]
+}

@@ -1,0 +1,1 @@
+{"type":"excalidraw","version":2,"source":"osfs-ticket-queue","elements":[{"type":"rectangle","x":40,"y":60,"width":180,"height":40,"label":"next_ticket (roll)"},{"type":"arrow","x":220,"y":80,"label":"take, wait turn"},{"type":"rectangle","x":340,"y":60,"width":180,"height":40,"label":"now_serving (display)"}],"appState":{},"files":{}}

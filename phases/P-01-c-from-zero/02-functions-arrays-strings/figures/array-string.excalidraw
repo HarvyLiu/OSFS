@@ -1,0 +1,1 @@
+{"type":"excalidraw","version":2,"source":"osfs-array-string","elements":[{"type":"rectangle","x":60,"y":80,"width":320,"height":50,"label":"buf[4] = 0 | 10 | 20 | 30 (contiguous)"},{"type":"rectangle","x":60,"y":160,"width":320,"height":50,"label":"\"osfs\" = o s f s \\0 (5 bytes)"}],"appState":{},"files":{}}

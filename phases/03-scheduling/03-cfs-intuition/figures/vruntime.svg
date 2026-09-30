@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="440" height="160" role="img" aria-label="vruntime chart">
+<text x="20" y="35" font-family="monospace" font-size="13">vr: A 14.00, B 15.28, C 13.45 (tied)</text>
+<text x="20" y="58" font-family="monospace" font-size="13">real: A 14, B 5, C 41 (proportional)</text>
+<text x="20" y="82" font-family="monospace" font-size="12">charge = 1024/weight per tick; run min vr</text>
+<text x="20" y="106" font-family="monospace" font-size="12">weights: -5:3121 0:1024 5:335</text>
+<text x="20" y="130" font-family="monospace" font-size="12">editable: vruntime.excalidraw</text>
+</svg>

@@ -1,0 +1,1 @@
+{"type":"excalidraw","version":2,"source":"osfs-vsfs-layout","elements":[{"type":"rectangle","x":40,"y":40,"width":400,"height":30,"label":"0:super 1:bitmap 2-5:inodes 6+:data"}]} 

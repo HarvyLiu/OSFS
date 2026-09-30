@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="460" height="150" role="img" aria-label="ctx switch">
+<text x="20" y="40" font-family="monospace" font-size="13">task1 [regs|rsp] --push/stash/load/pop/ret--&gt; task2</text>
+<text x="20" y="65" font-family="monospace" font-size="12">%rsp names the running task; PCB stores the rest</text>
+<text x="20" y="90" font-family="monospace" font-size="12">callee-saved travel; caller-saved already spilled</text>
+<text x="20" y="115" font-family="monospace" font-size="12">editable: ctx-switch.excalidraw</text>
+</svg>

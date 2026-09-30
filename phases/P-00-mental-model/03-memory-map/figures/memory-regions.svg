@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="440" height="160" role="img" aria-label="memory regions">
+<text x="20" y="35" font-family="monospace" font-size="13">code: functions (read-only residents)</text>
+<text x="20" y="57" font-family="monospace" font-size="13">static: .data init + .bss zero (whole run)</text>
+<text x="20" y="79" font-family="monospace" font-size="13">heap: malloc..free (ownership transfers)</text>
+<text x="20" y="101" font-family="monospace" font-size="13">stack: locals {..} (NEVER return &amp;local)</text>
+<text x="20" y="125" font-family="monospace" font-size="12">lifetime Q = neighborhood Q (ask where)</text>
+<text x="20" y="145" font-family="monospace" font-size="12">editable: memory-regions.excalidraw</text>
+</svg>

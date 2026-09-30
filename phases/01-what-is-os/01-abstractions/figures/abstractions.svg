@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="440" height="160" role="img" aria-label="three abstractions">
+<text x="20" y="40" font-family="monospace" font-size="13">blocks --FS--&gt; files (names+offsets)</text>
+<text x="20" y="62" font-family="monospace" font-size="13">cpu --proc--+&gt; processes (pid+mem+files)</text>
+<text x="20" y="84" font-family="monospace" font-size="13">ram --MM--+&gt; address spaces (private 0..max)</text>
+<text x="20" y="108" font-family="monospace" font-size="12">syscalls = the shop counter for each lie</text>
+<text x="20" y="130" font-family="monospace" font-size="12">editable: abstractions.excalidraw</text>
+</svg>

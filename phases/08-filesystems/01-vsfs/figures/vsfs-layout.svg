@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="440" height="160" role="img" aria-label="vsfs layout">
+<text x="20" y="40" font-family="monospace" font-size="13">0:super 1:bitmap 2-5:inodes(8x32B) 6+:data</text>
+<text x="20" y="62" font-family="monospace" font-size="13">inode: type|size|direct[4] -- root=0 (dir)</text>
+<text x="20" y="84" font-family="monospace" font-size="12">dirent 16B: name[12]+inum; names map, inodes own</text>
+<text x="20" y="108" font-family="monospace" font-size="12">ceiling: 4x64B = 256B (indirect lifts, later)</text>
+<text x="20" y="130" font-family="monospace" font-size="12">editable: vsfs-layout.excalidraw</text>
+</svg>

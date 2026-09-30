@@ -1,0 +1,12 @@
+{
+  "lesson": "03-c-pointers",
+  "title": "C Pointers — Addresses, Dereference, Arithmetic",
+  "questions": [
+    {"stage": "pre", "question": "What does int *p = &x mean?", "options": ["p holds the value of x", "p holds the address of x", "p holds a copy of x's bytes", "p allocates a new int"], "correct": 1, "explanation": "The * declares a pointer; &x takes x's address."},
+    {"stage": "check", "question": "After int x=1; int *p=&x; *p=2; what is x?", "options": ["1", "2", "address of p", "undefined, p is a copy"], "correct": 1, "explanation": "*p writes through to the same mailbox, so x becomes 2."},
+    {"stage": "check", "question": "If int is 4 bytes and p=0x1000, what is p+1?", "options": ["0x1001", "0x1004", "0x1000", "0x2000"], "correct": 1, "explanation": "Pointer arithmetic strides by sizeof(*p)."},
+    {"stage": "check", "question": "What does a[i] mean in C?", "options": ["address of a plus i bytes", "*(a+i) with int stride", "a new allocation", "a bounds-checked access"], "correct": 1, "explanation": "Subscript is sugar for dereference plus stride; no bounds check."},
+    {"stage": "post", "question": "Why must malloc be paired with free?", "options": ["Otherwise the pointer dangles immediately", "Otherwise heap bytes leak until process exit", "Otherwise stack overflows", "Otherwise the compiler errors"], "correct": 1, "explanation": "Heap lives until freed; leaks accumulate."},
+    {"stage": "post", "question": "Why can't kernels use printf/malloc directly?", "options": ["They are too slow", "Kernels are freestanding: no hosted libc until you write drivers/allocators", "Kernels forbid pointers", "Kernels only use Rust"], "correct": 1, "explanation": "Freestanding means you provide print and alloc yourself."}
+  ]
+}

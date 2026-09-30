@@ -1,0 +1,12 @@
+{
+  "lesson": "01-block-layer",
+  "title": "Block Layer",
+  "questions": [
+    {"stage": "pre", "question": "Write vs flush promises?", "options": ["Same", "Write = cached+dirty (fast); flush = durable (slow)", "Flush caches", "Write persists"], "correct": 1, "explanation": "Coherence vs durability: two promises, two calls."},
+    {"stage": "check", "question": "Crash before flush loses?", "options": ["Nothing", "Unflushed dirties (never happened)", "Flushed data", "The disk"], "correct": 1, "explanation": "Durability requires the flush call, not the write."},
+    {"stage": "check", "question": "Cached read of dirty block shows?", "options": ["Old disk bytes", "New bytes (coherent pre-flush)", "Zeros", "Error"], "correct": 1, "explanation": "Cache-first serves latest; flush decides survival."},
+    {"stage": "check", "question": "HDD vs SSD fears?", "options": ["Same", "HDD seeks (ms random); SSD erases+wear (write physics)", "SSD seeks", "Neither"], "correct": 1, "explanation": "Different physics, different schedulers."},
+    {"stage": "post", "question": "Torn write means?", "options": ["Slow write", "Crash mid-flush: half-block new (checksums detect, journals repair)", "Full loss", "No issue"], "correct": 1, "explanation": "Partial durability: the state journals forbid."},
+    {"stage": "post", "question": "Reopen-after-flush proves?", "options": ["Speed", "Persistence across opens (reboot rehearsal)", "Caching", "Nothing"], "correct": 1, "explanation": "Truth outlives the process that wrote it."}
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "lesson": "05-structs-pcb",
+  "title": "structs, enums, PCB preview",
+  "questions": [
+    {"stage": "pre", "question": "p->pid means?", "options": ["Address of p", "Field pid of struct at address p", "Size of p", "Next struct"], "correct": 1, "explanation": "Arrow dereferences then selects: (*p).pid."},
+    {"stage": "check", "question": "Why must UNUSED be 0?", "options": ["Style", "Static storage zeroes; 0 = free slot automatically", "Enum rule", "Kernel demands"], "correct": 1, "explanation": "Zero-init gives free table without a loop."},
+    {"stage": "check", "question": "find_pid returns 0 when?", "options": ["Always", "No live row with that pid (miss or reaped)", "Table full", "On success"], "correct": 1, "explanation": "NULL = miss; caller must check like malloc."},
+    {"stage": "check", "question": "snprintf vs strcpy for name?", "options": ["Same", "snprintf caps at size-1+zero; strcpy can smash", "strcpy faster safe", "No difference"], "correct": 1, "explanation": "Bounded copy preserves neighboring fields."},
+    {"stage": "post", "question": "ZOMBIE->UNUSED models which syscall?", "options": ["fork", "exec", "wait (reap)", "read"], "correct": 2, "explanation": "Parent collects status, frees the row."},
+    {"stage": "post", "question": "sizeof may exceed field sums. Why?", "options": ["Bug", "Alignment padding between fields", "Enum cost", "Typedef overhead"], "correct": 1, "explanation": "Compiler pads for aligned access; offsets reveal it."}
+  ]
+}

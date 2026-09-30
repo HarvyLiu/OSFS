@@ -1,0 +1,14 @@
+site-astro/dist/
+site-astro/node_modules/
+site-astro/.astro/
+site-astro/src/content/docs/lessons/
+site-astro/src/content/docs/roadmap.md
+site-astro/src/content/docs/glossary.md
+__pycache__/
+*.pyc
+build/
+*.o
+*.elf
+*.bin
+*.iso
+.osfs-qemu-log

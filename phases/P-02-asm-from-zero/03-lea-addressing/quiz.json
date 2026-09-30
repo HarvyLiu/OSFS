@@ -1,0 +1,12 @@
+{
+  "lesson": "03-lea-addressing",
+  "title": "lea vs mov, Addressing Modes",
+  "questions": [
+    {"stage": "pre", "question": "offset(base,index,scale) computes?", "options": ["base*index+offset", "base + index*scale + offset", "base-offset", "index only"], "correct": 1, "explanation": "SIB formula; scale in {1,2,4,8}."},
+    {"stage": "check", "question": "movl (%rdi,%rsi,4),%eax does what?", "options": ["Computes address only", "Loads 4 bytes at base+i*4", "Stores eax", "Multiplies"], "correct": 1, "explanation": "Parens dereference; scale matches int."},
+    {"stage": "check", "question": "leal (%rdi,%rdi,2),%eax does what?", "options": ["Loads from memory", "Computes rdi*3, touches no memory", "Stores to memory", "Calls function"], "correct": 1, "explanation": "lea = address math; compilers use it for x*3, x*5, x*9."},
+    {"stage": "check", "question": "int array with scale 8 gives?", "options": ["Correct values", "Garbage (wrong stride; 8 fits long, not int)", "Faster loads", "Zero"], "correct": 1, "explanation": "Scale must equal element size."},
+    {"stage": "post", "question": "Struct field state after int pid is at?", "options": ["Offset 0", "Offset 4", "Offset 8", "Nowhere"], "correct": 1, "explanation": "Contiguous layout: second int sits 4 bytes in."},
+    {"stage": "post", "question": "Why does -O2 emit lea for x*3?", "options": ["Smaller source", "Single-cycle math without imul or memory", "Uses less registers", "Required by ABI"], "correct": 1, "explanation": "Optimization preserves semantics with cheaper hardware."}
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "lesson": "01-bits-binary-hex",
+  "title": "Bits, Binary, Hex",
+  "questions": [
+    {"stage": "pre", "question": "One hex digit equals?", "options": ["1 bit", "4 bits (a nibble)", "8 bits", "16 bits"], "correct": 1, "explanation": "16 values (0-F) = 4 binary digits."},
+    {"stage": "check", "question": "0xA6 in binary?", "options": ["10100110", "11000110", "10100101", "01101010"], "correct": 0, "explanation": "A=1010, 6=0110."},
+    {"stage": "check", "question": "0xA6 & 0x0F = ?", "options": ["0xA6", "0x06", "0xA0", "0xF0"], "correct": 1, "explanation": "Mask keeps low nibble only."},
+    {"stage": "check", "question": "1 << 4 = ?", "options": ["4", "8", "16", "32"], "correct": 2, "explanation": "Shift left 4 = x16."},
+    {"stage": "post", "question": "Why are addresses printed in hex?", "options": ["Hex is faster", "64-bit binary unreadable; hex is 16 chars", "CPUs store hex", "Decimal overflows"], "correct": 1, "explanation": "Compact + nibble-aligned with bytes."},
+    {"stage": "post", "question": "0x1000 decimal?", "options": ["1000", "4096 (one page)", "256", "65536"], "correct": 1, "explanation": "0x1000 = 4096 = 4 KiB page."}
+  ]
+}

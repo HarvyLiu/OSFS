@@ -1,0 +1,12 @@
+{
+  "lesson": "01-registers-mov",
+  "title": "Registers, mov, add",
+  "questions": [
+    {"stage": "pre", "question": "movl $1, %eax means?", "options": ["Move eax to 1 (8-bit)", "Copy immediate 1 into eax (32-bit)", "Compare eax with 1", "Push 1 on stack"], "correct": 1, "explanation": "$=immediate, %=register, l=32-bit, src to dst."},
+    {"stage": "check", "question": "x86-64 System V: where are the first two int args?", "options": ["%eax, %ebx", "Stack only", "%edi, %esi", "%esp, %ebp"], "correct": 2, "explanation": "edi=arg1, esi=arg2; return in eax."},
+    {"stage": "check", "question": "AT&T vs Intel order?", "options": ["Same", "AT&T src,dst; Intel dst,src", "AT&T dst,src; Intel src,dst", "Random"], "correct": 1, "explanation": "movl %edi,%eax = Intel mov eax,edi."},
+    {"stage": "check", "question": "What does ret do?", "options": ["Return 0", "Pop return address into %rip (back to caller)", "Clear eax", "Halt CPU"], "correct": 1, "explanation": "Inverse of call's push; resumes caller."},
+    {"stage": "post", "question": "GDB at add2 entry shows edi=40 esi=2 eax=40. Why is eax already 40?", "options": ["Bug", "First instruction movl already ran (break landed after it) or prior value; step to see 40->42", "CPU preloads", "Compiler error"], "correct": 1, "explanation": "Step with si: eax goes 40 then 42 — watch one insn at a time."},
+    {"stage": "post", "question": "objdump default dialect on Linux?", "options": ["Intel", "AT&T", "ARM", "No default"], "correct": 1, "explanation": "Linux tooling prints AT&T unless asked for Intel."}
+  ]
+}

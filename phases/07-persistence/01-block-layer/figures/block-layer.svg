@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="440" height="150" role="img" aria-label="block layer">
+<text x="20" y="40" font-family="monospace" font-size="13">write -&gt; cache + dirty (fast lie)</text>
+<text x="20" y="62" font-family="monospace" font-size="13">flush -&gt; disk (slow truth) / crash -&gt; drop</text>
+<text x="20" y="84" font-family="monospace" font-size="12">reads serve cache (dirties visible pre-flush)</text>
+<text x="20" y="108" font-family="monospace" font-size="12">HDD fears seeks; SSD fears erases+wear</text>
+<text x="20" y="130" font-family="monospace" font-size="12">editable: block-layer.excalidraw</text>
+</svg>

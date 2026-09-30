@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="440" height="150" role="img" aria-label="syscall trap">
+<text x="20" y="40" font-family="monospace" font-size="13">user: write(fd,buf,n) --trap--&gt; kernel</text>
+<text x="20" y="62" font-family="monospace" font-size="13">kernel: sys_write via dispatch[1] --ret--&gt;</text>
+<text x="20" y="84" font-family="monospace" font-size="12">result in rax or -errno; strace prints all</text>
+<text x="20" y="108" font-family="monospace" font-size="12">short writes + EINTR: loop, don't hope</text>
+<text x="20" y="130" font-family="monospace" font-size="12">editable: syscall-trap.excalidraw</text>
+</svg>

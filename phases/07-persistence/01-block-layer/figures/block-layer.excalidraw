@@ -1,0 +1,1 @@
+{"type":"excalidraw","version":2,"source":"osfs-block-layer","elements":[{"type":"rectangle","x":40,"y":60,"width":140,"height":40,"label":"write -> cache+dirty"},{"type":"arrow","x":180,"y":80,"label":"flush? persist : crash? drop"}],"appState":{},"files":{}}

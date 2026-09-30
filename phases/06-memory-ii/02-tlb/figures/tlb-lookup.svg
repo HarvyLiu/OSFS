@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="440" height="150" role="img" aria-label="tlb lookup">
+<text x="20" y="40" font-family="monospace" font-size="13">VPN --TLB?-- hit: frame (101) / miss: walk (201)</text>
+<text x="20" y="62" font-family="monospace" font-size="13">EAT = h*101 + (1-h)*201; trace: 2H/6M = 176</text>
+<text x="20" y="84" font-family="monospace" font-size="12">FIFO evict oldest; flush on CR3 (or ASID)</text>
+<text x="20" y="108" font-family="monospace" font-size="12">huge pages: fewer keys, 512x reach each</text>
+<text x="20" y="130" font-family="monospace" font-size="12">editable: tlb-lookup.excalidraw</text>
+</svg>

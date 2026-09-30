@@ -1,0 +1,12 @@
+{
+  "lesson": "04-no-std-unsafe",
+  "title": "no_std, panic_handler, unsafe",
+  "questions": [
+    {"stage": "pre", "question": "std vs core?", "options": ["Same", "core always (types/traits); std adds alloc+OS (threads/files/println)", "core needs OS", "std smaller"], "correct": 1, "explanation": "Layers: no_std keeps core, drops the OS-backed floors."},
+    {"stage": "check", "question": "no_std debts?", "options": ["None", "panic_handler (never-returns) + own entry (no_main)", "Just main", "Only comments"], "correct": 1, "explanation": "Nowhere to unwind/print + no hosted startup: you provide both."},
+    {"stage": "check", "question": "unsafe fn peek means?", "options": ["No checks ever", "Raw deref allowed inside; CALLER bears validity proof", "Safe code", "Panics"], "correct": 1, "explanation": "Unsafety fences the blade; safe wrappers move the burden to audited spots."},
+    {"stage": "check", "question": "wrapping_add vs + in debug?", "options": ["Same", "wrapping modular by contract; + panics on overflow in debug", "wrapping slower", "+ wraps"], "correct": 1, "explanation": "Overflow is a choice: modular, checked, or debug-trap."},
+    {"stage": "post", "question": "Safe wrapper pattern?", "options": ["unsafe everywhere", "Check bounds, then tiny unsafe block, safe fn face + SAFETY comment", "Avoid pointers", "Use C"], "correct": 1, "explanation": "Fence sharp parts, expose trusted verbs — the kernel idiom."},
+    {"stage": "post", "question": "println!/Vec gone in no_std because?", "options": ["Banned words", "They need OS/allocator floors you unplugged", "Too slow", "Never exist"], "correct": 1, "explanation": "Serial + bump-allocator replace them (serial + Memory II)."}
+  ]
+}

@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="460" height="170" role="img" aria-label="threads vs procs">
+<text x="20" y="35" font-family="monospace" font-size="13">processes: separate code+data+heap each</text>
+<text x="20" y="58" font-family="monospace" font-size="13">threads: 1 code+data+heap, N stacks+regsets</text>
+<text x="20" y="82" font-family="monospace" font-size="12">counter++ = load/add/store: losable between any two</text>
+<text x="20" y="106" font-family="monospace" font-size="12">4x100k want 400k: racy short, mutex exact</text>
+<text x="20" y="130" font-family="monospace" font-size="12">editable: threads-procs.excalidraw</text>
+</svg>

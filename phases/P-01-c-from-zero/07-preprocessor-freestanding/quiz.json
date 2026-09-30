@@ -1,0 +1,12 @@
+{
+  "lesson": "07-preprocessor-freestanding",
+  "title": "Preprocessor, Freestanding vs Hosted",
+  "questions": [
+    {"stage": "pre", "question": "What does the preprocessor do?", "options": ["Compiles machine code", "Text paste/forks before compiling (define/ifdef/include)", "Links objects", "Runs the program"], "correct": 1, "explanation": "Directives transform source text; compiler sees the result."},
+    {"stage": "check", "question": "BAD(2,3)*10 gives 2 because?", "options": ["Compiler bug", "Expands to 2<3?2:3*10 (missing parens)", "Overflow", "Wrong types"], "correct": 1, "explanation": "Unparenthesized bodies rebind with surrounding operators."},
+    {"stage": "check", "question": "Two-step STR needed because?", "options": ["Style", "Single # pastes the literal tokens without expanding macros", "Faster", "C standard quirk only"], "correct": 1, "explanation": "Helper forces argument expansion before stringizing."},
+    {"stage": "check", "question": "-DNDEBUG removes LOG because?", "options": ["Deletes source", "LOG defined to nothing under that flag at compile time", "Runtime check", "Linker strips"], "correct": 1, "explanation": "The call never exists in the release translation unit."},
+    {"stage": "post", "question": "Freestanding removes what?", "options": ["The C language", "libc/startup/services (printf/malloc/main-startup); logic stays", "All headers", "The compiler"], "correct": 1, "explanation": "You keep syntax+types; you provide entry, I/O, memory."},
+    {"stage": "post", "question": "bare.c compiles -ffreestanding -nostdlib -c but can't run. Why?", "options": ["Syntax invalid", "No entry/startup/link layout until boot.s + linker script provide them", "Missing main is fatal", "Needs Python"], "correct": 1, "explanation": "Compile checks language; running needs the kernel half (Tooling 02)."}
+  ]
+}

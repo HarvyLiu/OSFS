@@ -1,0 +1,12 @@
+{
+  "lesson": "02-fork-exec",
+  "title": "fork/exec/wait",
+  "questions": [
+    {"stage": "pre", "question": "What does fork() return in the parent vs child?", "options": ["0 in both", "child pid in parent, 0 in child", "0 in parent, child pid in child", "-1 in both on success"], "correct": 1, "explanation": "Parent learns the child's pid; child knows it is the copy via 0."},
+    {"stage": "check", "question": "What does exec() do to the calling process?", "options": ["Creates a sibling process", "Replaces its memory with a new program, same pid", "Waits for children", "Copies its pages"], "correct": 1, "explanation": "Same PCB/pid, brand-new address space."},
+    {"stage": "check", "question": "Why call waitpid after fork?", "options": ["To speed up the child", "To collect exit status and reap the zombie", "To share memory", "To change scheduling"], "correct": 1, "explanation": "Dead children linger as zombies until waited on."},
+    {"stage": "check", "question": "Child calls exit() instead of _exit() after fork with buffered printf — risk?", "options": ["No risk", "Double-flush of copied stdio buffers", "Kernel panic", "Parent hangs forever"], "correct": 1, "explanation": "fork copies stdio buffers; exit flushes again. Use _exit in child."},
+    {"stage": "post", "question": "Copy-on-write means?", "options": ["Copy all pages eagerly at fork", "Share pages read-only until a write faults, then copy", "Share pages forever", "Never copy, only exec"], "correct": 1, "explanation": "Lazy copy keeps fork fast."},
+    {"stage": "post", "question": "Where does WEXITSTATUS come from?", "options": ["Child's stack variable", "Kernel-saved exit code in PCB, read via wait", "Parent's errno", "The echo binary's stdout"], "correct": 1, "explanation": "Kernel stores it at exit; wait retrieves it."}
+  ]
+}

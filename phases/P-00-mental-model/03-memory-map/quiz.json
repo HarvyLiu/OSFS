@@ -1,0 +1,12 @@
+{
+  "lesson": "03-memory-map",
+  "title": "Memory Map: Static, Stack, Heap",
+  "questions": [
+    {"stage": "pre", "question": "Return heap pointer vs stack pointer?", "options": ["Both fine", "Heap valid (owned); stack dead (frame gone)", "Both dead", "Both leak"], "correct": 1, "explanation": "Lifetime follows neighborhood."},
+    {"stage": "check", "question": "Compiler warns return-local-addr. Means?", "options": ["Style", "Frame dies at }: the address dangles", "Slow code", "Needs free"], "correct": 1, "explanation": "The warning names the corpse; never silence it."},
+    {"stage": "check", "question": "Function-static lifetime?", "options": ["One call", "Whole run, local scope (hybrid)", "Heap", "None"], "correct": 1, "explanation": "Sees-local, lives-global: singletons wear this."},
+    {"stage": "check", "question": ".data vs .bss?", "options": ["Same", "Initialized vs zeroed statics (both whole-run)", "Stack parts", "Heap parts"], "correct": 1, "explanation": "Storage class is section destiny."},
+    {"stage": "post", "question": "Printing dangling ptr safe, deref not. Why?", "options": ["Luck", "Address value harmless; use-after-return faults/corrupts", "ASan slow", "Compiler bug"], "correct": 1, "explanation": "Read the number, never visit the house."},
+    {"stage": "post", "question": "Region order across OSes?", "options": ["Universal", "OS-specific (regions universal, order varies)", "Random", "Fixed by C"], "correct": 1, "explanation": "05/01's lesson, previewed: compare outputs."}
+  ]
+}

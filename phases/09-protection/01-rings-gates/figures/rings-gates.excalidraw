@@ -1,0 +1,1 @@
+{"type":"excalidraw","version":2,"source":"osfs-rings-gates","elements":[{"type":"rectangle","x":60,"y":40,"width":160,"height":30,"label":"ring 0: kernel (all)"},{"type":"rectangle","x":60,"y":90,"width":160,"height":30,"label":"ring 3: user (gates only)"}],"appState":{},"files":{}}

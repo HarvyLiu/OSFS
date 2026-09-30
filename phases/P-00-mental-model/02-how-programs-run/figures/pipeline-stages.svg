@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="440" height="150" role="img" aria-label="pipeline stages">
+<text x="20" y="40" font-family="monospace" font-size="13">.c --E--&gt; .i (paste) --S--&gt; .s (asm)</text>
+<text x="20" y="62" font-family="monospace" font-size="13">.s --c--&gt; .o (object) --link--&gt; binary</text>
+<text x="20" y="84" font-family="monospace" font-size="13">binary --exec--&gt; process (argc/argv!)</text>
+<text x="20" y="108" font-family="monospace" font-size="12">errors name stages: read the FIRST one</text>
+<text x="20" y="130" font-family="monospace" font-size="12">editable: pipeline-stages.excalidraw</text>
+</svg>

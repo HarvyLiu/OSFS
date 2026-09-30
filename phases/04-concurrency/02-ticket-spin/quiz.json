@@ -1,0 +1,12 @@
+{
+  "lesson": "02-ticket-spin",
+  "title": "Ticket and Spin Locks",
+  "questions": [
+    {"stage": "pre", "question": "04/01 lost 285k updates. The missing piece?", "options": ["Faster CPU", "Mutual exclusion around load-add-store (a lock)", "More threads", "Bigger counter"], "correct": 1, "explanation": "The triple must be indivisible; locks fence it."},
+    {"stage": "check", "question": "fetch_add(&next,1) guarantees?", "options": ["Speed", "Unique tickets: read-and-bump as one hardware step", "Fairness alone", "Sleep"], "correct": 1, "explanation": "Atomicity at issue: no two threads draw alike."},
+    {"stage": "check", "question": "Spin loop must use atomic_load because?", "options": ["Style", "Plain cached read could never see the update (spin forever)", "Slower is safer", "Needed for pause"], "correct": 1, "explanation": "Reread from coherence every lap or miss the handoff."},
+    {"stage": "check", "question": "Unlock = serving++. Wakes whom?", "options": ["All waiters", "Exactly the holder of the next ticket (no herd)", "Nobody", "Random"], "correct": 1, "explanation": "One writer, one match — thundering herd avoided by numbering."},
+    {"stage": "post", "question": "Spin vs sleep rule?", "options": ["Always spin", "Short+contended sections: spin; long/idle waits: sleep (futex)", "Always sleep", "No difference"], "correct": 1, "explanation": "Burn cores briefly vs surrender them long — cost model decides."},
+    {"stage": "post", "question": "Ticket vs test-and-set fairness?", "options": ["Same", "Ticket FIFO (starvation-free); TAS loudest-wins (can starve)", "TAS fairer", "Neither fair"], "correct": 1, "explanation": "Numbering orders admission; raw flags don't."}
+  ]
+}

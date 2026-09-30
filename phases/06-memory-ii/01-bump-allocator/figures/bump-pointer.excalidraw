@@ -1,0 +1,1 @@
+{"type":"excalidraw","version":2,"source":"osfs-bump-pointer","elements":[{"type":"rectangle","x":40,"y":60,"width":220,"height":40,"label":"[used...][next ->][...free]"},{"type":"arrow","x":260,"y":80,"label":"alloc: align, check, hand, advance"}],"appState":{},"files":{}}

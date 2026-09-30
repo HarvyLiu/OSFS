@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="150" role="img" aria-label="interrupt path">
+<text x="20" y="40" font-family="monospace" font-size="12">device IRQn --enabled?--&gt; IDT[n] --push+jump--&gt; handler --iret--&gt; resume</text>
+<text x="20" y="64" font-family="monospace" font-size="12">cli: park as pending (not lost, just late)</text>
+<text x="20" y="88" font-family="monospace" font-size="12">handler: save, ack, wake, restore (stay short)</text>
+<text x="20" y="112" font-family="monospace" font-size="12">editable: interrupt-path.excalidraw</text>
+</svg>

@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="440" height="150" role="img" aria-label="build modes">
+<text x="20" y="40" font-family="monospace" font-size="13">hosted: _start+libc+main+exit provided</text>
+<text x="20" y="62" font-family="monospace" font-size="13">freestanding: language only, you provide all</text>
+<text x="20" y="86" font-family="monospace" font-size="12">#define pastes, #ifdef forks, -ffreestanding strips</text>
+<text x="20" y="110" font-family="monospace" font-size="12">editable: build-modes.excalidraw</text>
+</svg>

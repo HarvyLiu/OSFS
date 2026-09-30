@@ -1,0 +1,12 @@
+{
+  "lesson": "06-headers-make",
+  "title": "Headers, Source Split, Makefile",
+  "questions": [
+    {"stage": "pre", "question": "Header vs source?", "options": ["Same thing", "Header declares (promises); source defines (delivers)", "Header runs first", "Source is optional"], "correct": 1, "explanation": "Compile against promises, link to deliveries."},
+    {"stage": "check", "question": "Include guards prevent?", "options": ["Slow builds", "Double-paste redefinition in one translation unit", "Link errors only", "Nothing"], "correct": 1, "explanation": "Second include becomes empty; one definition survives."},
+    {"stage": "check", "question": "make rebuilds a target when?", "options": ["Always", "A prerequisite is newer than the target", "On Mondays", "When binary runs"], "correct": 1, "explanation": "Timestamp comparison = minimal rebuilds."},
+    {"stage": "check", "question": "Undefined reference to vec_push means?", "options": ["Missing header", "Compiled fine; definition not linked in", "Typo in main only", "Wrong C standard"], "correct": 1, "explanation": "Declaration satisfied compiler; linker found no delivery."},
+    {"stage": "post", "question": "nm shows U vec_push in main.o. Meaning?", "options": ["Defined there", "Used but defined elsewhere (to resolve at link)", "Corrupt object", "Static function"], "correct": 1, "explanation": "U = undefined-in-this-object; T in vec.o keeps the promise."},
+    {"stage": "post", "question": "Why does touching vec.h rebuild everything?", "options": ["Bug", "Headers are source: both .c paste it, both change", "Make is cautious", "Timestamps random"], "correct": 1, "explanation": "Include = textual dependency; list headers as prereqs."}
+  ]
+}

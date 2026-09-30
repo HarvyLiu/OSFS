@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="440" height="140" role="img" aria-label="addressing map">
+<text x="20" y="40" font-family="monospace" font-size="13">addr = base + index*scale + offset</text>
+<text x="20" y="62" font-family="monospace" font-size="12">mov visits it; lea computes it (no touch)</text>
+<text x="20" y="84" font-family="monospace" font-size="12">scales: 1 char, 2 short, 4 int, 8 long/ptr</text>
+<text x="20" y="108" font-family="monospace" font-size="12">editable: addressing-map.excalidraw</text>
+</svg>

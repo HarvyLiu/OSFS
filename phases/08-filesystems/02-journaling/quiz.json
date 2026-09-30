@@ -1,0 +1,12 @@
+{
+  "lesson": "02-journaling",
+  "title": "Journaling and Crash Consistency",
+  "questions": [
+    {"stage": "pre", "question": "Crash between bitmap+inode writes (no journal)?", "options": ["Fine", "Half-updated = corrupt (torn update)", "Faster", "Nothing"], "correct": 1, "explanation": "Multi-block updates need atomicity the disk lacks."},
+    {"stage": "check", "question": "Crash pre-commit replays to?", "options": ["New bytes", "Zeros: discard, nothing happened", "Random", "Half"], "correct": 1, "explanation": "Uncommitted intent dies with RAM; home intact."},
+    {"stage": "check", "question": "Commit flag separates?", "options": ["Speeds", "Nothing from everything (single atomic point)", "Old from new disk", "Users"], "correct": 1, "explanation": "One flag: discard-side vs replay-side."},
+    {"stage": "check", "question": "Replay twice gives?", "options": ["Doubled bytes", "Same bytes (idempotent copies)", "Zeros", "Error"], "correct": 1, "explanation": "Copy-twice = copy-once: safe after crash-mid-replay."},
+    {"stage": "post", "question": "Checkpoint-before-commit breaks because?", "options": ["Slower", "Crash between = half-new home, no journal to repair", "Uses RAM", "Needs fsck"], "correct": 1, "explanation": "Order is the feature: intent before effects, always."},
+    {"stage": "post", "question": "Journal vs fsck tradeoff?", "options": ["Same", "Journal replays few (fast); fsck scans all (slow, thorough)", "fsck faster", "Neither works"], "correct": 1, "explanation": "Bounded redo vs whole-disk audit."}
+  ]
+}

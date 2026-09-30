@@ -1,0 +1,12 @@
+{
+  "lesson": "02-mlfq",
+  "title": "MLFQ",
+  "questions": [
+    {"stage": "pre", "question": "SJF's cheat vs MLFQ's fix?", "options": ["Same cheat", "SJF knows bursts; MLFQ learns via demotion on quantum exhaust", "MLFQ is slower FIFO", "No difference"], "correct": 1, "explanation": "Behavior reveals length; no oracle needed."},
+    {"stage": "check", "question": "NOBOOST completions A(3) B(10) C(3)?", "options": ["8,12,14", "7,16,12", "7,16,11", "3,13,16"], "correct": 1, "explanation": "Hand trace: A done@7, C@12, B@16 FCFS tail."},
+    {"stage": "check", "question": "Exhaust quantum but alive => ?", "options": ["Finish", "Demote one level, usage reset", "Boost", "Exit"], "correct": 1, "explanation": "The learning step: long jobs sink."},
+    {"stage": "check", "question": "BOOST8 changes C 12->11. Mechanism?", "options": ["Faster CPU", "At t=8 all unfinished return Q0; C reruns high sooner", "C skips queues", "B deleted"], "correct": 1, "explanation": "Boost forgets history on schedule; shorts re-float."},
+    {"stage": "post", "question": "Starvation without boost looks like?", "options": ["All finish fast", "Hog camps Q2 while shorts keep arriving high", "No demotions", "Boost loops"], "correct": 1, "explanation": "Low queue never empties of new highs above it."},
+    {"stage": "post", "question": "Boost's price?", "options": ["None", "Forgets history: hogs refloat too (gaming surface)", "Slower ticks", "More queues"], "correct": 1, "explanation": "Every fix trades; gamers exploit fresh-high starts (Exercises)."}
+  ]
+}

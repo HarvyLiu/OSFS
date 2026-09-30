@@ -1,0 +1,12 @@
+{
+  "lesson": "02-functions-arrays-strings",
+  "title": "Functions, Arrays, Strings",
+  "questions": [
+    {"stage": "pre", "question": "add(x,3) leaves x unchanged. Why?", "options": ["Compiler bug", "Args pass by value (copies)", "x is const", "printf restores it"], "correct": 1, "explanation": "C copies args onto the stack; callee writes copies."},
+    {"stage": "check", "question": "fill(buf,4) modifies caller's buf. Why?", "options": ["Global variable", "Array decays to pointer; writes go through", "Static storage", "Return value"], "correct": 1, "explanation": "buf passes as &buf[0]; arr[i] dereferences caller memory."},
+    {"stage": "check", "question": "Why must array length travel separately?", "options": ["Style only", "C arrays carry no length; callee can't know", "Lint rule", "Kernel requires it"], "correct": 1, "explanation": "No bounds metadata — pass n explicitly."},
+    {"stage": "check", "question": "strlen(\"osfs\") is 4, not 5. Why?", "options": ["Bug", "Counts chars before NUL, excluding terminator", "Skips first char", "Counts bytes wrong"], "correct": 1, "explanation": "Zero terminates but isn't counted."},
+    {"stage": "post", "question": "strcpy needs dst big enough because?", "options": ["Speed", "It copies until+including NUL with no bounds check", "It zero-fills", "It allocates"], "correct": 1, "explanation": "Overflow corrupts stack; size the buffer or bound the copy."},
+    {"stage": "post", "question": "ASan build of an overflow does what?", "options": ["Silently fixes it", "Aborts with precise report (keeps bug loud)", "Speeds up", "Disables warnings"], "correct": 1, "explanation": "Instrumentation turns silent corruption into a loud, located failure."}
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "lesson": "01-rings-gates",
+  "title": "Rings and Syscall Gates",
+  "questions": [
+    {"stage": "pre", "question": "THE rule?", "options": ["cpl >= dpl", "Allow iff cpl <= dpl numerically (low number = high privilege)", "Always allow", "Always fault"], "correct": 1, "explanation": "Reach up safe, reach down faults."},
+    {"stage": "check", "question": "User->syscall gate (DPL3)?", "options": ["FAULT", "ok (3<=3: doors open at your level)", "Only kernel", "Random"], "correct": 1, "explanation": "Equality opens: the door exists for you."},
+    {"stage": "check", "question": "User reads kernel data (DPL0)?", "options": ["ok", "FAULT (3<=0 false: #GP)", "Sometimes", "Only writes"], "correct": 1, "explanation": "Down-crossings fault, reads included."},
+    {"stage": "check", "question": "Kernel reads user data?", "options": ["FAULT", "ok (0<=3: sharing downward safe)", "Only writes", "Never"], "correct": 1, "explanation": "Privilege reaches down freely."},
+    {"stage": "post", "question": "Userspace cli dies why?", "options": ["Bug", "Privileged instruction at CPL3: #GP (rings enforced)", "Slow", "Missing header"], "correct": 1, "explanation": "P-02/04's death, generalized to all ring-0 ops."},
+    {"stage": "post", "question": "Flipping <= to >= in gates?", "options": ["Harmless", "Catastrophe: user reaches debug gates (backwards doors)", "Faster", "Nothing"], "correct": 1, "explanation": "One character ends kernels: direction is everything."}
+  ]
+}

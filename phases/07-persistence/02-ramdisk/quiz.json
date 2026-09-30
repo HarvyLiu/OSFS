@@ -1,0 +1,12 @@
+{
+  "lesson": "02-ramdisk",
+  "title": "RAMdisk Block Driver",
+  "questions": [
+    {"stage": "pre", "question": "File vs RAM backend differ where?", "options": ["Read path", "Crash/flush durability only; reads/writes identical", "Block numbers", "API"], "correct": 1, "explanation": "Coherence universal; durability lives below."},
+    {"stage": "check", "question": "rd_flush moves how many bytes?", "options": ["All dirties", "Zero (theater: nothing below; flags cleared, counted)", "One block", "All blocks"], "correct": 1, "explanation": "Honest no-op: RAM durability is oxymoronic."},
+    {"stage": "check", "question": "Post-crash byte reads?", "options": ["Old value", "0 (total amnesia; file-backend shows old truth)", "Random", "Error"], "correct": 1, "explanation": "No truth below: wipe is complete."},
+    {"stage": "check", "question": "Post-free calls return?", "options": ["0", "-1 (dead device; use-after-free at device scale)", "Crash", "Old data"], "correct": 1, "explanation": "live=0 fences the freed store."},
+    {"stage": "post", "question": "RAMdisk real uses?", "options": ["Archives", "initramfs (pre-disk boot) + FS test beds (speed)", "Backups", "Swap only"], "correct": 1, "explanation": "Fast volatile: boot before disks wake, test without rust."},
+    {"stage": "post", "question": "Next lesson codes against?", "options": ["File paths", "Block verbs (backend-blind filesystem above)", "RAM pointers", "Syscalls"], "correct": 1, "explanation": "Interfaces, not media: VSFS mounts either."}
+  ]
+}

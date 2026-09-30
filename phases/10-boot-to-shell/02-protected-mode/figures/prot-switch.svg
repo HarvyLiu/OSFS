@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="440" height="170" role="img" aria-label="mode switch">
+<text x="20" y="30" font-family="monospace" font-size="13">real: save %dl, int13 reads kernel -&gt; 0x8000</text>
+<text x="20" y="52" font-family="monospace" font-size="13">A20 (int15/2401) unwraps 1 MiB mirror</text>
+<text x="20" y="74" font-family="monospace" font-size="13">lgdt (null, code 9A, data 92, 4G flat)</text>
+<text x="20" y="96" font-family="monospace" font-size="13">CR0.PE=1 + ljmp $0x08,$0x8000 (far! flush!)</text>
+<text x="20" y="120" font-family="monospace" font-size="13">kentry: segs=0x10, stack 0x7000, call kmain</text>
+<text x="20" y="144" font-family="monospace" font-size="13">kmain: VGA cells + serial, freestanding C</text>
+<text x="20" y="162" font-family="monospace" font-size="12">editable: prot-switch.excalidraw</text>
+</svg>

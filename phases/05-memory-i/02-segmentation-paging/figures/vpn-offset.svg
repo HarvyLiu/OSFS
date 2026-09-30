@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="440" height="150" role="img" aria-label="vpn offset split">
+<text x="20" y="40" font-family="monospace" font-size="13">va = VPN(20b) | offset(12b): &gt;&gt;12, &amp;0xFFF</text>
+<text x="20" y="62" font-family="monospace" font-size="13">frame = table[VPN] (fault if !present)</text>
+<text x="20" y="84" font-family="monospace" font-size="13">phys = frame*4096 + offset (offset untouched)</text>
+<text x="20" y="108" font-family="monospace" font-size="12">seg: phys = base+off, fault if off&gt;=limit</text>
+<text x="20" y="130" font-family="monospace" font-size="12">editable: vpn-offset.excalidraw</text>
+</svg>

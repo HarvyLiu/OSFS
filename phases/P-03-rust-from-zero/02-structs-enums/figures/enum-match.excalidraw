@@ -1,0 +1,1 @@
+{"type":"excalidraw","version":2,"source":"osfs-enum-match","elements":[{"type":"rectangle","x":40,"y":60,"width":200,"height":40,"label":"enum: only 4 states exist"},{"type":"rectangle","x":280,"y":60,"width":180,"height":40,"label":"match: handle all 4"}],"appState":{},"files":{}}

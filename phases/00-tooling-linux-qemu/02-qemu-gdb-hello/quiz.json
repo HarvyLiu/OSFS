@@ -1,0 +1,12 @@
+{
+  "lesson": "02-qemu-gdb-hello",
+  "title": "QEMU Hello + GDB Attach",
+  "questions": [
+    {"stage": "pre", "question": "What does qemu -kernel kernel.elf do?", "options": ["Compiles the kernel", "Loads your ELF as the guest OS and boots it", "Starts GDB", "Formats a disk"], "correct": 1, "explanation": "-kernel hands QEMU your binary as the thing to boot."},
+    {"stage": "check", "question": "Why does boot.s set %esp before calling C?", "options": ["Faster boot", "C needs a stack for call/return and locals", "QEMU requires it", "It enables interrupts"], "correct": 1, "explanation": "call pushes a return address; without a stack the CPU faults."},
+    {"stage": "check", "question": "movl $stack_top, %esp means? (AT&T)", "options": ["Move esp into stack_top, 8-bit", "Move immediate stack_top into esp, 32-bit", "Load Intel syntax", "Compare two registers"], "correct": 1, "explanation": "$=immediate, %=register, l=32-bit, src→dst."},
+    {"stage": "check", "question": "What do -S -s mean to QEMU?", "options": ["Silent + safe mode", "Freeze CPU at start + expose GDB on :1234", "Serial + sound", "SMP with 2 cores"], "correct": 1, "explanation": "-S freezes, -s is shorthand for gdb tcp::1234."},
+    {"stage": "post", "question": "serial_putc spins on 0x20. What is it waiting for?", "options": ["A keypress", "Transmitter-holding-register empty (ready for next byte)", "Disk ready", "Timer tick"], "correct": 1, "explanation": "Line-status bit 5 = THR empty; polling, no interrupts yet."},
+    {"stage": "post", "question": "make qemu exits 124. Good or bad?", "options": ["Bad, kernel crashed", "Good: timeout killed QEMU after showing serial (expected, it halts forever)", "Bad, linker failed", "Good, GDB connected"], "correct": 1, "explanation": "124 = timeout's normal kill; the guest never exits by design."}
+  ]
+}

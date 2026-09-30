@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="420" height="140" role="img" aria-label="bits map">
+<text x="20" y="40" font-family="monospace" font-size="14">0xA6 = 1010 0110 = 166</text>
+<text x="20" y="65" font-family="monospace" font-size="12">A=1010 6=0110 (one hex digit = 4 bits)</text>
+<text x="20" y="90" font-family="monospace" font-size="12">&amp; 0x0F keeps low nibble, &gt;&gt; moves bits</text>
+<text x="20" y="115" font-family="monospace" font-size="12">editable: bits-map.excalidraw</text>
+</svg>

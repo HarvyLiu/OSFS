@@ -1,0 +1,1 @@
+{"type":"excalidraw","version":2,"source":"osfs-no-std","elements":[{"type":"rectangle","x":40,"y":60,"width":140,"height":40,"label":"core (always)"},{"type":"rectangle","x":200,"y":60,"width":140,"height":40,"label":"+ alloc (needs allocator)"},{"type":"rectangle","x":360,"y":60,"width":140,"height":40,"label":"+ std (needs OS)"}],"appState":{},"files":{}}

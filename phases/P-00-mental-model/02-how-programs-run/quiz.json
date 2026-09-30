@@ -1,0 +1,12 @@
+{
+  "lesson": "02-how-programs-run",
+  "title": "How Programs Run",
+  "questions": [
+    {"stage": "pre", "question": "cc hello.c -o hello hides?", "options": ["One step", "Preprocess, compile, assemble, link (then loader runs)", "Just linking", "Interpretation"], "correct": 1, "explanation": "Four tools + loader: meet each by flag."},
+    {"stage": "check", "question": "800-line .i from 10-line .c because?", "options": ["Bloat", "Headers pasted (stdio chain)", "Debug info", "Optimization"], "correct": 1, "explanation": "Includes are textual: measure with wc."},
+    {"stage": "check", "question": "nm shows U printf in hello.o. Meaning?", "options": ["Defined here", "Used here, resolved at link", "Error", "Static"], "correct": 1, "explanation": "U = promise kept elsewhere."},
+    {"stage": "check", "question": "argv[0] is?", "options": ["First arg", "How you were invoked (self path)", "Count", "Empty"], "correct": 1, "explanation": "Loader fills argv[0] with self."},
+    {"stage": "post", "question": "First error rule?", "options": ["Read last", "Read FIRST (later stages echo earlier breaks)", "Ignore all", "Count them"], "correct": 1, "explanation": "Cascades lie; origins don't."},
+    {"stage": "post", "question": "Undefined reference = which stage?", "options": ["Compile", "Link (compiled fine, delivery missing)", "Preprocess", "Runtime"], "correct": 1, "explanation": "Declarations satisfied; definitions absent."}
+  ]
+}

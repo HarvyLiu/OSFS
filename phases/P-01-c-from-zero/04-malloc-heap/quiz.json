@@ -1,0 +1,12 @@
+{
+  "lesson": "04-malloc-heap",
+  "title": "malloc/free Heap Ownership",
+  "questions": [
+    {"stage": "pre", "question": "Stack vs heap lifetime?", "options": ["Same", "Stack dies at }; heap lives until free", "Heap dies first", "Both forever"], "correct": 1, "explanation": "Scope vs ownership: the core distinction."},
+    {"stage": "check", "question": "realloc returns NULL. Old block?", "options": ["Freed automatically", "Still valid; caller still owns it", "Leaked always", "Zeroed"], "correct": 1, "explanation": "Failure leaves the old pointer intact — never overwrite it blindly."},
+    {"stage": "check", "question": "vec doubles 4->8->16. Why doubling?", "options": ["Tradition", "Amortized O(1) per push; fewer moves", "Uses less memory", "Faster malloc"], "correct": 1, "explanation": "Geometric growth bounds total copies linearly."},
+    {"stage": "check", "question": "Which is NOT a heap sin?", "options": ["Leak", "Double-free", "Use-after-free", "Checking NULL"], "correct": 3, "explanation": "NULL checks are virtue; the other three corrupt or waste."},
+    {"stage": "post", "question": "ASan on commented-out free reports?", "options": ["Nothing", "Memory leak with allocation stack", "Faster run", "Compiler warning"], "correct": 1, "explanation": "'Runs fine' never proves ownership — guards do."},
+    {"stage": "post", "question": "Kernel kalloc vs user malloc?", "options": ["Unrelated", "Same own/free discipline, page granularity vs byte", "Kalloc never fails", "Malloc is freestanding"], "correct": 1, "explanation": "Discipline transfers; granularity changes to 4 KiB pages."}
+  ]
+}

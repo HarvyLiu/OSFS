@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="220" role="img" aria-label="qemu gdb map">
+<rect x="20" y="30" width="170" height="50" fill="none" stroke="currentColor" stroke-width="2"/><text x="30" y="52" font-family="monospace" font-size="12">kernel.elf</text><text x="30" y="68" font-family="monospace" font-size="12">_start → C</text>
+<text x="200" y="55" font-family="monospace" font-size="12">-kernel →</text>
+<rect x="300" y="30" width="160" height="50" fill="none" stroke="currentColor" stroke-width="2"/><text x="310" y="52" font-family="monospace" font-size="12">QEMU</text><text x="310" y="68" font-family="monospace" font-size="12">serial→stdio</text>
+<text x="310" y="105" font-family="monospace" font-size="12">-S -s :1234 ↓</text>
+<rect x="300" y="115" width="160" height="50" fill="none" stroke="currentColor" stroke-width="2"/><text x="310" y="137" font-family="monospace" font-size="12">GDB</text><text x="310" y="153" font-family="monospace" font-size="12">break main</text>
+<text x="20" y="190" font-family="monospace" font-size="12">editable: qemu-gdb-map.excalidraw</text>
+</svg>

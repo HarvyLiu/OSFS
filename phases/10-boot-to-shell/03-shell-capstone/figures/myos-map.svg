@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="440" height="180" role="img" aria-label="myos map">
+<text x="20" y="26" font-family="monospace" font-size="13">paging: dir+tab identity 0-4M, CR0.PG (06 alive)</text>
+<text x="20" y="48" font-family="monospace" font-size="13">timer: PIT 100Hz, PIC-&gt;0x20, IDT stub, ticks</text>
+<text x="20" y="70" font-family="monospace" font-size="13">tasks: switch_to parks/rides esp (02 bare metal)</text>
+<text x="20" y="94" font-family="monospace" font-size="13">shell yields every loop; timer flags need_resched</text>
+<text x="20" y="118" font-family="monospace" font-size="13">fs: ROM name-&gt;content (08 without the disk)</text>
+<text x="20" y="142" font-family="monospace" font-size="13">proof: tasks twice, spins grows, esps 4K apart</text>
+<text x="20" y="162" font-family="monospace" font-size="12">editable: myos-map.excalidraw</text>
+</svg>

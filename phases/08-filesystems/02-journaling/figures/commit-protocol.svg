@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="440" height="160" role="img" aria-label="commit protocol">
+<text x="20" y="40" font-family="monospace" font-size="13">1 stage: journal gets copies, home untouched</text>
+<text x="20" y="62" font-family="monospace" font-size="13">2 commit: ONE flag (nothing -&gt; everything)</text>
+<text x="20" y="84" font-family="monospace" font-size="13">3 checkpoint: journal -&gt; home, free txn</text>
+<text x="20" y="108" font-family="monospace" font-size="12">crash@0 discard / crash@1 replay / crash@2 noop</text>
+<text x="20" y="130" font-family="monospace" font-size="12">replay idempotent: twice = once</text>
+<text x="20" y="150" font-family="monospace" font-size="12">editable: commit-protocol.excalidraw</text>
+</svg>

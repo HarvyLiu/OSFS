@@ -1,0 +1,1 @@
+{"type":"excalidraw","version":2,"source":"osfs-build-modes","elements":[{"type":"rectangle","x":60,"y":60,"width":160,"height":40,"label":"hosted: libc+main"},{"type":"rectangle","x":280,"y":60,"width":200,"height":40,"label":"freestanding: you+script"}],"appState":{},"files":{}}

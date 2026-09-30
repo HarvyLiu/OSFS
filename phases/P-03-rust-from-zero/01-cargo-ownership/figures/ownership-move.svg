@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="460" height="160" role="img" aria-label="ownership move">
+<text x="20" y="40" font-family="monospace" font-size="13">let b = a; (move: a dead, b owns)</text>
+<text x="20" y="62" font-family="monospace" font-size="13">f(&amp;x): borrow (x lives) f(&amp;mut x): 1 writer</text>
+<text x="20" y="84" font-family="monospace" font-size="12">drop at } = automatic free, exactly once</text>
+<text x="20" y="108" font-family="monospace" font-size="12">String owns / &amp;str views; Vec owns / &amp;[T] views</text>
+<text x="20" y="132" font-family="monospace" font-size="12">editable: ownership-move.excalidraw</text>
+</svg>

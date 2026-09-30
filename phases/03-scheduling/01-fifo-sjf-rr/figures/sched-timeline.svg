@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="460" height="160" role="img" aria-label="sched timeline">
+<text x="20" y="35" font-family="monospace" font-size="12">FIFO: |P1 0-8|P2 8-12|P3 12-14|</text>
+<text x="20" y="60" font-family="monospace" font-size="12">SJF: |P1 0-8|P3 8-10|P2 10-14|</text>
+<text x="20" y="85" font-family="monospace" font-size="12">RRq2: |P1 P2 P3 P1 P2 P1 P1| done 14/10/6</text>
+<text x="20" y="112" font-family="monospace" font-size="12">same workload, different waiting -- policy chooses</text>
+<text x="20" y="132" font-family="monospace" font-size="12">editable: sched-timeline.excalidraw</text>
+</svg>

@@ -1,0 +1,1 @@
+{"type":"excalidraw","version":2,"source":"osfs-heap-map","elements":[{"type":"rectangle","x":60,"y":60,"width":200,"height":50,"label":"stack: dies at }"},{"type":"rectangle","x":300,"y":60,"width":200,"height":50,"label":"heap: lives til free"}],"appState":{},"files":{}}

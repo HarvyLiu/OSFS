@@ -1,0 +1,12 @@
+{
+  "lesson": "05-ffi",
+  "title": "C FFI",
+  "questions": [
+    {"stage": "pre", "question": "repr(C) buys?", "options": ["Speed", "C layout rules (order+padding) so bytes agree", "More types", "GC"], "correct": 1, "explanation": "Default Rust may reorder; C rules are the shared alphabet."},
+    {"stage": "check", "question": "PcbFfi size/align/offsets?", "options": ["12/4/0-4-8", "16/8/0-4-8 (u64 aligns 8)", "24/8/0-8-16", "16/4/0-4-12"], "correct": 1, "explanation": "4+4 then u64 at 8: size 16, align 8."},
+    {"stage": "check", "question": "no_mangle + extern C?", "options": ["Faster calls", "Plain symbol + C ABI so C links/calls correctly", "More inlining", "Less code"], "correct": 1, "explanation": "Name for the linker, convention for the registers."},
+    {"stage": "check", "question": "C mirror compiles (-c) proves?", "options": ["Layouts match", "Syntax sane only; equality needs layout tests", "Links fine", "Runs fine"], "correct": 1, "explanation": "Compile can't see across: the fence's special hazard."},
+    {"stage": "post", "question": "Mixed MSVC+MinGW link fails. Lesson?", "options": ["FFI broken", "One matching target to link (kernel build unifies)", "Use Python", "Avoid Rust"], "correct": 1, "explanation": "Runtimes must agree; single-target builds do."},
+    {"stage": "post", "question": "Never use across FFI?", "options": ["u64", "long/int (platform-varying widths)", "i32", "Functions"], "correct": 1, "explanation": "Fixed widths only: LLP64-vs-LP64 burns the guessers."}
+  ]
+}

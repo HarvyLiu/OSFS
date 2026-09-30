@@ -1,0 +1,12 @@
+{
+  "lesson": "01-wsl-docker-setup",
+  "title": "WSL2 + Docker Setup",
+  "questions": [
+    {"stage": "pre", "question": "Why Linux-first for this OS course?", "options": ["Linux is faster at Python", "fork, signals, /proc, and QEMU/GDB flows are Linux-native", "Windows lacks C compilers", "Docker only runs on Linux"], "correct": 1, "explanation": "Later lessons use fork, /proc, strace, and ELF toolchains directly."},
+    {"stage": "check", "question": "verify.py exits 1. What does that mean?", "options": ["All good", "At least one required tool missing from PATH", "QEMU booted", "Rust failed to compile"], "correct": 1, "explanation": "Non-zero = missing tool, printed by name."},
+    {"stage": "check", "question": "What does -v \"$PWD:/osfs\" do?", "options": ["Copies files into the image forever", "Mounts your repo into the container live", "Installs volumes on Docker Hub", "Speeds up QEMU"], "correct": 1, "explanation": "Mount = live mirror; edits appear instantly both sides."},
+    {"stage": "check", "question": "which -a gcc shows /mnt/c/... first. Risk?", "options": ["None", "make may invoke Windows gcc instead of Linux one", "Docker breaks", "GDB runs faster"], "correct": 1, "explanation": "First PATH entry wins; prefer /usr/bin or work in Docker."},
+    {"stage": "post", "question": "What belongs in a toolchain bug report?", "options": ["Screenshot of desktop", "OS, kernel, tool versions, door used (WSL vs Docker)", "Favorite editor", "QEMU window size"], "correct": 1, "explanation": "The toolchain card makes repro one glance."},
+    {"stage": "post", "question": "--strict adds what?", "options": ["Rust nightly", "qemu-system-i386 for 32-bit boot lessons", "Windows support", "GPU drivers"], "correct": 1, "explanation": "32-bit boot sectors need the i386 emulator."}
+  ]
+}

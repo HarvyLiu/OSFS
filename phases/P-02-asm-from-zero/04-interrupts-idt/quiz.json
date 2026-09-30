@@ -1,0 +1,12 @@
+{
+  "lesson": "04-interrupts-idt",
+  "title": "Interrupts, cli/sti, IDT Preview",
+  "questions": [
+    {"stage": "pre", "question": "Polling vs interrupts?", "options": ["Same", "Polling asks in a loop; interrupts notify via IDT dispatch", "Interrupts are slower always", "Polling uses IDT"], "correct": 1, "explanation": "Notification inverts control: CPU works until knocked."},
+    {"stage": "check", "question": "Masked (cli) raise does what in our model?", "options": ["Runs anyway", "Parks pending=1, runs nothing", "Deletes handler", "Crashes"], "correct": 1, "explanation": "Deferred, not lost — drained after sti."},
+    {"stage": "check", "question": "Unregistered vector raised?", "options": ["Crash", "Ignored (spurious-safe)", "Runs vector 0", "Reboots"], "correct": 1, "explanation": "Guard makes unknown IRQs boring, as hardware demands."},
+    {"stage": "check", "question": "Why cli BEFORE saving registers?", "options": ["Speed", "Nested IRQ mid-save corrupts the frame", "Tradition", "Saves power"], "correct": 1, "explanation": "Fence first, work second — ordering law."},
+    {"stage": "post", "question": "Why iretq, not ret?", "options": ["Longer name", "Pops flags + far return atomically (no race window)", "Faster", "Shorter encoding"], "correct": 1, "explanation": "Restores interrupt-flag state with the jump, indivisibly."},
+    {"stage": "post", "question": "Userspace cli does what on Linux?", "options": ["Disables interrupts", "Faults (#GP -> SIGSEGV); only ring 0 may", "Nothing", "Reboots"], "correct": 1, "explanation": "Privilege rings enforce it — the protection story preview."}
+  ]
+}

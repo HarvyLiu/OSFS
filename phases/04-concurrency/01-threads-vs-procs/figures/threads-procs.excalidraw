@@ -1,0 +1,1 @@
+{"type":"excalidraw","version":2,"source":"osfs-threads-procs","elements":[{"type":"rectangle","x":40,"y":60,"width":220,"height":50,"label":"proc A: code+data+heap+1 stack"},{"type":"rectangle","x":300,"y":60,"width":220,"height":50,"label":"proc B: separate world"}],"appState":{},"files":{}}

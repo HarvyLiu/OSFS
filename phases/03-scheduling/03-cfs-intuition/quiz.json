@@ -1,0 +1,12 @@
+{
+  "lesson": "03-cfs-intuition",
+  "title": "CFS Intuition",
+  "questions": [
+    {"stage": "pre", "question": "CFS picks whom each tick?", "options": ["Highest pid", "Smallest vruntime (most behind weighted)", "Longest burst", "Newest arrival"], "correct": 1, "explanation": "Min virtual clock = most owed in weighted time."},
+    {"stage": "check", "question": "Running 1 tick adds to vr?", "options": ["1.0 always", "1024/weight (heavy accrues slowly)", "weight/1024", "Nothing"], "correct": 1, "explanation": "Charge is inverse to weight; heavy clocks crawl, get picked often."},
+    {"stage": "check", "question": "60 ticks split 14/5/41. Why?", "options": ["Round-robin", "Proportional to 1024/335/3121 weights", "Random", "Arrival order"], "correct": 1, "explanation": "23/8/68% vs weight shares 22.9/7.5/69.6."},
+    {"stage": "check", "question": "vr spread 13.45-15.28 means?", "options": ["Unfair", "Bounded lag: capped near one big step, never compounding", "Bug", "Starvation"], "correct": 1, "explanation": "The fairness guarantee: lag bounded structurally."},
+    {"stage": "post", "question": "All nice 0 => ?", "options": ["Starvation", "20/20/20 round-robin (CFS contains RR)", "Random split", "First wins all"], "correct": 1, "explanation": "Equal weights = equal charges = plain rotation."},
+    {"stage": "post", "question": "nice +1 changes weight by?", "options": ["+1", "Roughly /1.25 (each step ~10%+ CPU shift)", "Doubles", "Nothing"], "correct": 1, "explanation": "Exponential table: small nice moves, real share moves."}
+  ]
+}

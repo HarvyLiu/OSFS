@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="440" height="170" role="img" aria-label="address space map">
+<text x="20" y="35" font-family="monospace" font-size="13">low: code+data | heap grows up ^</text>
+<text x="20" y="58" font-family="monospace" font-size="13">mid: mmap gaps (libs, big allocs)</text>
+<text x="20" y="81" font-family="monospace" font-size="13">high: stack grows down v | kernel top</text>
+<text x="20" y="106" font-family="monospace" font-size="12">same shape every proc, different contents</text>
+<text x="20" y="130" font-family="monospace" font-size="12">pages 4K translate virtual -&gt; physical</text>
+<text x="20" y="150" font-family="monospace" font-size="12">editable: address-space.excalidraw</text>
+</svg>

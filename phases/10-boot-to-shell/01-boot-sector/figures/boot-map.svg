@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="440" height="160" role="img" aria-label="boot map">
+<text x="20" y="40" font-family="monospace" font-size="13">BIOS: AA55? load sector0 -&gt; 0x7C00, jump</text>
+<text x="20" y="62" font-family="monospace" font-size="13">boot: cli, segs=0, stack 0x7C00, print</text>
+<text x="20" y="84" font-family="monospace" font-size="13">output: VGA int10 + serial COM1 (CI reads)</text>
+<text x="20" y="108" font-family="monospace" font-size="12">510 bytes code+msg + 2 magic = 512 total</text>
+<text x="20" y="130" font-family="monospace" font-size="12">hang: cli/hlt/jmp (timeout 124 = success)</text>
+<text x="20" y="150" font-family="monospace" font-size="12">editable: boot-map.excalidraw</text>
+</svg>

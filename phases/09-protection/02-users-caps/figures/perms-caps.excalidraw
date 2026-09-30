@@ -1,0 +1,1 @@
+{"type":"excalidraw","version":2,"source":"osfs-perms-caps","elements":[{"type":"rectangle","x":40,"y":60,"width":200,"height":30,"label":"owner? group? other? (first wins)"},{"type":"rectangle","x":40,"y":100,"width":200,"height":30,"label":"root? yes : bit test + caps"}],"appState":{},"files":{}}

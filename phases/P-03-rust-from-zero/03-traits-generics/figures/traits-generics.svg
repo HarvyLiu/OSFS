@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="440" height="150" role="img" aria-label="traits generics">
+<text x="20" y="40" font-family="monospace" font-size="13">trait Describe { fn describe } -- promise</text>
+<text x="20" y="62" font-family="monospace" font-size="13">impl for Pcb, impl for Job -- keepers</text>
+<text x="20" y="84" font-family="monospace" font-size="12">fn f&lt;T: Describe&gt; -- any keeper, static</text>
+<text x="20" y="106" font-family="monospace" font-size="12">Box = heap owner; Vec = growable heap array</text>
+<text x="20" y="130" font-family="monospace" font-size="12">editable: traits-generics.excalidraw</text>
+</svg>

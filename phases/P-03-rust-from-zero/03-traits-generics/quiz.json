@@ -1,0 +1,12 @@
+{
+  "lesson": "03-traits-generics",
+  "title": "Traits, Generics, Vec/Box",
+  "questions": [
+    {"stage": "pre", "question": "Trait vs struct?", "options": ["Same", "Struct holds data; trait promises behavior any struct can keep", "Trait holds data", "Struct is generic"], "correct": 1, "explanation": "Data vs capability: promises compose across types."},
+    {"stage": "check", "question": "announce(&42_i32) fails because?", "options": ["Wrong syntax", "i32 keeps no Describe promise (bound unsatisfied)", "Needs Box", "Needs mut"], "correct": 1, "explanation": "Bounds gate calls at compile time, naming the gap."},
+    {"stage": "check", "question": "Monomorphization means?", "options": ["Runtime dispatch", "Compiler stamps per-type copies (no runtime cost, bigger binary)", "GC", "Interpreted"], "correct": 1, "explanation": "Pay in bytes, not cycles — visible via nm."},
+    {"stage": "check", "question": "Box<Pcb> does what to p?", "options": ["Copies", "Moves to heap; p dead after", "Borrows", "Clones"], "correct": 1, "explanation": "Move rule: ownership relocates, old name dies."},
+    {"stage": "post", "question": "Display impl buys?", "options": ["Nothing", "Every {} print + to_string downstream", "Faster code", "Heap"], "correct": 1, "explanation": "Formatting is a trait: keep it, unlock the ecosystem."},
+    {"stage": "post", "question": "Bound removal breaks announce body because?", "options": ["Style", "Without bound the generic can't know .describe exists", "Needs lifetime", "Needs Box"], "correct": 1, "explanation": "Bounds carry method knowledge into generic bodies."}
+  ]
+}

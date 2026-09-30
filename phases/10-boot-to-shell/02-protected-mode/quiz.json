@@ -1,0 +1,12 @@
+{
+  "lesson": "02-protected-mode",
+  "title": "Protected Mode",
+  "questions": [
+    {"stage": "pre", "question": "Why save %dl first?", "options": ["Speed", "BIOS passes boot drive once; clobbered later", "Tradition", "Alignment"], "correct": 1, "explanation": "int calls clobber; drive number needed for int13."},
+    {"stage": "check", "question": "Why far jump, not near?", "options": ["Longer reach", "Reloads CS hidden cache (else keeps 16-bit decode)", "Faster", "Required syntax"], "correct": 1, "explanation": "PE set but CS stale: near jump executes 32-bit bytes as 16-bit."},
+    {"stage": "check", "question": "A20 gate does what?", "options": ["Speeds RAM", "Unlocks addresses past 1 MiB (unwraps mirror)", "Enables cache", "Protects kernel"], "correct": 1, "explanation": "PC-AT fossil: disabled A20 wraps memory at 1 MiB."},
+    {"stage": "check", "question": "-ffreestanding means?", "options": ["Faster code", "No libc/host: kernel provides all (ENTRY replaces _start)", "Static link", "No warnings"], "correct": 1, "explanation": "Freestanding: no main, no syscalls, just your code."},
+    {"stage": "post", "question": "After the jump, BIOS is?", "options": ["Faster", "Unreachable (your segments now): write VGA directly", "Still callable", "Reloaded"], "correct": 1, "explanation": "int10 needs real mode: kmain writes 0xB8000 cells."},
+    {"stage": "post", "question": "LOAD_SECTORS via --defsym because?", "options": ["Style", "Kernel size varies: build measures, loader obeys", "Speed", "Required"], "correct": 1, "explanation": "Stat counts kernel.bin; assemble bakes the count."}
+  ]
+}

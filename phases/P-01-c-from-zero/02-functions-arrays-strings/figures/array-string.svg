@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="440" height="150" role="img" aria-label="array string">
+<text x="20" y="40" font-family="monospace" font-size="13">buf[4]: [0][10][20][30] contiguous ints</text>
+<text x="20" y="65" font-family="monospace" font-size="13">"osfs": o s f s \0 (5 bytes, zero ends)</text>
+<text x="20" y="90" font-family="monospace" font-size="12">array name = &amp;arr[0]; length travels separately</text>
+<text x="20" y="115" font-family="monospace" font-size="12">editable: array-string.excalidraw</text>
+</svg>

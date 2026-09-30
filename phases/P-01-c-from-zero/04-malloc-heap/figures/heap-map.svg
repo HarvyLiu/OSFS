@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="440" height="140" role="img" aria-label="heap map">
+<text x="20" y="40" font-family="monospace" font-size="13">stack: dies at } (borrowed)</text>
+<text x="20" y="62" font-family="monospace" font-size="13">heap: lives until free (owned)</text>
+<text x="20" y="86" font-family="monospace" font-size="12">malloc=ask NULL=fail realloc=grow free=return</text>
+<text x="20" y="110" font-family="monospace" font-size="12">editable: heap-map.excalidraw</text>
+</svg>

@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="440" height="150" role="img" aria-label="link layout">
+<text x="20" y="40" font-family="monospace" font-size="13">a.o(.text .data .bss) + b.o(...) --script--&gt; image</text>
+<text x="20" y="62" font-family="monospace" font-size="13">ENTRY sets first jump; . sets addresses</text>
+<text x="20" y="84" font-family="monospace" font-size="12">*(.multiboot) first or QEMU refuses to boot</text>
+<text x="20" y="108" font-family="monospace" font-size="12">nm letters: T text D data B bss R rodata</text>
+<text x="20" y="130" font-family="monospace" font-size="12">editable: link-layout.excalidraw</text>
+</svg>

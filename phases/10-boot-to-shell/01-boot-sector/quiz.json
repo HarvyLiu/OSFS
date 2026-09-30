@@ -1,0 +1,12 @@
+{
+  "lesson": "01-boot-sector",
+  "title": "Boot Sector",
+  "questions": [
+    {"stage": "pre", "question": "BIOS boots when?", "options": ["Always", "Sector0 bytes 510-511 = 0xAA55 (handshake)", "Any disk", "Never"], "correct": 1, "explanation": "Magic checked, sector loaded to 0x7C00, jumped."},
+    {"stage": "check", "question": "cli first because?", "options": ["Speed", "No stack yet: interrupt would push into garbage", "Tradition", "Disables bugs"], "correct": 1, "explanation": "Fence-first law, boot edition."},
+    {"stage": "check", "question": "-Ttext 0x7c00 needed because?", "options": ["Faster link", "$msg must equal runtime addr (loaded at 0x7C00, DS=0)", "Smaller binary", "Required always"], "correct": 1, "explanation": "Without origin, SI points 0x7C00 low (classic first-boot bug)."},
+    {"stage": "check", "question": "Dual output (VGA+serial) why?", "options": ["Redundancy", "Humans read screen, CI reads wire (nographic shows serial)", "Speed", "BIOS needs"], "correct": 1, "explanation": "Two audiences: eyes and timeout-grep."},
+    {"stage": "post", "question": "qemu exits 124. Verdict?", "options": ["Crash", "Success-with-timeout (guest halts forever by design)", "Link fail", "No boot"], "correct": 1, "explanation": "124 = timeout's kill: expected, greeted."},
+    {"stage": "post", "question": "Oversize code (>510) does what?", "options": ["Truncates silently", "Build error (negative .fill count)", "Boots anyway", "Warns only"], "correct": 1, "explanation": "Budget enforced at assemble time, not boot time."}
+  ]
+}

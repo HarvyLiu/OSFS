@@ -1,0 +1,12 @@
+{
+  "lesson": "01-vsfs",
+  "title": "VSFS",
+  "questions": [
+    {"stage": "pre", "question": "Names vs inodes?", "options": ["Same thing", "Dirs map names->inum; inodes hold type/size/blocks", "Inodes hold names", "Dirs hold data"], "correct": 1, "explanation": "Split: naming in entries, metadata in inodes."},
+    {"stage": "check", "question": "Block map 0/1/2-5/6+?", "options": ["Random", "Super/bitmap/inodes(8)/data (geometry by define)", "All data", "All inodes"], "correct": 1, "explanation": "Fixed map; metadata protects itself in bitmap."},
+    {"stage": "check", "question": "256B ceiling from?", "options": ["RAM", "4 direct x 64B (no indirect yet)", "Bitmap", "Names"], "correct": 1, "explanation": "Direct-only: stated upfront, enforced, lifted later."},
+    {"stage": "check", "question": "Duplicate create returns?", "options": ["New inum", "-1 (namespace invariant: unique names)", "Overwrites", "Crash"], "correct": 1, "explanation": "Dir scan rejects dupes before allocating."},
+    {"stage": "post", "question": "8 used blocks after hello?", "options": ["Random", "super+bitmap+4 inode+root data+1 file (counted)", "All 64", "1"], "correct": 1, "explanation": "Bitmap census: every allocation accounted."},
+    {"stage": "post", "question": "Backend-blind means?", "options": ["No backend", "FS codes to read/write verbs; RAM/file/disk plug unchanged", "Slower", "No tests"], "correct": 1, "explanation": "Vtable boundary: media varies, logic doesn't."}
+  ]
+}

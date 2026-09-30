@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="460" height="150" role="img" aria-label="ramdisk backends">
+<text x="20" y="40" font-family="monospace" font-size="13">verbs: read/write/flush/crash (identical)</text>
+<text x="20" y="62" font-family="monospace" font-size="13">file backend: flush persists, crash reloads</text>
+<text x="20" y="84" font-family="monospace" font-size="13">ram backend: flush no-op, crash wipes all</text>
+<text x="20" y="108" font-family="monospace" font-size="12">FS codes to verbs: backend invisible above</text>
+<text x="20" y="130" font-family="monospace" font-size="12">editable: ramdisk-backends.excalidraw</text>
+</svg>

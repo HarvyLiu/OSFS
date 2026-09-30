@@ -1,0 +1,12 @@
+{
+  "lesson": "05-calling-inline",
+  "title": "C Calling ASM, Inline ASM",
+  "questions": [
+    {"stage": "pre", "question": "Operand %0 refers to?", "options": ["First input", "First listed operand (outputs first, then inputs)", "Register eax always", "The template string"], "correct": 1, "explanation": "Numbering follows declaration order across outputs then inputs."},
+    {"stage": "check", "question": "\"+r\"(x) means?", "options": ["Write-only any register", "Read-write, any register, seeded with x and written back", "Read-only", "Must be eax"], "correct": 1, "explanation": "+ = both directions; r = allocator picks."},
+    {"stage": "check", "question": "volatile on rdtsc because?", "options": ["Speed", "Timing reads must execute exactly placed; optimizer must not merge/hoist", "Syntax demand", "Needs root"], "correct": 1, "explanation": "Without it, two reads collapse and deltas lie."},
+    {"stage": "check", "question": "\"cc\" clobber confesses?", "options": ["Memory written", "Flags register changed by the instruction", "Stack moved", "Interrupts disabled"], "correct": 1, "explanation": "add sets flags; nearby branches depend on the truth."},
+    {"stage": "post", "question": "cpuid vendor order b,d,c because?", "options": ["Alphabetical", "Intel spreads EBX,EDX,ECX in that order for leaf 0", "Random", "AT&T order"], "correct": 1, "explanation": "Hardware contract, memorized once in the helper."},
+    {"stage": "post", "question": "Inline ASM mostly buys?", "options": ["Speed over C", "Access to instructions C cannot spell (cpuid/rdtsc/in/out)", "Smaller binaries", "Portability"], "correct": 1, "explanation": "Same codegen for add; irreplaceable for special instructions."}
+  ]
+}

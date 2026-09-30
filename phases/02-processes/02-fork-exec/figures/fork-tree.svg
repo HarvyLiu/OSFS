@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="460" height="220" role="img" aria-label="fork tree">
+<rect x="140" y="15" width="180" height="40" fill="none" stroke="currentColor" stroke-width="2"/><text x="150" y="40" font-family="monospace" font-size="13">parent pid=100</text>
+<line x1="230" y1="55" x2="100" y2="100" stroke="currentColor" stroke-width="2"/><line x1="230" y1="55" x2="360" y2="100" stroke="currentColor" stroke-width="2"/>
+<text x="200" y="80" font-family="monospace" font-size="12">fork()</text>
+<rect x="20" y="100" width="180" height="50" fill="none" stroke="currentColor" stroke-width="2"/><text x="30" y="120" font-family="monospace" font-size="12">parent returns 101</text><text x="30" y="138" font-family="monospace" font-size="12">→ wait()</text>
+<rect x="260" y="100" width="180" height="50" fill="none" stroke="currentColor" stroke-width="2"/><text x="270" y="120" font-family="monospace" font-size="12">child returns 0</text><text x="270" y="138" font-family="monospace" font-size="12">→ exec(echo)</text>
+<text x="20" y="180" font-family="monospace" font-size="12">editable source: fork-tree.excalidraw</text>
+</svg>

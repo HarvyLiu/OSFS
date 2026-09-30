@@ -1,0 +1,14 @@
+CC=cc
+CFLAGS=-Wall -Werror -Wextra -std=c11
+BUILD=build
+TARGET=$(BUILD)/split
+SRCS=main.c vec.c
+HEADERS=vec.h
+all: $(TARGET)
+$(TARGET): $(SRCS) $(HEADERS)
+	@mkdir -p $(BUILD)
+	$(CC) $(CFLAGS) $(SRCS) -o $(TARGET)
+run: $(TARGET)
+	./$(TARGET)
+clean:
+	rm -rf $(BUILD)

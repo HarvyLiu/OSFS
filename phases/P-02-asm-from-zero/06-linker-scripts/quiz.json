@@ -1,0 +1,12 @@
+{
+  "lesson": "06-linker-scripts",
+  "title": "Linker Scripts",
+  "questions": [
+    {"stage": "pre", "question": "Compiler vs linker?", "options": ["Same job", "Compiler makes sectioned objects; linker lays them at addresses", "Linker compiles", "Neither needed"], "correct": 1, "explanation": "Bricks vs house at chosen addresses."},
+    {"stage": "check", "question": "nm shows D init_global. Meaning?", "options": ["Deleted", "Initialized data section (.data)", "Debug info", "Dynamic lib"], "correct": 1, "explanation": "Letter = home section: T text, D data, B bss, R rodata."},
+    {"stage": "check", "question": ". = 1M means?", "options": ["1 megabyte file", "Location counter: lay out from 0x100000", "1 million symbols", "Align to 1"], "correct": 1, "explanation": "Dot assigns the running address; everything after follows."},
+    {"stage": "check", "question": "Why *(.multiboot) first?", "options": ["Speed", "QEMU scans first 8 KiB for the magic; buried = unbootable", "Tradition", "Smaller image"], "correct": 1, "explanation": "Placement is contract for boot discovery."},
+    {"stage": "post", "question": "Custom section .mysec collects?", "options": ["Nothing", "All .mysec inputs across objects, adjacently", "Only first file", "Random bytes"], "correct": 1, "explanation": "Sections gather by name across objects — init arrays use this."},
+    {"stage": "post", "question": "Host vs kernel layout?", "options": ["Same", "Host loader relocates invisibly; kernel script dictates (no loader below)", "Kernels need none", "Host has no sections"], "correct": 1, "explanation": "Bottom of the stack writes its own map."}
+  ]
+}

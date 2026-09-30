@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="440" height="150" role="img" aria-label="stack frames">
+<text x="20" y="40" font-family="monospace" font-size="13">high: main frame (oldest)</text>
+<text x="20" y="62" font-family="monospace" font-size="13">mid: level1 frame (rbp anchored)</text>
+<text x="20" y="84" font-family="monospace" font-size="13">low: level2 frame &lt;- %rsp (grows down)</text>
+<text x="20" y="110" font-family="monospace" font-size="12">call pushes home; prologue anchors; ret walks back</text>
+<text x="20" y="130" font-family="monospace" font-size="12">editable: stack-frames.excalidraw</text>
+</svg>

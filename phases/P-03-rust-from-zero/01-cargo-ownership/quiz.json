@@ -1,0 +1,12 @@
+{
+  "lesson": "01-cargo-ownership",
+  "title": "Cargo, Ownership, Borrows",
+  "questions": [
+    {"stage": "pre", "question": "One owner rule means?", "options": ["One variable total", "Each value has exactly one owner; assign moves it", "No sharing ever", "GC frees"], "correct": 1, "explanation": "Move transfers; old name dies by compiler decree."},
+    {"stage": "check", "question": "shout(&name) then using name: legal?", "options": ["No, moved", "Yes: shared borrow, owner alive", "Only once", "Needs clone"], "correct": 1, "explanation": "& borrows coexist with the owner."},
+    {"stage": "check", "question": "&mut allows?", "options": ["Many writers", "One writer, zero readers in that statement", "No writes", "Copy"], "correct": 1, "explanation": "Exclusivity kills data races before running."},
+    {"stage": "check", "question": "Drop at } equals?", "options": ["Leak", "Automatic free exactly once (malloc/free counted by compiler)", "GC pause", "Nothing"], "correct": 1, "explanation": "Scope exit inserts the release you used to hand-write."},
+    {"stage": "post", "question": "String vs &str?", "options": ["Same", "String owns heap bytes; &str borrows a view (ptr+len)", "str owns", "Both copy"], "correct": 1, "explanation": "Own vs view: the vocabulary of every Rust API."},
+    {"stage": "post", "question": "Use-after-move is?", "options": ["Runtime crash", "Compile error E0382 (use-after-free made unshippable)", "Warning only", "Fine"], "correct": 1, "explanation": "The bug class becomes a build break — read --explain."}
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "lesson": "02-segmentation-paging",
+  "title": "Segmentation and Paging",
+  "questions": [
+    {"stage": "pre", "question": "Segmentation translates by?", "options": ["Table lookup", "phys = base+offset, fault if offset>=limit", "Hashing", "No translation"], "correct": 1, "explanation": "Variable chunks: add base, police limit."},
+    {"stage": "check", "question": "32-bit VA, 4K pages: VPN and offset?", "options": ["vpn=va>>10, off 10b", "vpn=va>>12 (20b), off=va&0xFFF (12b)", "vpn=va&0xFF", "No split"], "correct": 1, "explanation": "12 offset bits address 4096 bytes; rest indexes."},
+    {"stage": "check", "question": "page(0x2ABC) with frame7?", "options": ["0x2ABC", "0x7ABC (frame*4096+offset)", "0x7000", "FAULT"], "correct": 1, "explanation": "Offset passes through untouched: 0xABC survives."},
+    {"stage": "check", "question": "Limit check uses >= because?", "options": ["Style", "Limit exclusive: offset==limit already outside", "Faster", "Includes one more"], "correct": 1, "explanation": "Boundary exactness: 0x2000 with limit 0x2000 faults."},
+    {"stage": "post", "question": "Why paging beat segmentation?", "options": ["Faster adds", "Fixed pages kill external fragmentation; present bits enable swap/protection", "Less RAM", "No tables"], "correct": 1, "explanation": "Uniform atoms + per-page flags: the winning combo."},
+    {"stage": "post", "question": "Maps ranges align to 0x1000 because?", "options": ["Luck", "Mappings are page-granular; flags attach per page", "ASLR", "Compiler"], "correct": 1, "explanation": "Protection/allocation quanta force alignment."}
+  ]
+}

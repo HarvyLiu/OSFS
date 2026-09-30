@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="440" height="170" role="img" aria-label="mlfq queues">
+<text x="20" y="35" font-family="monospace" font-size="13">Q0 q=2: new jobs, shorts finish here</text>
+<text x="20" y="58" font-family="monospace" font-size="13">Q1 q=4: demoted once, mediums drain</text>
+<text x="20" y="81" font-family="monospace" font-size="13">Q2 FCFS: hogs sink; boost rescues all up</text>
+<text x="20" y="106" font-family="monospace" font-size="12">exhaust quantum -&gt; demote; boost -&gt; all Q0</text>
+<text x="20" y="130" font-family="monospace" font-size="12">trace: A=7 B=16 C=12, boost8: C=11</text>
+<text x="20" y="150" font-family="monospace" font-size="12">editable: mlfq-queues.excalidraw</text>
+</svg>

@@ -1,0 +1,3 @@
+/* Explain-toggle for line tables + figure captions. */
+.explain-table { font-size: 0.92rem; }
+figure.excalidraw svg { width: 100%; height: auto; background: var(--sl-color-bg); }

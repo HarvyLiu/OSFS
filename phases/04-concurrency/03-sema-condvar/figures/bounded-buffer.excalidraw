@@ -1,0 +1,1 @@
+{"type":"excalidraw","version":2,"source":"osfs-bounded-buffer","elements":[{"type":"rectangle","x":40,"y":60,"width":160,"height":40,"label":"producer: wait empty"},{"type":"arrow","x":200,"y":80,"label":"buf[N] + mutex"},{"type":"rectangle","x":340,"y":60,"width":180,"height":40,"label":"consumer: wait full"}],"appState":{},"files":{}}

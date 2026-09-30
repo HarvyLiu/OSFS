@@ -1,0 +1,12 @@
+{
+  "lesson": "03-swap-oom",
+  "title": "Swap, Demand Paging, OOM",
+  "questions": [
+    {"stage": "pre", "question": "Clean vs dirty evict?", "options": ["Same cost", "Clean drops free (disk current); dirty writes back first", "Dirty drops", "Neither writes"], "correct": 1, "explanation": "Tracking dirt avoids most disk traffic."},
+    {"stage": "check", "question": "Trace faults/evictions/writebacks?", "options": ["13/6/1", "9/6/1 (4 hits absorb the rest)", "9/9/9", "6/6/0"], "correct": 1, "explanation": "Hand trace: 9 majors, 6 evicts, exactly page-0's dirt writes."},
+    {"stage": "check", "question": "vpn 9 access returns?", "options": ["1 (fault)", "0 (hit)", "-1 (outside 0..5: unmapped address)", "Evicts"], "correct": 2, "explanation": "Range faults differ from residency faults."},
+    {"stage": "check", "question": "malloc without touch costs?", "options": ["Full RAM", "Almost nothing until touched (lazy fault-in)", "Double", "Swap"], "correct": 1, "explanation": "Promise vs residence: overcommit's trick."},
+    {"stage": "post", "question": "OOM killer picks by?", "options": ["Random", "Badness score (RSS + tuning; oom_score_adj)", "Oldest", "Smallest"], "correct": 1, "explanation": "Scores rank victims; -1000 exempts."},
+    {"stage": "post", "question": "VSZ >> RSS means?", "options": ["Leak", "Mapped promises exceed touched frames (lazy/sparse healthy)", "Bug", "Swap full"], "correct": 1, "explanation": "The gap is laziness working, not memory lost."}
+  ]
+}

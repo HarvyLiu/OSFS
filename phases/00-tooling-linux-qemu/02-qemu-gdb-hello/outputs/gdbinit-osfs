@@ -1,0 +1,5 @@
+target remote :1234
+break kernel_main
+break serial_putc
+layout asm
+echo \n[gdbinit-osfs] connected. try: continue, info registers, x/8i $pc\n

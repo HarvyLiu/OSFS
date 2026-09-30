@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="440" height="150" role="img" aria-label="perms caps">
+<text x="20" y="40" font-family="monospace" font-size="13">class: owner? group? other? (first match only)</text>
+<text x="20" y="62" font-family="monospace" font-size="13">root: always yes / else bit test (r4 w2 x1)</text>
+<text x="20" y="84" font-family="monospace" font-size="13">raw: ALSO needs CAP bit (identity insufficient)</text>
+<text x="20" y="108" font-family="monospace" font-size="12">setuid: borrow file-owner uid for one call</text>
+<text x="20" y="130" font-family="monospace" font-size="12">editable: perms-caps.excalidraw</text>
+</svg>

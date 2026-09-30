@@ -1,0 +1,12 @@
+{
+  "lesson": "01-abstractions",
+  "title": "Abstractions: Files, Procs, Address Spaces",
+  "questions": [
+    {"stage": "pre", "question": "The OS's three big lies?", "options": ["TCP/IP/DNS", "Files over blocks, processes over CPUs, address spaces over RAM", "Users/groups/permissions", "Tabs/spaces/braces"], "correct": 1, "explanation": "Each hides sharing/limits behind a private fiction."},
+    {"stage": "check", "question": "First user fd after 0/1/2?", "options": ["0", "1", "3", "99"], "correct": 2, "explanation": "Per-process indices; std trio occupies 0-2."},
+    {"stage": "check", "question": "Same pointer value in two processes?", "options": ["Same bytes", "Different bytes (private spaces, same numbering)", "Crash", "Shared always"], "correct": 1, "explanation": "Numbering is per-space; mappings differ."},
+    {"stage": "check", "question": "fopen w vs a?", "options": ["Same", "w razes/truncates, a appends", "a reads", "w appends"], "correct": 1, "explanation": "Mode picks offset fate: zero vs end."},
+    {"stage": "post", "question": "/proc/PID/fd shows?", "options": ["Source code", "Live open files of that process", "Passwords", "Nothing"], "correct": 1, "explanation": "Fds are per-process tables; procfs exposes them."},
+    {"stage": "post", "question": "Which phase deepens each lie?", "options": ["Any order", "Files 07-08, procs 02-04, spaces 05-06", "All in capstone", "None"], "correct": 1, "explanation": "The pocket map for the whole course."}
+  ]
+}

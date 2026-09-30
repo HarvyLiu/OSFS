@@ -1,0 +1,1 @@
+{"type":"excalidraw","version":2,"source":"osfs-trapframe","elements":[{"type":"rectangle","x":40,"y":60,"width":220,"height":40,"label":"trapframe: regs+pc+sp+flags"},{"type":"rectangle","x":300,"y":60,"width":200,"height":40,"label":"pcb: id+state+frame+root+files"}],"appState":{},"files":{}}

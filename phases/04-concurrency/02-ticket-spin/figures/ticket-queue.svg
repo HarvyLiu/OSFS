@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="460" height="150" role="img" aria-label="ticket queue">
+<text x="20" y="40" font-family="monospace" font-size="13">lock: my = fetch_add(next++) -- take a number</text>
+<text x="20" y="62" font-family="monospace" font-size="13">wait: while (serving != my) spin+pause</text>
+<text x="20" y="84" font-family="monospace" font-size="13">unlock: serving++ -- next number, please</text>
+<text x="20" y="108" font-family="monospace" font-size="12">FIFO by construction: tickets never cut</text>
+<text x="20" y="130" font-family="monospace" font-size="12">editable: ticket-queue.excalidraw</text>
+</svg>

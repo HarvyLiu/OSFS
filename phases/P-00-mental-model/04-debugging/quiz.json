@@ -1,0 +1,12 @@
+{
+  "lesson": "04-debugging",
+  "title": "Debugging",
+  "questions": [
+    {"stage": "pre", "question": "First debugging step?", "options": ["Guess the fix", "Reproduce: input that kills vs input that lives", "Rewrite everything", "Ask online"], "correct": 1, "explanation": "A reproducer that discriminates is worth ten hypotheses."},
+    {"stage": "check", "question": "gdb backtrace says?", "options": ["How to fix", "Call stack at death: library frame + your guilty line", "Variable values", "Nothing useful"], "correct": 1, "explanation": "Frame 0 dies in strlen, frame 1 names buggy.c:21."},
+    {"stage": "check", "question": "Which bug is scarier?", "options": ["The crash (NULL)", "Silent corruption (<= overread: wrong answers, no crash)", "Both equal", "Neither"], "correct": 1, "explanation": "Crashes announce; corruption ships wrong results quietly."},
+    {"stage": "check", "question": "-g flag does what?", "options": ["Optimizes", "Keeps names/line numbers for gdb", "Warns more", "Links static"], "correct": 1, "explanation": "Debug info: addresses become buggy.c:21."},
+    {"stage": "post", "question": "Where to check nullable returns?", "options": ["Where born", "At the use site, before dereference", "Never", "In tests only"], "correct": 1, "explanation": "Check where you use: if(!id) before strlen."},
+    {"stage": "post", "question": "assert's job?", "options": ["Handle errors", "Pin: fail before fix, pass after (regression net)", "Speed up", "Document only"], "correct": 1, "explanation": "Asserts pin behavior so bugs can't silently return."}
+  ]
+}

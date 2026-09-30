@@ -1,0 +1,12 @@
+{
+  "lesson": "01-address-spaces",
+  "title": "Address Spaces",
+  "questions": [
+    {"stage": "pre", "question": "Same pointer number in two processes?", "options": ["Same bytes", "Different bytes: private spaces, shared numbering", "Crash", "Shared"], "correct": 1, "explanation": "Translation is per-process; numbers coincide, frames differ."},
+    {"stage": "check", "question": "mmap ANONYMOUS gives?", "options": ["File bytes", "Zeroed private pages, fileless", "Shared stack", "Kernel code"], "correct": 1, "explanation": "Nowhere-backed RAM, faulted in on touch."},
+    {"stage": "check", "question": "Untouched mmap pages cost?", "options": ["Full RAM", "Almost nothing until touched (lazy fault-in)", "Double RAM", "Swap"], "correct": 1, "explanation": "Allocation promises; touch delivers (faults prove)."},
+    {"stage": "check", "question": "Heap vs stack growth?", "options": ["Both up", "Heap up, stack down (toward each other)", "Both down", "Fixed"], "correct": 1, "explanation": "The meeting in the middle is the overflow story."},
+    {"stage": "post", "question": "Big mallocs bypass heap via?", "options": ["Stack", "Direct mmap regions (visible in maps)", "Swap", "Kernel"], "correct": 1, "explanation": "Two-gear allocator: heap for small, mmap for big."},
+    {"stage": "post", "question": "Page size known how?", "options": ["Always 4096", "Queried via sysconf (norm 4096 x86-64)", "Guessed", "In binary"], "correct": 1, "explanation": "Query beats lore; hugepages exist."}
+  ]
+}

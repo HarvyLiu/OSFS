@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="440" height="150" role="img" aria-label="trapframe">
+<text x="20" y="40" font-family="monospace" font-size="13">trapframe: regs[N] + pc + sp + flags</text>
+<text x="20" y="62" font-family="monospace" font-size="13">pcb: pid ppid state + frame + root + files</text>
+<text x="20" y="84" font-family="monospace" font-size="12">pause = save all; resume = restore reverse</text>
+<text x="20" y="108" font-family="monospace" font-size="12">fork copies row; switch swaps rows; wait reaps</text>
+<text x="20" y="130" font-family="monospace" font-size="12">editable: trapframe.excalidraw</text>
+</svg>

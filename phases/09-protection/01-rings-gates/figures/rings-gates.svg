@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="440" height="150" role="img" aria-label="rings gates">
+<text x="20" y="40" font-family="monospace" font-size="13">ring 0 kernel: cli inb CR3 maps (all)</text>
+<text x="20" y="62" font-family="monospace" font-size="13">ring 3 user: gates DPL3 only (asks)</text>
+<text x="20" y="84" font-family="monospace" font-size="13">THE rule: allow iff cpl &lt;= dpl (numeric)</text>
+<text x="20" y="108" font-family="monospace" font-size="12">down-crossings fault (#GP); up is safe</text>
+<text x="20" y="130" font-family="monospace" font-size="12">editable: rings-gates.excalidraw</text>
+</svg>

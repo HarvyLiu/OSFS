@@ -1,0 +1,12 @@
+{
+  "lesson": "02-users-caps",
+  "title": "Users, Groups, Capabilities",
+  "questions": [
+    {"stage": "pre", "question": "Bob in staff, file 640. Bob's class?", "options": ["Owner", "Group (first match wins over other)", "Other", "Root"], "correct": 1, "explanation": "Order: owner? group? other? Exactly one applies."},
+    {"stage": "check", "question": "Bob write on 640?", "options": ["ok", "DENY (group r-- lacks w)", "ok with sudo", "Sometimes"], "correct": 1, "explanation": "Group bits r--: read yes, write no."},
+    {"stage": "check", "question": "Root write on 000?", "options": ["DENY", "ok (skeleton key bypasses bits)", "Only read", "Needs cap"], "correct": 1, "explanation": "uid 0 bypasses permission bits (caps retire this)."},
+    {"stage": "check", "question": "Non-root raw disk needs?", "options": ["Ownership", "CAP bit AND (identity insufficient alone)", "Nothing", "Root group"], "correct": 1, "explanation": "Depth: perms say whose, caps say may-what."},
+    {"stage": "post", "question": "setuid passwd means?", "options": ["Runs as caller", "Runs as file owner (borrowed root, fenced minute)", "No password", "Root shell"], "correct": 1, "explanation": "Borrowed identity for one call: sharpest Unix door."},
+    {"stage": "post", "question": "0640 -> 0660 moves whom?", "options": ["Owner", "Group gains write (bob-w flips)", "Other", "Root"], "correct": 1, "explanation": "One octal digit moves a whole class."}
+  ]
+}

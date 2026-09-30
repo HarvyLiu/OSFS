@@ -1,0 +1,12 @@
+{
+  "lesson": "02-stack-call-ret",
+  "title": "Stack, call/ret, Frames",
+  "questions": [
+    {"stage": "pre", "question": "What does call f do?", "options": ["Jumps only", "Pushes return address, jumps to f", "Pops the stack", "Clears registers"], "correct": 1, "explanation": "Return address on top is how ret finds home."},
+    {"stage": "check", "question": "pushq %rbp; movq %rsp,%rbp does what?", "options": ["Disables interrupts", "Saves caller anchor, anchors this frame", "Adds two numbers", "Returns"], "correct": 1, "explanation": "Classic prologue: preserve old rbp, set new anchor."},
+    {"stage": "check", "question": "Deeper calls have ___ %rsp?", "options": ["Higher", "Lower (stack grows down)", "Same", "Random"], "correct": 1, "explanation": "x86 stacks grow toward zero; depth sampler proves it."},
+    {"stage": "check", "question": "leave equals?", "options": ["hlt", "mov %rbp,%rsp; pop %rbp", "ret twice", "nop"], "correct": 1, "explanation": "Tear down frame then ret pops home."},
+    {"stage": "post", "question": "bt shows main -> frame_add. What is each line?", "options": ["A process", "One live frame with its return address", "A register", "A syscall"], "correct": 1, "explanation": "Backtrace = chain of frames linked via saved rbp/return addr."},
+    {"stage": "post", "question": "Why does -O2 -fomit-frame-pointer hinder bt?", "options": ["Deletes code", "Fuses/omits rbp anchors for speed; rsp-relative addressing instead", "Disables GDB", "Changes ABI"], "correct": 1, "explanation": "Faster but less walkable; OS entry paths often keep frames."}
+  ]
+}

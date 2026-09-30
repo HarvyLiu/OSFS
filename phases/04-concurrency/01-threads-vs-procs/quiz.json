@@ -1,0 +1,12 @@
+{
+  "lesson": "01-threads-vs-procs",
+  "title": "Threads vs Processes, Races",
+  "questions": [
+    {"stage": "pre", "question": "fork vs pthread_create sharing?", "options": ["Same sharing", "fork clones the world (separate); threads add stack+regs to the same world", "Threads clone more", "Neither shares"], "correct": 1, "explanation": "Separate address spaces vs one space, many stacks."},
+    {"stage": "check", "question": "counter++ loses updates because?", "options": ["Slow CPU", "Load-add-store: interleavings repeat loads before stores land", "Compiler bug", "Too many threads"], "correct": 1, "explanation": "Three steps, preemptible between any two."},
+    {"stage": "check", "question": "Racy 400k lands short usually, exact sometimes. Meaning?", "options": ["No bug when exact", "Races are probabilistic: small windows hide, scale exposes", "Mutex broken", "Test invalid"], "correct": 1, "explanation": "Exact-once proves nothing; shortfall proves the window."},
+    {"stage": "check", "question": "-pthread needed where?", "options": ["Compile only", "Link only", "Both compile and link halves", "Neither"], "correct": 2, "explanation": "Defines + libpthread; half-flag fails each way."},
+    {"stage": "post", "question": "Why gate tests on mutex line only?", "options": ["Racy uninteresting", "Timing nondeterminism would flake CI; control is deterministic", "Mutex faster", "Racy always exact"], "correct": 1, "explanation": "Assert contracts, observe weather."},
+    {"stage": "post", "question": "Two locks, even/odd threads, same counter. Exact?", "options": ["Yes, more locks safer", "No: all accessors must share ONE lock for one datum", "Yes if fast", "Depends on cores"], "correct": 1, "explanation": "Mutual exclusion needs a common exclusion — preview of lock discipline."}
+  ]
+}

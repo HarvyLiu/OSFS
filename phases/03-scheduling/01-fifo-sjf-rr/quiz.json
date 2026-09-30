@@ -1,0 +1,12 @@
+{
+  "lesson": "01-fifo-sjf-rr",
+  "title": "FIFO, SJF, RR",
+  "questions": [
+    {"stage": "pre", "question": "Policy vs mechanism?", "options": ["Same thing", "Policy picks who runs; mechanism (switch) runs them", "Mechanism picks", "Neither matters"], "correct": 1, "explanation": "Scheduler decides order; context switch performs it."},
+    {"stage": "check", "question": "FIFO completions for P1(0,8) P2(1,4) P3(2,2)?", "options": ["8,12,14", "8,10,14", "14,10,6", "6,10,14"], "correct": 0, "explanation": "Arrival order, no preemption: P1 0-8, P2 8-12, P3 12-14."},
+    {"stage": "check", "question": "SJF (nonpreemptive) order here?", "options": ["P1 P2 P3", "P1 P3 P2", "P3 P2 P1", "P2 P3 P1"], "correct": 1, "explanation": "P1 only choice at 0; at 8, shorter P3 beats P2."},
+    {"stage": "check", "question": "Turnaround vs waiting?", "options": ["Same", "Turnaround=comp-arr; waiting=turnaround-burst", "Waiting includes burst", "Turnaround excludes queue"], "correct": 1, "explanation": "Waiting isolates queue pain from service time."},
+    {"stage": "post", "question": "Why does SJF win averages here?", "options": ["Fewer switches", "It knows bursts upfront (unrealistic omniscience)", "It preempts", "It ignores arrivals"], "correct": 1, "explanation": "Optimal-with-future-knowledge; real schedulers estimate (MLFQ)."},
+    {"stage": "post", "question": "RR quantum trades?", "options": ["Nothing", "Small q: better response, more switches; big q: approx FIFO", "Big q always wins", "Quantum irrelevant"], "correct": 1, "explanation": "Response vs overhead — the knob CFS auto-tunes."}
+  ]
+}

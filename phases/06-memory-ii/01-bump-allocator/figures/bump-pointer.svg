@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="440" height="150" role="img" aria-label="bump pointer">
+<text x="20" y="40" font-family="monospace" font-size="13">[used......][next -&gt;][free........]</text>
+<text x="20" y="62" font-family="monospace" font-size="13">alloc: align_up -&gt; fit? -&gt; hand -&gt; next=end</text>
+<text x="20" y="84" font-family="monospace" font-size="12">no headers: free singly impossible; reset all</text>
+<text x="20" y="108" font-family="monospace" font-size="12">align_up(p,a) = (p+a-1) &amp; !(a-1), pow2 only</text>
+<text x="20" y="130" font-family="monospace" font-size="12">editable: bump-pointer.excalidraw</text>
+</svg>

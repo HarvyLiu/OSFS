@@ -1,0 +1,12 @@
+{
+  "lesson": "01-pcb-paper",
+  "title": "PCB: The Process on Paper",
+  "questions": [
+    {"stage": "pre", "question": "Pause must preserve?", "options": ["Pid only", "Regs+pc/sp/flags, state, id/parent, files, space root", "Just stack", "Nothing"], "correct": 1, "explanation": "Resume needs the full drawer set, not an ID."},
+    {"stage": "check", "question": "Trapframe vs PCB?", "options": ["Same", "Trapframe = user CPU state at trap; PCB = card holding it + identity/resources", "PCB smaller", "Unrelated"], "correct": 1, "explanation": "Frame rides inside the card."},
+    {"stage": "check", "question": "Clobber-then-restore proves?", "options": ["Speed", "Snapshot carries resume (not luck): trash-then-copy-back exact", "Nothing", "State"], "correct": 1, "explanation": "Delete the snapshot and it fails: the copy is load-bearing."},
+    {"stage": "check", "question": "0x202 flags means?", "options": ["Error", "IF set: interrupts were enabled (restored on resume)", "Halted", "User mode"], "correct": 1, "explanation": "Flags ride along: resume restores interrupt posture too."},
+    {"stage": "post", "question": "fork at field level?", "options": ["New pid, copied frame+rows, shared-then-COW space", "Same pid", "Empty card", "No copy"], "correct": 0, "explanation": "Photocopy row, renumber, share space lazily."},
+    {"stage": "post", "question": "Two PCBs cross-talk?", "options": ["Always", "Never: snapshots isolate (tested)", "Sometimes", "Only root"], "correct": 1, "explanation": "Rows independent by construction; test pins it."}
+  ]
+}

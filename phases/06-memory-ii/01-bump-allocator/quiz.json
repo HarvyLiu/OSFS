@@ -1,0 +1,12 @@
+{
+  "lesson": "01-bump-allocator",
+  "title": "Bump Allocator",
+  "questions": [
+    {"stage": "pre", "question": "Bump alloc steps?", "options": ["Search free list", "Align cursor, fit-check, hand out, advance", "Compact heap", "Ask kernel"], "correct": 1, "explanation": "Four moves, no metadata: the whole algorithm."},
+    {"stage": "check", "question": "align_up needs power-of-two because?", "options": ["Speed only", "Mask trick !(a-1) rounds correctly only for pow2", "Tradition", "Rust demands"], "correct": 1, "explanation": "Bit math: non-pow2 masks misalign silently (hence debug_assert)."},
+    {"stage": "check", "question": "Single free impossible because?", "options": ["Slow", "No headers/sizes recorded; only reset-all", "Borrow checker", "Needs OS"], "correct": 1, "explanation": "Nothing remembers sizes: discipline (arenas) replaces structures."},
+    {"stage": "check", "question": "checked_add + ? on overflow?", "options": ["Wraps", "Returns None early (honest OOM-shaped failure)", "Panics always", "Ignores"], "correct": 1, "explanation": "Huge sizes fail clean instead of wrapping into Callooh."},
+    {"stage": "post", "question": "Zero-size alloc?", "options": ["Panics", "Some pointer, advances nothing (tolerated, tested)", "None", "UB"], "correct": 1, "explanation": "ZSTs exist: allocators tolerate, not trap."},
+    {"stage": "post", "question": "Bump fits where?", "options": ["General malloc", "Boot/frames/scratch arenas (reset discipline); buddies/lists generalize", "Never", "Only Rust"], "correct": 1, "explanation": "Fastest corner, narrowest contract: match tool to lifetime shape."}
+  ]
+}

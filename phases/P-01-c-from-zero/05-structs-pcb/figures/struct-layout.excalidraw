@@ -1,0 +1,1 @@
+{"type":"excalidraw","version":2,"source":"osfs-struct-layout","elements":[{"type":"rectangle","x":60,"y":60,"width":320,"height":40,"label":"pid(4) | state(4) | rsp(8) | name(16)"}],"appState":{},"files":{}}

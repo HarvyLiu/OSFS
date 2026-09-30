@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="440" height="150" role="img" aria-label="enum match">
+<text x="20" y="40" font-family="monospace" font-size="13">enum State: Unused|Runnable|Running|Zombie</text>
+<text x="20" y="62" font-family="monospace" font-size="13">match: all 4 arms or it won't compile</text>
+<text x="20" y="84" font-family="monospace" font-size="12">Option = Some|None (no NULL); Result = Ok|Err</text>
+<text x="20" y="108" font-family="monospace" font-size="12">editable: enum-match.excalidraw</text>
+</svg>

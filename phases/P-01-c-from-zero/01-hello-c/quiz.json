@@ -1,0 +1,12 @@
+{
+  "lesson": "01-hello-c",
+  "title": "Hello C",
+  "questions": [
+    {"stage": "pre", "question": "What does cc main.c -o hello do?", "options": ["Runs the program", "Translates C text to a machine-code executable", "Prints hello", "Installs a library"], "correct": 1, "explanation": "Compile+link: text in, runnable bytes out."},
+    {"stage": "check", "question": "int square(int x) means?", "options": ["A variable named square", "A function taking int, returning int", "A loop", "A system call"], "correct": 1, "explanation": "Return type, name, parameter list."},
+    {"stage": "check", "question": "= vs == in if (i % 2 == 0)?", "options": ["Same thing", "= assigns, == compares; if needs ==", "== assigns", "Both assign"], "correct": 1, "explanation": "Single = would assign 0 (false) — -Wall catches it."},
+    {"stage": "check", "question": "return 0 from main means?", "options": ["Print zero", "Exit code success, read via $?/wait", "Zero variables", "Reboot"], "correct": 1, "explanation": "Exit status contract with the parent/OS."},
+    {"stage": "post", "question": "printf(\"i=%d\", i) — what is %d?", "options": ["A variable", "Format verb: print int as decimal", "A pointer", "Exit code"], "correct": 1, "explanation": "Verbs interpret bytes; wrong verb warns."},
+    {"stage": "post", "question": "strace showed write(1,...). What does that prove?", "options": ["printf calls the kernel to emit bytes", "C is slow", "The loop failed", "GDB is attached"], "correct": 0, "explanation": "Hosted printf = format in userspace + write trap."}
+  ]
+}

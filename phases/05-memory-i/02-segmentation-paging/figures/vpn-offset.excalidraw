@@ -1,0 +1,1 @@
+{"type":"excalidraw","version":2,"source":"osfs-vpn-offset","elements":[{"type":"rectangle","x":60,"y":60,"width":200,"height":40,"label":"VPN (20b) | offset (12b)"},{"type":"arrow","x":260,"y":80,"label":"table[VPN]"},{"type":"rectangle","x":400,"y":60,"width":160,"height":40,"label":"frame+offset"}],"appState":{},"files":{}}

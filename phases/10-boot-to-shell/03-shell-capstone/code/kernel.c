@@ -58,7 +58,8 @@ static void vga_putc(char c) {
     if (vga_pos >= 80 * 25) vga_pos = 0;  // simplification: wrap, not scroll
 }
 static void puts2(const char *s) {  // dual output: screen + wire, 10/01's law
-    for (; *s; s++) { vga_putc(*s); serial_putc(*s); }
+    for (const char *p = s; *p; p++) vga_putc(*p);
+    serial_puts(s);
 }
 static void puthex(uint32_t v) {
     char d[8];
@@ -195,6 +196,7 @@ static void cmd_ls(void) {
     for (int i = 0; fs[i].name; i++) { puts2(fs[i].name); puts2("\n"); }
 }
 static void cmd_cat(char *arg) {
+    if (!kstrlen(arg)) { puts2("usage: cat <file>\n"); return; }  // empty arg: guide
     const char *d = fs_cat(arg);
     if (d) puts2(d);
     else puts2("no such file\n");
@@ -205,7 +207,8 @@ static void cmd_tasks(void) {
     puts2("spins="); putdec(spins);
     puts2(" main_esp=0x"); puthex(main_sp);
     puts2(" spin_esp=0x"); puthex(spin_sp);
-    puts2("\n");
+    puts2(" live_esp=0x"); puthex(read_esp());  // same stack as main (a few dozen
+    puts2("\n");                                // bytes deeper: call depth, honest)
 }
 static void dispatch(void) {
     if (!kstrcmp(line, "help")) cmd_help();

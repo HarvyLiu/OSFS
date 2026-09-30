@@ -152,7 +152,7 @@ Change X → Y: change `"OSFS hello on serial\n"` to `"OSFS 123\n"`. Verify: `ma
 
 Linker — where the kernel lives:
 
-```ld
+```text
 ENTRY(_start)
 SECTIONS {
     . = 1M;

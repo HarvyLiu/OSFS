@@ -135,16 +135,16 @@ hello from myos fs
 myos> uptime
 3s (ticks=312)
 myos> tasks
-spins=1841 main_esp=0xXXXX spin_esp=0xXXXX
+spins=1841 main_esp=0xXXXX spin_esp=0xXXXX live_esp=0xXXXX
 myos> tasks
-spins=2907 main_esp=0xXXXX spin_esp=0xXXXX
+spins=2907 main_esp=0xXXXX spin_esp=0xXXXX live_esp=0xXXXX
 ```
 
 What this does: exercises FS (cat), timer (uptime ticks climbing), scheduler (spins growing between calls — the other stack *ran* while you typed).
 
 | Lines | Code | Why it exists |
 |---|---|---|
-| two `tasks` calls | motion proof | spins differ (something incremented without you asking — that something is task two) |
+| two `tasks` calls | motion proof | spins differ (something incremented without you asking — that something is task two; `live_esp` sits just below `main_esp` — same stack, call depth apart) |
 | `uptime` ticks | 100 Hz proof | ~100/second (PIT divisor math, confirmed by counting — hardware keeps promises) |
 
 Change X → Y: `cat about.txt` (the second ROM file). Verify: one-line manifesto (FS with two files is still an FS — `ls` said so, `cat` proves it).

@@ -78,7 +78,7 @@ Change X → Y: `objdump -h` on `/bin/ls` instead. Verify: same section names, w
 
 Tooling 02's script, decoded line by line (the one that boots):
 
-```ld
+```text
 ENTRY(_start)
 SECTIONS {
     . = 1M;

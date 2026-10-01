@@ -22,6 +22,16 @@
   --sl-color-bg-sidebar: #181825;
 }
 
+/* ---- Layout: center the reading column, give the TOC room ---- */
+@media (min-width: 72rem) {
+  [data-has-sidebar][data-has-toc] .main-pane {
+    --sl-content-margin-inline: auto; /* gutters both sides, not just left */
+  }
+  .right-sidebar {
+    padding-left: 2rem; /* TOC text sits further right of the divider */
+  }
+}
+
 /* ---- Footer: no fill, just a yellow outline ---- */
 footer {
   background: transparent;

@@ -25,8 +25,9 @@ class TestBoot(unittest.TestCase):
     def test_entry_cli(self):
         self.assertEqual(BIN.read_bytes()[0], 0xFA)  # cli first: fence!
 
-    def test_bios_teletype(self):
-        self.assertIn(b"\xcd\x10", BIN.read_bytes())  # int $0x10 present
+    def test_vga_direct(self):
+        self.assertIn(b"\xb8\x00\xb8", BIN.read_bytes())  # mov $0xB800,%ax: cells, not int10
+        self.assertNotIn(b"\xcd\x10", BIN.read_bytes())  # no BIOS teletype (sercon echoes!)
 
 
 if __name__ == "__main__":

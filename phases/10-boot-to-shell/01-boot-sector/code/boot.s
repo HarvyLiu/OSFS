@@ -10,14 +10,19 @@ _start:
     movw $0x7C00, %sp
     sti
     call serial_init
+    movw $0xB800, %ax
+    movw %ax, %es         # ES = VGA text cells (direct: no firmware in the path)
+    xorw %di, %di         # cell cursor in bytes (+2 per char)
+    movb $0x07, %ah       # white-on-black (set once: serial_putc preserves %ax)
     movw $msg, %si
 putc:
     lodsb
     testb %al, %al
     jz hang
-    movb $0x0E, %ah
-    int $0x10
-    call serial_putc
+    movb %al, %es:(%di)   # char cell
+    movb %ah, %es:1(%di)  # attribute cell
+    addw $2, %di
+    call serial_putc      # %al still the char (stores don't clobber)
     jmp putc
 hang:
     cli

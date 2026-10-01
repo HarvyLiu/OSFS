@@ -11,7 +11,7 @@
 ## Learning Objectives
 - Trace BIOS → 0x7C00 → print → hang using a memory map of the first KiBs
 - Implement a 512-byte sector (message + VGA + serial + `0xAA55`) in 16-bit AT&T ASM
-- Explain `.code16`, segment zeroing, `int $0x10`, and why the signature sits at bytes 510–511
+- Explain `.code16`, segment zeroing, direct VGA cells (and why BIOS teletype is banned here), and why the signature sits at bytes 510–511
 - Connect this milestone to Tooling 02 (same serial dance, younger CPU mode) and to 10/02 (loading what's next)
 
 ## Concept in 60s
@@ -20,7 +20,7 @@
 
 <!-- source: ../figures/boot-map.excalidraw — open in excalidraw.com to redraw -->
 
-Power on: BIOS POSTs, finds a disk with bytes 510–511 = `0xAA55` (the "I'm bootable" handshake), loads sector 0 to physical `0x7C00`, jumps there in 16-bit real mode (1 MiB addressable, segments × 16). Your code: zero `%ds` (so addresses mean what you think), park a [stack](../../glossary/terms.md#stack) below `0x7C00` (it grows *down* into free low RAM), print via BIOS `int $0x10` (VGA, for humans) + COM1 serial (for CI — Tooling 02's dance, real-mode edition), `cli`/`hlt` forever. 510 bytes code+message, 2 bytes magic. That's a bootloader's whole childhood.
+Power on: BIOS POSTs, finds a disk with bytes 510–511 = `0xAA55` (the "I'm bootable" handshake), loads sector 0 to physical `0x7C00`, jumps there in 16-bit real mode (1 MiB addressable, segments × 16). Your code: zero `%ds` (so addresses mean what you think), park a [stack](../../glossary/terms.md#stack) below `0x7C00` (it grows *down* into free low RAM), print via direct VGA cells at `0xB8000` (for humans) + COM1 serial (for CI — Tooling 02's dance, real-mode edition), `cli`/`hlt` forever. One wire, one writer: BIOS teletype (`int $0x10`) is banned on the screen path because firmware with a serial console (SeaBIOS sercon) echoes it to the wire — our CI banner once arrived as `OOSSFFSS  bboooott!`. 510 bytes code+message, 2 bytes magic. That's a bootloader's whole childhood.
 
 ## Simulate It (host — the arithmetic of layout, no QEMU)
 
@@ -59,14 +59,19 @@ _start:
     movw $0x7C00, %sp
     sti
     call serial_init
+    movw $0xB800, %ax
+    movw %ax, %es         # ES = VGA text cells (direct: no firmware in the path)
+    xorw %di, %di         # cell cursor in bytes (+2 per char)
+    movb $0x07, %ah       # white-on-black (set once: serial_putc preserves %ax)
     movw $msg, %si
 putc:
     lodsb
     testb %al, %al
     jz hang
-    movb $0x0E, %ah
-    int $0x10
-    call serial_putc
+    movb %al, %es:(%di)   # char cell
+    movb %ah, %es:1(%di)  # attribute cell
+    addw $2, %di
+    call serial_putc      # %al still the char (stores don't clobber)
     jmp putc
 hang:
     cli
@@ -74,7 +79,7 @@ hang:
     jmp hang
 ```
 
-What this does: enters with interrupts off, zeroes segments, parks a stack, inits serial, prints the message twice-over (screen + wire), sleeps forever.
+What this does: enters with interrupts off, zeroes segments, parks a stack, inits serial, prints the message twice-over (VGA cells + wire), sleeps forever.
 
 | Lines | Code | Why it exists |
 |---|---|---|
@@ -85,7 +90,8 @@ What this does: enters with interrupts off, zeroes segments, parks a stack, init
 | `movw $0x7C00,%sp` | stack below load | grows down from load base (0x7BFF↓ — free low RAM; upward would eat our own code) |
 | `sti` | enable after | stack exists now — safe to take interrupts (order mirrors `cli`-first: setup, *then* expose) |
 | `lodsb/testb/jz` | string walk | load byte at DS:SI++, stop at zero (`asciz` terminator — P-01/02's zero rule, bare metal) |
-| `movb $0x0E,%ah; int $0x10` | BIOS teletype | AH=0x0E prints AL, advances cursor (firmware as a library — gone after protected mode, savor it) |
+| `ES=0xB800, %es:(%di)` | video segment | physical `0xB8000` = text buffer (`0xB800`×16 — segments as addressing, 05 preview) |
+| cells + `addw $2` | direct write | char+attribute per cell, cursor in `%di` (no BIOS call — firmware can't echo what it never sees; SeaBIOS sercon doubled our CI banner once, never again) |
 
 ```asm
 serial_init:
@@ -207,6 +213,6 @@ Artifact: `outputs/boot-checklist.md` — `.code16`, segments-zero, stack-below,
 
 ## Further Reading
 
-- OSDev Bare Bones + BIOS interrupts list (`int 0x10/AH=0x0E` contract).
+- OSDev Bare Bones (and its BIOS interrupts list — read `int 0x10/AH=0x0E` to learn why the screen path here avoids it).
 - MIT 6.1810 boot lab (their loader, our sector — compare rituals).
 - Intel SDM Vol.1 Ch.3 (real-mode addressing — seg×16+off, authoritative).

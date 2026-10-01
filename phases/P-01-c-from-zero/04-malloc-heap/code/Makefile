@@ -13,7 +13,8 @@ run: $(BUILD)/heap
 asan: $(BUILD)/heap-asan
 	./$(BUILD)/heap-asan
 test: all
-	./$(BUILD)/heap | grep -q "len=6 cap=8" && ./$(BUILD)/heap-asan | grep -q "len=6 cap=8" && echo "PASS malloc-heap"
+	./$(BUILD)/heap | grep -q "len=6 cap=8" && echo "PASS malloc-heap (plain)"
+	@if $(CC) $(CFLAGS) -fsanitize=address,undefined heap.c -o $(BUILD)/heap-asan 2>/dev/null; then ./$(BUILD)/heap-asan | grep -q "len=6 cap=8" && echo "PASS malloc-heap (asan)"; else echo "NOTE asan skipped (no sanitizer toolchain)"; fi
 	$(CC) $(CFLAGS) tests/test_main.c -o $(BUILD)/test_heap && ./$(BUILD)/test_heap
 clean:
 	rm -rf $(BUILD)

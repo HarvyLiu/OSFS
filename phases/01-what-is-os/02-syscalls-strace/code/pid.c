@@ -25,6 +25,8 @@ int main(void) {
     if (nr < 0) { perror("read"); return 1; }
     close(rfd);
     buf[nr] = 0;
-    printf("pid=%ld back=[%s]", pid, buf);
-    return strcmp(buf, msg) != 0;
+    int ok = strcmp(buf, msg) == 0;  // file bytes exact (newline included)
+    if (nr > 0 && buf[nr - 1] == '\n') buf[nr - 1] = 0;  // display trim only
+    printf("pid=%ld back=[%s]\n", pid, buf);
+    return !ok;
 }

@@ -1,4 +1,5 @@
 // test_main.c -- 4 checks: file round-trip via stdio + fd + content + size.
+#define _POSIX_C_SOURCE 200809L  // fileno(): glibc hides it under -std=c11 without this
 #include <assert.h>
 #include <stdio.h>
 #include <string.h>

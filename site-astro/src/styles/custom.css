@@ -35,13 +35,38 @@
   --sl-color-bg-sidebar: #181825;
 }
 
-/* ---- Layout: center the reading column, give the TOC room ---- */
+/* ---- Layout: center the reading column, TOC on hover ---- */
 @media (min-width: 72rem) {
   [data-has-sidebar][data-has-toc] .main-pane {
     --sl-content-margin-inline: auto; /* gutters both sides, not just left */
   }
+  /* Collapse the TOC column to a slim hover rail … */
+  .right-sidebar-container {
+    width: 2.5rem;
+    border-inline-start: 1px solid var(--sl-color-hairline);
+  }
   .right-sidebar {
-    padding-left: 2rem; /* TOC text sits further right of the divider */
+    opacity: 0;
+    visibility: hidden;
+    transition:
+      opacity 0.18s ease,
+      visibility 0.18s;
+    background: var(--sl-color-bg);
+    box-shadow: -12px 0 32px rgba(0, 0, 0, 0.18);
+    z-index: 10;
+  }
+  /* … that reveals the panel as an overlay on hover. No reflow. */
+  .right-sidebar-container:hover .right-sidebar {
+    opacity: 1;
+    visibility: visible;
+    width: 17rem;
+    inset-inline-end: 0;
+    padding-left: 1rem;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .right-sidebar {
+    transition: none;
   }
 }
 

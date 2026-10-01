@@ -20,7 +20,7 @@
 
 <!-- source: ../figures/ramdisk-backends.excalidraw — open in excalidraw.com to redraw -->
 
-07/01's device backed blocks with a *file* (durable, slow-ish, crash = reload file). A RAMdisk backs them with *malloc'd RAM* (fast, volatile: process exit = total amnesia). Same verbs, same block numbers, same callers — VSFS next lesson won't know which it's on (that's the point: filesystems program to the *interface*, not the medium). Flush on RAM = memcpy to... itself (no-op with a counter bump — durability theater, honestly labeled). Crash on RAM = wipe (or reload from an optional snapshot file — our `blk_crash` semantic, RAM-speed). Real uses: initramfs (kernel boots from RAM before disks wake), FS test beds (this course's 08 phase runs here first).
+Take the device from 07/01 and pull the file out from under it — back the same blocks with *malloc'd RAM* instead. You get a disk made of forgetting stuff: fast, volatile, gone when the process exits. The verbs don't change and neither do the block numbers, so the filesystem in the next lesson can't tell which backend it rides — that blindness is the whole point, because filesystems program to the *interface*, not the medium. Flush becomes an honest no-op: it clears the dirty flags and bumps a counter, copying nothing since there's nowhere below to push. Crash becomes a wipe (or a reload from an optional snapshot file — our `blk_crash` semantic at RAM speed). You'll meet the real ones at boot, when the kernel unpacks an initramfs before disks wake, and again across phase 08, where every filesystem here gets tested on RAM first.
 
 ## Simulate It (host C — RAM backend, portable)
 
@@ -187,7 +187,7 @@ Change X → Y: `dd if=/dev/zero of=/dev/shm/t bs=1M count=10 2>&1 | tail -1` th
 
 ## Ship It
 
-Artifact: `outputs/ramdisk-card.md` — verb parity table (blk vs rd, per-verb durability notes), volatility contract, `brd`/`tmpfs` verbs. Next lesson mounts a filesystem on *either* — the interface pays off immediately.
+Artifact: `outputs/ramdisk-card.md` — verb parity table (blk vs rd, per-verb durability notes), volatility contract, `brd`/`tmpfs` verbs. Next lesson mounts a filesystem on *either* — the interface pays off immediately. You now own both backends behind one interface — VSFS in 08/01 mounts on either without noticing.
 
 ## Exercises
 

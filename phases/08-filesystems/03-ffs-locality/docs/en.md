@@ -20,7 +20,7 @@
 
 <!-- source: ../figures/locality-groups.excalidraw — open in excalidraw.com to redraw -->
 
-Old files die leaving holes: evens 0–30 occupied, odds free (Swiss cheese). A new file (inode at block 40) needs 8 blocks. **First-fit** scans from 0: takes odds 1–15 (span 14, gaps 14 — seeks everywhere). **Clustered** scans up from the inode: takes 41–48 contiguous (span 7, gaps 7 — one short glide). FFS generalizes: split disk into cylinder/block *groups*, each with own inodes+bitmap+data; place file data in its inode's group, dirs near parents, big files across groups. Same bytes, half the seeks. SSDs don't seek — but caches/prefetch still love contiguity (locality never retires, only changes currency).
+Old files die and leave holes behind: evens 0–30 occupied, odds free — Swiss cheese. Now you must place a new 8-block file whose inode sits at block 40. **First-fit** scans from block 0 and takes the odds 1–15: span 14, gaps 14, seeks everywhere. **Clustered** scans upward from the inode and takes 41–48 in one contiguous run: span 7, gaps 7, one short glide. FFS turns that instinct into architecture: split the disk into cylinder or block groups, each with its own inodes, bitmap, and data, then keep file data in its inode's group, directories near their parents, and only big files sprawling across groups. Same bytes, half the seeks. SSDs never seek, but their caches and prefetchers still reward contiguity — locality never retires, it just changes currency.
 
 ## Simulate It (host C — two policies, one bitmap, no QEMU)
 
@@ -122,7 +122,7 @@ Change X → Y: `filefrag code/demo.c 2>/dev/null || echo no-filefrag` (Linux: e
 
 ## Ship It
 
-Artifact: `outputs/locality-card.md` — first-fit vs clustered rule, span/gap metrics, group recipe (inode-near-data, dirs-near-parents, big-files-across), SSD translation (seeks→cache/prefetch). Filesystem reference complete (08: VSFS → journal → FFS).
+Artifact: `outputs/locality-card.md` — first-fit vs clustered rule, span/gap metrics, group recipe (inode-near-data, dirs-near-parents, big-files-across), SSD translation (seeks→cache/prefetch). Filesystem reference complete (08: VSFS → journal → FFS). You now own placement — rings in phase 09 guard everything you just built.
 
 ## Exercises
 

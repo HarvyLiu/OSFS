@@ -20,7 +20,7 @@
 
 <!-- source: ../figures/stack-frames.excalidraw — open in excalidraw.com to redraw -->
 
-`call f` pushes the return [address](../../../../glossary/terms.md#address) and jumps. The classic prologue then pushes old `%rbp` and copies `%rsp` into `%rbp` — now `%rbp` anchors this frame while `%rsp` dances with pushes/locals. Locals live at negative offsets (`-8(%rbp)`), args that spilled at positive ones. `leave` (= `mov %rbp,%rsp; pop %rbp`) tears down, `ret` pops home. Stacks grow *down*: deeper calls = smaller `%rsp`. See [stack](../../../../glossary/terms.md#stack), [register](../../../../glossary/terms.md#register).
+You call `level1`, it calls `level2`, and GDB's `bt` shows two frames stacked like plates. Here is what built them: `call f` pushes the return [address](../../../../glossary/terms.md#address) and jumps. The prologue pushes old `%rbp` and copies `%rsp` into `%rbp` — now `%rbp` anchors this frame while `%rsp` moves with pushes and locals. You find locals at negative offsets (`-8(%rbp)`), spilled args at positive ones. `leave` (= `mov %rbp,%rsp; pop %rbp`) tears down, `ret` pops home. Stacks grow *down*: deeper calls mean smaller `%rsp`. That is the [stack](../../../../glossary/terms.md#stack) and its [register](../../../../glossary/terms.md#register) dance.
 
 ## Simulate It (host C — watch depth move rsp, no ASM yet)
 

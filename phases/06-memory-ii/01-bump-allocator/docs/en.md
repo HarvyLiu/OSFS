@@ -20,11 +20,11 @@
 
 <!-- source: ../figures/bump-pointer.excalidraw — open in excalidraw.com to redraw -->
 
-One cursor `next` starts at arena base. `alloc(size, align)`: round `next` up to `align` (`align_up`: `(p + a-1) & !(a-1)`, power-of-two only), check fit (`aligned + size <= end`), hand out `aligned`, set `next = aligned + size`. No headers, no lists, no reuse: individual `free` is impossible (nothing records sizes) — `reset` reclaims *everything* (arena discipline: request phase, then reset). Perfect for boot (map tables, then never free), frames (page-granular bump in `kalloc`'s youth), and short-lived scratch. General malloc needs headers/buddies (next lessons); bump needs 20 lines.
+Suppose you only need memory for a short while — boot tables, scratch buffers, one request phase. You can skip the bookkeeping entirely. Keep one cursor, `next`, at the arena base. To serve `alloc(size, align)`, you round `next` up to `align` with `align_up` (`(p + a-1) & !(a-1)`, power-of-two only), check fit (`aligned + size <= end`), hand out `aligned`, and set `next = aligned + size`. There are no headers, no lists, no reuse, so an individual `free` is impossible — nothing records sizes. Instead you `reset` and reclaim *everything* at once. That arena discipline fits boot (map tables, then never free), frames (page-granular bump in `kalloc`'s youth), and short-lived scratch. A general malloc needs headers or buddies (next lessons); bump needs 20 lines.
 
 ## Simulate It (host rustc — arena borrowed, no OS needed)
 
-Full program: `code/main.rs`. Borrows a `Vec<u8>` as the arena (host stand-in for a physical region).
+Your program is `code/main.rs`. You borrow a `Vec<u8>` as the arena — a host stand-in for a physical region.
 
 ```rust
 struct Bump<'a> {
@@ -129,7 +129,7 @@ Change X → Y: `RUSTFLAGS="-Z print-type-sizes" ...`? Nightly-only — skip; in
 
 ## Ship It
 
-Artifact: `outputs/bump.rs` — `align_up` + `Bump` as Phase 10's boot allocator starter (swap `&mut [u8]` for physical range + page-rounding then). Plus `outputs/allocator-card.md` (bump vs free-list vs buddy tradeoffs, one line each).
+Artifact: `outputs/bump.rs` — `align_up` + `Bump` as Phase 10's boot allocator starter (swap `&mut [u8]` for physical range + page-rounding then). Plus `outputs/allocator-card.md` (bump vs free-list vs buddy tradeoffs, one line each). You now own the simplest allocator — freeing singly comes next.
 
 ## Exercises
 

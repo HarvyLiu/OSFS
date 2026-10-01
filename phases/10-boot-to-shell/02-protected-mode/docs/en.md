@@ -20,7 +20,21 @@
 
 <!-- source: ../figures/prot-switch.excalidraw — open in excalidraw.com to redraw -->
 
-Real mode (10/01) is a 1 MiB playground with no protection — every program sees everything. Protected mode adds **segments with limits and privilege**: the CPU reads descriptors from your GDT (Global Descriptor Table), and `CR0.PE` (bit 0) flips the decoding from 16-bit real to 32-bit protected. The pipeline: BIOS disk read → kernel sectors at `0x8000` → A20 gate (unlock memory past 1 MiB — a PC-AT fossil, still wired) → `lgdt` → set PE → **far jump** (reloads the hidden segment cache — without it the CPU keeps decoding 16-bit) → 32-bit stub → C. After the jump, BIOS is unreachable (your segments, your rules) — which is why `kmain` writes VGA memory directly instead of calling `int $0x10`.
+Real mode (10/01) is a one-megabyte playground with no protection — every program
+sees everything, and nothing stops anything. Protected mode adds segments with
+limits and privilege: the CPU reads descriptors from your GDT (Global
+Descriptor Table), and one bit — `CR0.PE`, bit 0 — flips the decoding from
+16-bit real to 32-bit protected.
+
+The pipeline has six steps and zero shortcuts: BIOS disk read, kernel sectors
+landing at `0x8000`, the A20 gate (unlocking memory past 1 MiB — a PC-AT
+fossil, still wired), `lgdt`, PE set, then the **far jump**, which reloads the
+hidden segment cache. Skip it for a near jump and the CPU keeps decoding
+16-bit — instant garbage from perfectly good bytes.
+
+After the jump, BIOS is unreachable: your segments, your rules. That is why
+`kmain` writes VGA memory directly instead of calling `int $0x10` — firmware
+is a real-mode creature, and you just left real mode.
 
 ## Simulate It (host — the GDT on paper, no QEMU)
 

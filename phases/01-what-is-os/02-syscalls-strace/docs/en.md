@@ -20,7 +20,7 @@
 
 <!-- source: ../figures/syscall-trap.excalidraw — open in excalidraw.com to redraw -->
 
-Userspace can't touch hardware (rings forbid it — P-02/04's `cli` fault was the demo). So it *asks*: load a number (`__NR_write` = 1 on x86-64 Linux) + args into registers, execute `syscall` (the trap instruction): CPU switches to ring 0, indexes the dispatch table (`syscall.c`'s array of function pointers — an IDT for software), runs the handler with *your* args, returns with result in `%rax` (or `-errno`). Library calls (`printf`) are userspace formatting + this trap. `strace` prints each crossing: name(args) = result. See [syscall](../../../../glossary/terms.md#syscall).
+You cannot touch hardware from userspace. Rings forbid it — you felt that in P-02/04 when `cli` faulted. So you ask instead. You load a number (`__NR_write` = 1 on x86-64 Linux) plus args into registers, then you execute `syscall`. The CPU switches to ring 0, indexes the dispatch table (`syscall.c`'s array of function pointers — an IDT for software), runs the handler with your args, and returns with the result in `%rax` (or `-errno`). Library calls like `printf` are userspace formatting plus this trap. `strace` prints each crossing as name(args) = result. See [syscall](../../../../glossary/terms.md#syscall).
 
 ## Simulate It (host C — fd-level I/O, portable, no strace needed)
 

@@ -20,7 +20,7 @@
 
 <!-- source: ../figures/enum-match.excalidraw — open in excalidraw.com to redraw -->
 
-A C `struct` + `int state` lets `state = 99` compile (garbage states are representable). A Rust `enum State { Unused, Runnable, Running, Zombie }` makes *only* those four exist — `99` is unspellable. `match` must list every variant (skip one → compile error: the forgotten-case killer). `Option<Pcb>` = maybe-a-row (`Some`/`None` instead of NULL+dereference-roulette). `Result<T, E>` = value-or-named-error instead of `-1` + errno global. Combined: illegal states unrepresentable, missing cases uncompilable, absent rows explicit. The P-01/05 PCB table, rebuilt so three bug classes can't typecheck.
+You set `state = 99` in C and it compiles — garbage states are representable there. A Rust `enum State { Unused, Runnable, Running, Zombie }` makes *only* those four exist — `99` is unspellable. `match` must list every variant (skip one → compile error: the forgotten-case killer). `Option<Pcb>` = maybe-a-row (`Some`/`None` instead of NULL+dereference-roulette). `Result<T, E>` = value-or-named-error instead of `-1` + errno global. Combined: illegal states unrepresentable, missing cases uncompilable, absent rows explicit. The P-01/05 PCB table, rebuilt so three bug classes can't typecheck.
 
 ## Simulate It (host rustc, no Cargo needed)
 

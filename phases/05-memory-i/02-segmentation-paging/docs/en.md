@@ -20,11 +20,11 @@
 
 <!-- source: ../figures/vpn-offset.excalidraw — open in excalidraw.com to redraw -->
 
-Segmentation: `phys = base[seg] + offset`, fault if `offset >= limit[seg]` (variable-sized chunks — simple, fragments externally like a bad malloc). Paging: chop the virtual [address](../../../../glossary/terms.md#address) into `VPN | offset` (32-bit VA, 4 KiB pages → 20-bit VPN + 12-bit offset: `vpn = va >> 12`, `off = va & 0xFFF`): look up `frame = table[vpn]`, fault if `!present`, then `phys = frame*4096 + off`. Fixed-size pages → no external fragmentation; per-[page](../../../../glossary/terms.md#page) flags (present/read-write/user) → protection + swap for free. The table *is* the address space (per-process root — the field your PCB will carry).
+Two designs once fought over how to fake memory, and you still live with the winner. Segmentation says `phys = base[seg] + offset` and faults when `offset >= limit[seg]` — variable-sized chunks, simple to state, and prone to fragmenting externally like a bad malloc. Paging chops the virtual [address](../../../../glossary/terms.md#address) into `VPN | offset` instead (32-bit VA, 4 KiB pages → 20-bit VPN + 12-bit offset: `vpn = va >> 12`, `off = va & 0xFFF`). You look up `frame = table[vpn]`, fault if `!present`, then emit `phys = frame*4096 + off`. Fixed-size pages mean no external fragmentation, and per-[page](../../../../glossary/terms.md#page) flags (present/read-write/user) give you protection and swap for free. The table *is* the address space, with a per-process root — the field your PCB will carry.
 
 ## Simulate It (host C — both translators, no QEMU)
 
-Full program: `code/trans.c`. One segment table, one flat page table, printed walks.
+Your specimen is `code/trans.c`. You walk one segment table and one flat page table, with printed proof.
 
 ```c
 #include <stdio.h>
@@ -121,7 +121,7 @@ Change X → Y: `python3 -c "print(hex(0x7f8b2c1ab000 & 0xFFF))"` on any maps st
 
 ## Ship It
 
-Artifact: `outputs/translate-card.md` — seg formula + faults, VPN/offset split for 4K/2M/1G, present/RW/U bit meanings, `>>12`/`&0xFFF` verbs. The pocket reference for 05/03's multi-level walk (same split, applied thrice).
+Artifact: `outputs/translate-card.md` — seg formula + faults, VPN/offset split for 4K/2M/1G, present/RW/U bit meanings, `>>12`/`&0xFFF` verbs. The pocket reference for 05/03's multi-level walk (same split, applied thrice). You now own flat translation — depth comes next.
 
 ## Exercises
 

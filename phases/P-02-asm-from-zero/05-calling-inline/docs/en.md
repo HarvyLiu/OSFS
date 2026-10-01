@@ -20,7 +20,7 @@
 
 <!-- source: ../figures/inline-asm.excalidraw — open in excalidraw.com to redraw -->
 
-Extended ASM is a function call to the compiler's allocator: `__asm__ (TEMPLATE : OUTPUTS : INPUTS : CLOBBERS)`. `%0`, `%1`… name the operands *in order* (outputs first, then inputs). `"=r"(x)` = write-only, any [register](../../../../glossary/terms.md#register); `"+r"(x)` = read-write; `"a"` = must be `%eax`; `"Nd"` = imm8-or-`%dx` (port shapes). `volatile` = never delete/reorder (hardware pokes). Clobbers confess side effects: `"cc"` (flags changed), `"memory"` (RAM touched beyond listed outputs — blocks caching across the ASM). Get one letter wrong and the compiler "optimizes" your hardware access into nothing.
+You need `rdtsc` and C has no spelling for it, so you call the compiler's allocator: `__asm__ (TEMPLATE : OUTPUTS : INPUTS : CLOBBERS)`. `%0`, `%1`… name the operands *in order* (outputs first, then inputs). `"=r"(x)` = write-only, any [register](../../../../glossary/terms.md#register); `"+r"(x)` = read-write; `"a"` = must be `%eax`; `"Nd"` = imm8-or-`%dx` (port shapes). `volatile` = never delete/reorder (hardware pokes). Clobbers confess side effects: `"cc"` (flags changed), `"memory"` (RAM touched beyond listed outputs — blocks caching across the ASM). Get one letter wrong and the compiler "optimizes" your hardware access into nothing.
 
 ## Simulate It (host C — the contract in plain C first)
 

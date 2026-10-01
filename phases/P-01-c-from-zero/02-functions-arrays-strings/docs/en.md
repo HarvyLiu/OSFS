@@ -20,11 +20,11 @@
 
 <!-- source: ../figures/array-string.excalidraw — open in excalidraw.com to redraw -->
 
-`int add(int a, int b)` gets *copies*: changing `a` inside never touches the caller. But `void fill(int *arr, int n)` gets an [address](../../../../glossary/terms.md#address) — the array *decays* to `&arr[0]`, so writes go through. A C string is `char buf[N]` ending at the first `'\0'` (zero byte); `strlen` counts until zero, `strcpy` copies until zero *including* it. No length stored anywhere — forget the zero and every function runs off the end. That's the bug behind half of OS CVEs.
+You call `int add(int a, int b)` and the caller never notices — it gets *copies*, so writing `a` inside touches nothing outside. Pass an array to `void fill(int *arr, int n)` and everything changes. The array *decays* to the [address](../../../../glossary/terms.md#address) of element zero, so writes go through to the caller. A C string is a `char buf[N]` ending at the first `'\0'` zero byte. `strlen` counts until zero. `strcpy` copies until zero, *including* it. No length lives anywhere else. Forget the zero and every function runs off the end. That is the bug behind half of OS CVEs.
 
 ## Simulate It (host, no QEMU)
 
-Full program: `code/main.c`. Passes values, arrays, strings; prints what changed where.
+You drive all three rules at once. `code/main.c` passes values, arrays, and strings, then prints what changed where.
 
 ```c
 #include <stdio.h>
@@ -70,7 +70,7 @@ What this does: proves value-args don't alias, array-args do, and strings are ze
 
 Change X → Y: change `fill(buf, 4)` to `fill(buf, 2)`. Verify: `make run` prints `buf: 0 10 <garbage> <garbage>` (last two uninitialized — proves `fill` only touched what you asked, nothing auto-zeros).
 
-Then compare to libc (same output, battle-tested):
+Then meet the battle-tested versions. Same contract, fewer surprises:
 
 ```c
 #include <stdio.h>
@@ -112,7 +112,7 @@ Change X → Y: keep `dst[16]`, add `dst[my_strlen(dst)] = '!';` then print. Ver
 
 ## Use It (Linux)
 
-Watch argv — the OS handing `main` an array of strings:
+Look at argv in the wild — the OS handing `main` an array of strings:
 
 ```bash
 ./build/fn hello world
@@ -132,7 +132,7 @@ Change X → Y: replace `/proc/self/cmdline` with `/proc/$$/cmdline`. Verify: sh
 
 ## Ship It
 
-Artifact: `outputs/c-strings-card.md` — decay rule, zero rule, `strncpy` vs `strcpy` guidance, ASan one-liner. Reuse in every later lesson that touches pathnames or buffers.
+Artifact: `outputs/c-strings-card.md` — decay rule, zero rule, `strncpy` vs `strcpy` guidance, ASan one-liner. Reuse in every later lesson that touches pathnames or buffers. Pathnames and `read()` buffers will test it soon.
 
 ## Exercises
 

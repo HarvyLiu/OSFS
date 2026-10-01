@@ -20,7 +20,7 @@
 
 <!-- source: ../figures/addressing-map.excalidraw — open in excalidraw.com to redraw -->
 
-AT&T memory syntax: `offset(base,index,scale)` = `base + index*scale + offset`, where scale ∈ {1,2,4,8}. `movl 8(%rdi), %eax` *loads* the 4 bytes at that [address](../../../../glossary/terms.md#address). `leal 8(%rdi), %eax` *computes* the address itself into `%eax` — no memory touched. Compilers abuse `lea` for fast multiply-add (`x*3` = `x + x*2`). Struct fields are just offsets (`rsp` at +8 when `pid` at +0 — your PCB from P-01/05). Array indexing is just scale (`int` = ×4).
+You want `arr[2]` and the CPU hands you only base and index — you do the math. AT&T memory syntax is `offset(base,index,scale)` = `base + index*scale + offset`, where scale ∈ {1,2,4,8}. `movl 8(%rdi), %eax` *loads* the 4 bytes at that [address](../../../../glossary/terms.md#address). `leal 8(%rdi), %eax` *computes* the address itself into `%eax` — no memory touched. Compilers abuse `lea` for fast multiply-add (`x*3` = `x + x*2`). Struct fields are just offsets (`rsp` at +8 when `pid` at +0 — your PCB from P-01/05). Array indexing is just scale (`int` = ×4).
 
 ## Simulate It (host C — the math before the mnemonics)
 

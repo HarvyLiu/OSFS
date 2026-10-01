@@ -1,3 +1,16 @@
+/* Book typefaces (self-hosted, OFL): Source Serif for display, JetBrains Mono. */
+@import '@fontsource/source-serif-4/400.css';
+@import '@fontsource/source-serif-4/600.css';
+@import '@fontsource/source-serif-4/700.css';
+@import '@fontsource/source-serif-4/400-italic.css';
+@import '@fontsource/jetbrains-mono/400.css';
+@import '@fontsource/jetbrains-mono/500.css';
+
+:root {
+  --sl-font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --osfs-serif: 'Source Serif 4', Georgia, 'Iowan Old Style', 'Times New Roman', serif;
+}
+
 /* OSFS theme: Catppuccin peach buttons, yellow footer. */
 
 /* ---- Light (Latte) ---- */
@@ -63,7 +76,7 @@ figure.excalidraw svg { width: 100%; height: auto; background: var(--sl-color-bg
 /* Serif chapter + section titles. */
 .content-panel h1,
 .sl-markdown-content h2 {
-  font-family: Georgia, 'Iowan Old Style', 'Times New Roman', serif;
+  font-family: var(--osfs-serif);
   letter-spacing: -0.01em;
 }
 .content-panel > h1 {

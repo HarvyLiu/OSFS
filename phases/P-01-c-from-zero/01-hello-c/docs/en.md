@@ -20,11 +20,11 @@
 
 <!-- source: ../figures/compile-pipeline.excalidraw — open in excalidraw.com to redraw -->
 
-You write text (`main.c`). The compiler translates it to machine code (`hello`). The OS loads it and runs `main()`. `printf` asks the OS to put bytes on your terminal; `return 0` tells the parent "success" (any other number = "something failed", read via `$?` / `wait()` later). Types are just "how many bytes + how to read them": `char`=1, `int`=usually 4, addresses later. No [heap](../../../../glossary/terms.md#heap) yet, no [pointers](../../../../glossary/terms.md#pointer) yet — just the loop.
+You write text (`main.c`). The compiler translates it into machine code (`hello`). The OS loads it and runs `main()`. `printf` asks the OS to put bytes on your terminal. `return 0` tells the parent "success" — any other number means "something failed", and parents read it later via `$?` and `wait()`. Types are just "how many bytes, and how to read them": `char` is 1, `int` is usually 4, addresses come later. No [heap](../../../../glossary/terms.md#heap) yet. No [pointers](../../../../glossary/terms.md#pointer) yet. Just the loop.
 
 ## Simulate It (host, no QEMU)
 
-Full program: `code/main.c`. This *is* the simulator — hosted C on Linux/WSL/Docker/Windows.
+Your simulator is plain hosted C. `code/main.c` runs on Linux, WSL, Docker, or Windows — no QEMU needed.
 
 ```c
 #include <stdio.h>
@@ -99,7 +99,7 @@ What this does: compiles with warnings-as-errors, runs, then shows the exit code
 
 Change X → Y: delete one `;` and rebuild. Verify: compiler points at the exact line (read the error top-down; first error is real, rest are echoes — debugging mindset P-00/04).
 
-`Makefile` wraps the same command so you never retype flags:
+You will type those flags once, then let `make` remember them:
 
 ```make
 run:
@@ -110,7 +110,7 @@ What this does: identical compile+run, one word (`make run`), flags versioned in
 
 ## Use It (Linux)
 
-Same loop, observed by the OS:
+Step outside your program and watch the OS see the same loop:
 
 ```bash
 ./build/hello
@@ -130,7 +130,7 @@ Change X → Y: replace `write` with `process` (`-e trace=process`). Verify: nea
 
 ## Ship It
 
-Artifact: `outputs/c-loop-card.md` — the 4-line loop (edit → `make run` → read first error → verify `$?`). Tape it to your monitor; it stays valid through capstone.
+Artifact: `outputs/c-loop-card.md` — the 4-line loop (edit → `make run` → read first error → verify `$?`). Tape it to your monitor; it stays valid through capstone, and you will repeat it until it feels automatic.
 
 ## Exercises
 

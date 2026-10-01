@@ -20,7 +20,7 @@
 
 <!-- source: ../figures/registers-map.excalidraw — open in excalidraw.com to redraw -->
 
-x86-64 gives each function its args in [registers](../../../../glossary/terms.md#register): first int in `%edi`, second in `%esi`, return in `%eax` (32-bit slices of `%rdi/%rsi/%rax`). `movl $1, %eax` means "copy immediate 1 into eax": `$`=number, `%`=register, `l`=32 bits, order is source-then-destination. `addl %esi, %eax` adds esi *into* eax. `ret` jumps back. That's the whole lesson — everything else is vocabulary.
+You call `add2(40, 2)` and the numbers land in [registers](../../../../glossary/terms.md#register) before any stack is touched: first int in `%edi`, second in `%esi`, return in `%eax` (32-bit slices of `%rdi/%rsi/%rax`). You read `movl $1, %eax` as "copy immediate 1 into eax": `$`=number, `%`=register, `l`=32 bits, order is source-then-destination. `addl %esi, %eax` adds esi *into* eax. `ret` jumps back. That dataflow is the whole trick — the rest is vocabulary.
 
 ## Simulate It (host — C model of registers, no ASM yet)
 

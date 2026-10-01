@@ -20,11 +20,11 @@
 
 <!-- source: ../figures/vruntime.excalidraw — open in excalidraw.com to redraw -->
 
-Each task owns a virtual clock. Running one tick advances *its* clock by `1024/weight` — heavyweights (high weight) tick slowly, lightweights fast. The scheduler always runs the smallest clock (most behind in *weighted* time). Effect after 60 ticks with weights 1024/335/3121: clocks read ~14.0/15.3/13.5 (nearly tied!) while real ticks split 14/5/41 (wildly proportional). Fairness lives in virtual time; throughput lives in real time. `nice` sets weight (table below — each ±1 ≈ ±10%, the only knob users get).
+Imagine three tasks arguing over who is owed the CPU. You cannot settle it by counting turns — a turn means different things at different weights. So give each task its own virtual clock. Running one tick advances *its* clock by `1024/weight` — heavyweights (high weight) tick slowly, lightweights fast. You always run the smallest clock, the one most behind in *weighted* time. After 60 ticks with weights 1024/335/3121, the clocks read ~14.0/15.3/13.5 (nearly tied!) while real ticks split 14/5/41 (wildly proportional). Fairness lives in virtual time; throughput lives in real time. `nice` sets weight (table below — each ±1 ≈ ±10%, the only knob users get).
 
 ## Simulate It (host — the sketch, no QEMU)
 
-Full program: `code/cfs.c`. Three tasks, 60 ticks, min-vruntime.
+Your sketch lives in `code/cfs.c`. You run three tasks for 60 ticks, always picking the most-behind clock.
 
 ```c
 #include <stdio.h>
@@ -119,7 +119,7 @@ Change X → Y: `nice -n 10 ./build/cfs-demo-loop &` vs default (see Exercises).
 
 ## Ship It
 
-Artifact: `outputs/cfs-card.md` — weight table excerpt (−5/0/5), charge formula, pick rule, bounded-lag statement, `ps`/`chrt` verbs. Cite it whenever anyone says "just use priorities" (priorities *are* weights with a clock).
+Artifact: `outputs/cfs-card.md` — weight table excerpt (−5/0/5), charge formula, pick rule, bounded-lag statement, `ps`/`chrt` verbs. Cite it whenever anyone says "just use priorities" (priorities *are* weights with a clock). You now own fair time — threads will fight over it next.
 
 ## Exercises
 

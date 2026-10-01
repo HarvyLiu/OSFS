@@ -20,7 +20,7 @@
 
 <!-- source: ../figures/swap-flow.excalidraw — open in excalidraw.com to redraw -->
 
-RAM holds 3 frames; the workload names 6 pages. First touch faults (major: disk→frame). Full house + new page = evict FIFO victim: clean pages drop free (disk already has them), dirty pages write back first (disk stale — the write that *must* precede reuse). Present bit clear = "ask the fault handler, not the tables" (05/02's -2 grown into a loading dock). Our trace of 13: 9 faults, 6 evictions, 1 writeback, resident `{4,2,5}`. When promises exceed RAM *and* swap, Linux's OOM killer picks a victim by badness score (`oom_score_adj` tunable — the triage you'll read in `dmesg`).
+Picture three frames and a workload that names six pages — you promised more than fits. Each first touch faults its page in from disk (a major fault, disk to frame). When the house is full and a new page arrives, you evict the FIFO victim: clean pages drop free since disk already holds them, dirty pages must write back first since disk is stale. A clear present bit means "ask the fault handler," the -2 from 05/02 grown into a loading dock. Our 13-access trace lands at 9 faults, 6 evictions, 1 writeback, resident `{4,2,5}`. And when promises outrun RAM *and* swap, Linux stops loading and starts choosing — the OOM killer picks a victim by badness score, tunable via `oom_score_adj`, and you read the verdict in `dmesg`.
 
 ## Simulate It (host C — the engine, no QEMU)
 
@@ -186,7 +186,7 @@ Change X → Y: `cat /proc/self/oom_score`. Verify: small number (your shell is 
 
 ## Ship It
 
-Artifact: `outputs/swap-card.md` — fault/evict/writeback trio, dirty-bit rule, FIFO-vs-LRU note, OOM score verbs, `meminfo`/`ps` readers. Memory reference complete (05+06): spaces → tables → TLB → swap → killer.
+Artifact: `outputs/swap-card.md` — fault/evict/writeback trio, dirty-bit rule, FIFO-vs-LRU note, OOM score verbs, `meminfo`/`ps` readers. Memory reference complete (05+06): spaces → tables → TLB → swap → killer. You now own demand paging end to end — the block layer in phase 07 gives evicted pages somewhere durable to go.
 
 ## Exercises
 

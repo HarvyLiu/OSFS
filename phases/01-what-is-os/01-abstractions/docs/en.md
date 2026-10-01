@@ -20,7 +20,7 @@
 
 <!-- source: ../figures/abstractions.excalidraw — open in excalidraw.com to redraw -->
 
-Disks store numbered blocks (no names, no appends). The OS sells *files*: named byte streams with offsets (FS phases). CPUs run instruction streams; the OS sells *processes*: private machines with memory + files + a pid (Processes phases). RAM is one shared array; the OS sells *address spaces*: every process its own private mailboxes 0…max (Memory phases). Your program below touches all three in 20 lines: an fd (file handle), its own pid-less self (`/proc/self` later), and pointers into its private space. [Syscalls](../../../../glossary/terms.md#syscall) are the shop counter where you request each lie.
+Your disk knows only numbered blocks — no names, no appends. The OS sells you *files*: named byte streams with offsets (FS phases). Your CPU runs instruction streams; the OS sells you *processes*: private machines with memory, files, and a pid (Processes phases). Your RAM is one shared array; the OS sells you *address spaces*: each process gets its own private mailboxes from 0 to max (Memory phases). Your program below touches all three in 20 lines: an fd (file handle), its own pid-less self (`/proc/self` later), and pointers into its private space. [Syscalls](../../../../glossary/terms.md#syscall) are the shop counter where you request each lie.
 
 ## Simulate It (host C — all three lies, portable, no QEMU)
 

@@ -20,7 +20,7 @@
 
 <!-- source: ../figures/sched-timeline.excalidraw — open in excalidraw.com to redraw -->
 
-Same three jobs every time: P1(arr 0, burst 8), P2(arr 1, burst 4), P3(arr 2, burst 2). **FIFO** runs arrival order: P1 0–8, P2 8–12, P3 12–14. **SJF** (nonpreemptive, arrival-aware) runs P1 (only choice at 0), then shortest-available: P3 8–10, P2 10–14. **RR(q=2)** slices: P1 P2 P3 P1 P2 P1 P1 → done 14/10/6. Metrics: turnaround = completion − arrival (user cares), waiting = turnaround − burst (queue pain), response = first-run − arrival (interactivity). SJF wins averages here *because it cheats*: it knows bursts upfront. Real schedulers guess (MLFQ next lesson).
+You run the same three jobs every time: P1(arr 0, burst 8), P2(arr 1, burst 4), P3(arr 2, burst 2). **FIFO** runs arrival order: P1 0–8, P2 8–12, P3 12–14. **SJF** (nonpreemptive, arrival-aware) runs P1 (your only choice at 0), then shortest-available: P3 8–10, P2 10–14. **RR(q=2)** slices: P1 P2 P3 P1 P2 P1 P1, done at 14/10/6. You measure three things: turnaround = completion − arrival (what the user feels), waiting = turnaround − burst (queue pain), response = first-run − arrival (interactivity). SJF wins the averages here *because it cheats*: it knows bursts upfront. Real schedulers must guess (MLFQ next lesson).
 
 ## Simulate It (host, no QEMU)
 

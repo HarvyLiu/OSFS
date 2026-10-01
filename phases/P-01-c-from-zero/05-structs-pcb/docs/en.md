@@ -20,11 +20,11 @@
 
 <!-- source: ../figures/struct-layout.excalidraw — open in excalidraw.com to redraw -->
 
-A `struct` is contiguous fields: `pid` at offset 0, `state` next, then `rsp`, then a name buffer. `sizeof` includes *padding* (alignment gaps — the compiler inserts them, `pahole`/offset prints reveal them). `p->pid` means "field pid of the struct at [address](../../../../glossary/terms.md#address) p" (sugar for `(*p).pid`). An `enum` names the states (`UNUSED=0, RUNNABLE, RUNNING, ZOMBIE`) so `p->state == ZOMBIE` reads like English and the compiler warns on missed cases in `switch`. A `typedef` gives the struct a short name (`pcb_t`). The OS keeps *arrays* of these: the process table. See [PCB](../../../../glossary/terms.md#pcb), [pointer](../../../../glossary/terms.md#pointer), [heap](../../../../glossary/terms.md#heap).
+You need a roster the OS can scan, so you build it from grouped bytes. A `struct` lays fields side by side: `pid` at offset 0, `state` next, then `rsp`, then a name buffer. `sizeof` includes *padding* — alignment gaps the compiler inserts, which `pahole` and offset prints reveal. `p->pid` means "the pid field of the struct at [address](../../../../glossary/terms.md#address) p", sugar for `(*p).pid`. An `enum` names the states (`UNUSED=0, RUNNABLE, RUNNING, ZOMBIE`) so `p->state == ZOMBIE` reads like English and `switch` warns on missed cases. A `typedef` shortens the name to `pcb_t`. The OS keeps *arrays* of these rows: the process table. See [PCB](../../../../glossary/terms.md#pcb), [pointer](../../../../glossary/terms.md#pointer), [heap](../../../../glossary/terms.md#heap).
 
 ## Simulate It (host, no QEMU)
 
-Full program: `code/pcb.c` — 4-slot table, spawn 2, run one, zombie one, reap it.
+You run a process table in miniature. `code/pcb.c` holds 4 slots, spawns 2, runs one, zombies one, then reaps it.
 
 ```c
 #include <stdio.h>
@@ -132,7 +132,7 @@ What this does: prints the four offsets + size in one line you can diff across c
 
 ## Use It (Linux)
 
-Real PCBs live in the kernel, but their shadows are readable:
+You cannot touch the kernel's table, but you can read its shadows:
 
 ```bash
 ps -o pid,stat,comm -p 1

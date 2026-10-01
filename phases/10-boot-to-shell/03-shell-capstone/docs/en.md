@@ -20,7 +20,23 @@
 
 <!-- source: ../figures/myos-map.excalidraw — open in excalidraw.com to redraw -->
 
-Every phase converges here. **Paging** (06): one directory + one table mapping virtual = physical for the first 4 MiB — translation on, but transparent (prove the machinery before using it for isolation). **Interrupts** (04): the PIT fires IRQ0 100×/second; the PIC (remapped past CPU faults at `0x20`) vectors it through your IDT to `timer_stub`, which counts `ticks` and raises `need_resched`. **Tasks** (02/03): `switch_to` parks one [stack](../../../../glossary/terms.md#stack) and rides another — the shell yields every loop, the spinner counts, `tasks` prints both `esp` values as proof. **FS** (08): a ROM table of name→content (inodes without the disk — the interface is the lesson). **Shell** (01): `readline` + `dispatch` over serial — the same read-eval loop Thompson wrote, minus sixty years of features.
+Every phase of this book converges in one file. Walk it subsystem by subsystem.
+
+**Paging** (06): one directory plus one table mapping virtual = physical for the
+first 4 MiB — translation switched on, but transparent. Prove the machinery
+before using it for isolation.
+
+**Interrupts** (04): the PIT fires IRQ0 a hundred times a second; the PIC
+(remapped past the CPU faults at `0x20`) vectors each tick through your IDT to
+`timer_stub`, which counts `ticks` and raises `need_resched`.
+
+**Tasks** (02/03): `switch_to` parks one [stack](../../../../glossary/terms.md#stack)
+and rides another — the shell yields every loop, the spinner counts, and
+`tasks` prints both `esp` values as proof.
+
+**FS** (08): a ROM table of name→content — inodes without the disk. The
+interface is the lesson. **Shell** (01): `readline` plus `dispatch` over
+serial — the same read-eval loop Thompson wrote, minus sixty years of features.
 
 Honest label: the switch is *timer-flagged, cooperatively executed* — the timer contests the CPU, the shell yields at loop top. True async preemption (switch inside the ISR) is exercise 3.
 
@@ -42,7 +58,7 @@ What this does: models `fs_cat` + `cmd_ls` semantics (lookup-or-message — the 
 |---|---|---|
 | `fs.get(..., default)` | contract model | `fs_cat` returns 0 on miss, `cmd_cat` prints `no such file` (NULL-as-answer again — P-00/04's rule, now a feature) |
 
-Change X → Y: `fs.get('nope', ...)` → `fs['nope']`. Verify: `KeyError` (hostexception models the crash we *don't* ship — checked lookup vs blind index, the whole lesson in one exception).
+Change X → Y: `fs.get('nope', ...)` → `fs['nope']`. Verify: `KeyError` (a host exception models the crash we *don't* ship — checked lookup vs blind index, the whole lesson in one exception).
 
 ## Build It (five subsystems, one file + 20 lines of ASM)
 
@@ -153,7 +169,7 @@ Structure without QEMU: `python3 tests/test_shell.py -v` (6 checks: alignment, m
 
 ## Ship It
 
-Artifact: `outputs/myos-tour.md` — the five-subsystem demo script above plus the `tasks`-twice motion proof. This is the course's final artifact: every lesson from P-00 (stacks, argv-like parsing, debugging) through 09 (rings foreshadowed in `0x8E`) has a line of code in this kernel.
+Artifact: `outputs/myos-tour.md` — the five-subsystem demo script above plus the `tasks`-twice motion proof. This is the course's final artifact: every lesson from P-00 (stacks, argv-like parsing, debugging) through 09 (rings foreshadowed in `0x8E`) has a line of code in this kernel. This is where the book ends and yours begins.
 
 ## Exercises
 

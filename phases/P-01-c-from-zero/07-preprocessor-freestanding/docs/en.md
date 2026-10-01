@@ -20,11 +20,11 @@
 
 <!-- source: ../figures/build-modes.excalidraw — open in excalidraw.com to redraw -->
 
-The preprocessor runs *before* the compiler: dumb text paste withsharp knives. `#define MIN(a,b)` pastes expressions (parenthesize everything or precedence eats you). `#ifdef DEBUG` compiles two programs from one file. `#include` pastes headers (P-01/06's promises). Hosted C = libc + `_start` + `main` + `exit` provided (your sims so far). Freestanding C = language only: no `printf`, no `malloc`, `main` means nothing until a linker script + your entry say so. Kernels compile `-ffreestanding -nostdlib` and provide UART print + page alloc themselves. See [freestanding](../../../../glossary/terms.md#freestanding).
+Picture a pass that runs *before* the compiler: dumb text paste with sharp knives. `#define MIN(a,b)` pastes expressions, so you parenthesize everything or precedence eats you. `#ifdef DEBUG` compiles two programs from one file. `#include` pastes headers (P-01/06's promises). Hosted C gives you libc plus `_start` plus `main` plus `exit` — every sim you have run so far. Freestanding C gives you the language only: no `printf`, no `malloc`, and `main` means nothing until a linker script and your entry say so. Kernels compile `-ffreestanding -nostdlib` and provide their own UART print and page allocator. See [freestanding](../../../../glossary/terms.md#freestanding).
 
 ## Simulate It (host — macros with teeth, no QEMU)
 
-Full program: `code/macros.c`. Safe min, stringize, debug fork.
+You wield the sharp knives yourself. `code/macros.c` practices safe min, stringize, and a debug fork.
 
 ```c
 #include <assert.h>
@@ -62,7 +62,7 @@ What this does: exercises paste (`MIN`), stringize (`STR`), compile-time forks (
 
 Change X → Y: compile with `-DNDEBUG`, rerun. Verify: `dbg:` line vanishes (proves the fork is compile-time — the binary literally lacks the call; check with `strings`).
 
-See the paste with your own eyes:
+Watch the paste happen:
 
 ```bash
 gcc -E code/macros.c | grep -A2 "int main" | head -8
@@ -110,7 +110,7 @@ Change X → Y: add `#include <stdio.h>` to `bare.c`, rerun `make freestanding`.
 
 ## Use It (Linux)
 
-Real projects fork reality constantly:
+Real projects fork reality this way every day:
 
 ```bash
 gcc -dM -E - < /dev/null | grep -E "linux|__x86_64__|__STDC_VERSION__" | head -5
@@ -128,7 +128,7 @@ Change X → Y: `gcc -U__linux__ -dM -E - < /dev/null | grep -c __linux__`. Veri
 
 ## Ship It
 
-Artifact: `outputs/pp-card.md` — parenthesize-everything, two-step stringize, guard pattern, `-E`/`-dM`/`-DNDEBUG` verbs, freestanding flag set. Reuse every time a header misbehaves (it will).
+Artifact: `outputs/pp-card.md` — parenthesize-everything, two-step stringize, guard pattern, `-E`/`-dM`/`-DNDEBUG` verbs, freestanding flag set. Reuse every time a header misbehaves (it will). Tooling 02 will make you live there.
 
 ## Exercises
 

@@ -20,11 +20,11 @@
 
 <!-- source: ../figures/ticket-queue.excalidraw — open in excalidraw.com to redraw -->
 
-Two shared integers: `next_ticket` (deli roll) and `now_serving` (display). Lock = `my = fetch_add(&next,1)` (atomically take-and-increment — one uninterruptible op, P-02/05's territory), then spin `while (now_serving != my)` (reread each lap — `atomic_load`, never cache). Unlock = `now_serving++` (next number, please). Admission order = ticket order = arrival order: FIFO fairness, no starvation, starvation-free by construction. Cost: spinners burn cores (fine for 10-instruction critical sections, insane for disk waits — sleep locks/futex later).
+Picture the deli counter on a busy morning. You take a numbered roll and wait for the display to call it — nobody cuts, because the numbers never lie. This lock works the same way with two shared integers: `next_ticket` (the roll) and `now_serving` (the display). Locking means `my = fetch_add(&next,1)` — you take-and-increment atomically, one uninterruptible op from P-02/05's territory — then you spin on `while (now_serving != my)`, rereading each lap with `atomic_load`, never a cached copy. Unlocking means `now_serving++`: next number, please. Admission order matches ticket order matches arrival order — FIFO fairness, starvation-free by construction. The cost is honest: spinners burn cores. That is fine for 10-instruction critical sections and foolish for disk waits — sleep locks and futex come later.
 
 ## Simulate It (host pthreads + C11 atomics — Linux/WSL/Docker/MinGW)
 
-Split across `code/ticket.h` + `code/ticket.c` + `code/demo.c` (headers/split practice, again on purpose).
+You will split the work across `code/ticket.h` + `code/ticket.c` + `code/demo.c` — headers and split practice, again on purpose.
 
 ```c
 // ticket.h -- two integers + three verbs.
@@ -158,7 +158,7 @@ Change X → Y: `perf stat` the 04/01 mutex binary beside this one. Verify: tick
 
 ## Ship It
 
-Artifact: `outputs/lock-card.md` — take/wait/advance trio, spin-vs-sleep rule (short+contended=spin, long+idle=sleep), `pause` note, `_Atomic` minimum (never hand-roll with plain ints — 04/01's 285k says why). Next lesson generalizes to sleep locks; this card stays the fairness reference.
+Artifact: `outputs/lock-card.md` — take/wait/advance trio, spin-vs-sleep rule (short+contended=spin, long+idle=sleep), `pause` note, `_Atomic` minimum (never hand-roll with plain ints — 04/01's 285k says why). Next lesson generalizes to sleep locks; this card stays the fairness reference. You now own fair spinning — sleeping comes next.
 
 ## Exercises
 

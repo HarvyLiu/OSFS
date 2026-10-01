@@ -20,11 +20,11 @@
 
 <!-- source: ../figures/build-graph.excalidraw — open in excalidraw.com to redraw -->
 
-`vec.h` *declares* ("there exists `vec_push` taking..."); `vec.c` *defines* (the bytes); `main.c` *uses* (calls it). `#include "vec.h"` pastes the promise into each user. Guards (`#ifndef VEC_H`) stop double-paste when headers include headers. `cc -c` compiles each `.c` to a `.o` (machine code, unresolved calls dangling); the link step resolves them into one binary. `make` compares timestamps: rebuild a `.o` only if its `.c`/`.h` is newer than it — one-line change, one compile, not all. That's the whole build system behind every kernel.
+You outgrow one file the week your vector leaves `main`. Then `vec.h` *declares* ("there exists `vec_push` taking..."), `vec.c` *defines* the bytes, and `main.c` *uses* the call. `#include "vec.h"` pastes the promise into each user. Guards (`#ifndef VEC_H`) stop the double-paste when headers include headers. `cc -c` compiles each `.c` into a `.o` with machine code and dangling unresolved calls. The link step resolves them into one binary. `make` compares timestamps and rebuilds a `.o` only when its `.c` or `.h` is newer — one-line change, one compile, not all. That is the whole build system behind every kernel.
 
 ## Simulate It (host — the split, no QEMU)
 
-Three files in `code/`: `vec.h`, `vec.c`, `main.c`. This *is* the program; the lesson is its shape.
+You work with three files in `code/`: `vec.h`, `vec.c`, and `main.c`. This *is* the program — the lesson is its shape.
 
 ```c
 // vec.h -- promises + guards. Included by vec.c AND main.c.
@@ -131,7 +131,7 @@ What this does: one-command build+run; the dependency list (`main.c vec.c vec.h`
 
 Change X → Y: run `touch vec.h && make -n run`. Verify: `make -n` (dry run) prints the rebuild commands (proves header edits invalidate — headers are *source*, not comments).
 
-Object-level view (what kernels actually do):
+Kernels build this way. Look at the object level:
 
 ```bash
 cc -Wall -Werror -std=c11 -c vec.c -o build/vec.o
@@ -152,7 +152,7 @@ Change X → Y: delete `vec.c` from the link line. Verify: `undefined reference 
 
 ## Use It (Linux)
 
-Watch real multi-file builds behave identically:
+Step back and watch real multi-file builds do the same thing:
 
 ```bash
 touch vec.h && make -n run | head -5

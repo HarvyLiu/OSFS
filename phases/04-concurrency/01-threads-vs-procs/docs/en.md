@@ -20,11 +20,11 @@
 
 <!-- source: ../figures/threads-procs.excalidraw — open in excalidraw.com to redraw -->
 
-`fork()` clones code+data+files (separate worlds; talking needs pipes). `pthread_create` adds a [stack](../../../../glossary/terms.md#stack) + [register](../../../../glossary/terms.md#register) set to the *same* world (all globals shared for free — and for danger). `counter++` compiles to load→add→store: two threads can load the same value, both add, both store — one update vanishes. Four threads × 100k increments *should* be 400k; racy builds land short (how short depends on cores/timing — nondeterminism is the symptom). A mutex serializes the triple into atomicity (next lesson derives *how*; here we use it as the control group).
+Sit beside a program that counts to 400,000 and gets the answer wrong. That is your starting scene. `fork()` clones code+data+files into separate worlds — talking needs pipes. `pthread_create` adds a [stack](../../../../glossary/terms.md#stack) + [register](../../../../glossary/terms.md#register) set to the *same* world, so all globals come shared for free — and for danger. `counter++` compiles to load→add→store: two threads can load the same value, both add, both store — and one update vanishes. Four threads × 100k increments *should* be 400k; racy builds land short (how short depends on cores and timing — nondeterminism is the symptom). A mutex serializes the triple into atomicity. You use it here as the control group; next lesson derives *how* it works.
 
 ## Simulate It (host pthreads — Linux/WSL/Docker; MinGW also provides pthreads)
 
-Full program: `code/race.c`. Same work, two disciplines.
+Your specimen is `code/race.c`. You run the same work twice, under two disciplines.
 
 ```c
 #include <stdio.h>
@@ -102,7 +102,7 @@ Change X → Y: drop `-pthread` from the link line only. Verify: `undefined refe
 
 ## Use It (Linux)
 
-Threads are visible as tasked clones sharing memory:
+You can see your threads from outside as tasked clones sharing memory:
 
 ```bash
 ./build/race | head -3
@@ -121,7 +121,7 @@ Change X → Y: `ps -eLf | wc -l` idle vs while `make run` spins in another term
 
 ## Ship It
 
-Artifact: `outputs/race-card.md` — sharing checklist (what's shared: globals/heap/files; what's private: stack/registers/errno), race triage (flaky count → suspect shared write; exact under small N → scale up), `-pthread` both-halves reminder. Reuse in every later "is it a race?" investigation.
+Artifact: `outputs/race-card.md` — sharing checklist (what's shared: globals/heap/files; what's private: stack/registers/errno), race triage (flaky count → suspect shared write; exact under small N → scale up), `-pthread` both-halves reminder. Reuse in every later "is it a race?" investigation. You now own the bug — locks fence it next.
 
 ## Exercises
 

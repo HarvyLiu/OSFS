@@ -20,11 +20,11 @@
 
 <!-- source: ../figures/address-space.excalidraw — open in excalidraw.com to redraw -->
 
-Low addresses: code+data (your ELF's sections, P-02/06). Then heap (grows up via `brk`/`mmap`). Then mmap gaps (shared libs, big allocs). High: stack (grows down) + kernel half (top, yours to trap into, never to touch). Every process sees this *same shape* with *different contents* — virtual numbers translated per-process by page tables (4 KiB pages: the atom of honesty) into physical frames. `mmap(ANONYMOUS)` asks the lie directly: "give me N zeroed pages, nowhere-file-backed." `/proc/self/maps` prints your space live. See [address](../../../../glossary/terms.md#address), [heap](../../../../glossary/terms.md#heap), [page](../../../../glossary/terms.md#page).
+Every program you write believes it owns all of memory, from zero to forever. You share the machine with dozens of such believers, and none of them crash into each other. That shared fiction is the address space. Down low sit code and data (your ELF's sections from P-02/06). Then the heap grows up via `brk`/`mmap`, mmap gaps hold shared libraries and big allocations, and up high the stack grows down beside the kernel half — yours to trap into, never to touch. Every process sees this *same shape* with *different contents*: virtual numbers translated per-process by page tables, in 4 KiB pages (the atom of honesty), into physical frames. `mmap(ANONYMOUS)` asks for the fiction directly: "give me N zeroed pages, nowhere-file-backed." `/proc/self/maps` prints your space live. See [address](../../../../glossary/terms.md#address), [heap](../../../../glossary/terms.md#heap), [page](../../../../glossary/terms.md#page).
 
 ## Simulate It (host — selfie first, portable)
 
-Full program: `code/layout.c`. Prints each region's address from inside.
+You start with a selfie, and it runs anywhere. The program is `code/layout.c` — it prints each region's address from inside.
 
 ```c
 #include <stdio.h>
@@ -63,7 +63,7 @@ Change X → Y: `malloc(16)` → `malloc(1000000)` for heap2. Verify: gap explod
 
 ## Build It (mmap the lie directly — Linux/WSL/Docker)
 
-`code/map.c` asks for raw pages (needs `<sys/mman.h>` — Linux-only, like `fork` before it):
+Next you ask for raw pages with `code/map.c` (it needs `<sys/mman.h>` — Linux-only, like `fork` before it):
 
 ```c
 // map.c -- anonymous pages, zeroed, mine. Lesson docs/en.md. Linux-only.
@@ -130,7 +130,7 @@ Change X → Y: `pmap -x` on the `map` demo mid-`sleep` (add `sleep(60)` scratch
 
 ## Ship It
 
-Artifact: `outputs/vm-card.md` — region order, page facts (4 KiB, fault-on-touch), `mmap`/`munmap`/`mprotect` verbs, `pmap`/`maps` readers, virtual-vs-physical one-liner. The Memory-phase passport: stamped at every border crossing ahead.
+Artifact: `outputs/vm-card.md` — region order, page facts (4 KiB, fault-on-touch), `mmap`/`munmap`/`mprotect` verbs, `pmap`/`maps` readers, virtual-vs-physical one-liner. The Memory-phase passport: stamped at every border crossing ahead. You now own the map — translation builds it next.
 
 ## Exercises
 

@@ -20,7 +20,7 @@
 
 <!-- source: ../figures/tlb-lookup.excalidraw — open in excalidraw.com to redraw -->
 
-Without cache, each access pays walk+data (our model: 1 TLB probe + 100 walk + 100 data = 201 on miss). With a hit, the cached frame skips the walk (1 + 100 = 101). Four-entry FIFO TLB over trace `0,1,2,3,0,1,4,0`: fills on 0–3 (4 misses), hits 0,1 (2 hits), 4 evicts 0 (miss), 0 misses again (evicted!) → 2 hits / 6 misses, EAT = (2×101 + 6×201)/8 = 176. Locality is the whole game: repeats hit, strides miss. Real hardware: ~64–1536 entries, LRU-ish, per-CPU (shootdowns on unmap!), flushed on CR3 switch unless ASID-tagged (PCIDs let entries survive switches).
+You already pay the walk from 05/02 — every miss trudges through the table, then fetches the data. Our model puts numbers on it: 1 for the TLB probe, 100 for the walk, 100 for the data, so a miss costs 201 and a hit costs 101. Now watch a tiny 4-entry FIFO learn the trace `0,1,2,3,0,1,4,0`: the first four accesses fill it (4 misses), `0,1` hit, `4` evicts `0`, and the final `0` misses on the page it just lost — 2 hits, 6 misses, EAT = (2×101 + 6×201)/8 = 176. That sting is the whole game: repeats hit, strides miss. Real hardware scales the same idea — ~64–1536 entries, LRU-ish, per-CPU with shootdowns on unmap, flushed on CR3 switch unless ASID-tagged (PCIDs let entries survive switches).
 
 ## Simulate It (host C — TLB + walker, no QEMU)
 
@@ -129,7 +129,7 @@ Change X → Y: `perf stat` a stride program (Exercise 2's) vs this loop. Verify
 
 ## Ship It
 
-Artifact: `outputs/tlb-card.md` — hit/miss costs, EAT formula, FIFO-vs-LRU note, flush/ASID/hugepage trio, `perf` verbs. Cite it in every "why is this scan slow?" investigation henceforth.
+Artifact: `outputs/tlb-card.md` — hit/miss costs, EAT formula, FIFO-vs-LRU note, flush/ASID/hugepage trio, `perf` verbs. Cite it in every "why is this scan slow?" investigation henceforth. You now own the cache that makes paging affordable — swap pressure in 06/03 tests it next.
 
 ## Exercises
 

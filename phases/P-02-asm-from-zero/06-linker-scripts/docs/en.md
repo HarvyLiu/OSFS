@@ -20,7 +20,7 @@
 
 <!-- source: ../figures/link-layout.excalidraw — open in excalidraw.com to redraw -->
 
-Each `.o` carries *sections* (`.text` code, `.rodata` constants, `.data` initialized globals, `.bss` zeroed globals). The linker script's `SECTIONS` block concatenates them into one image at chosen addresses: `. = 1M` sets the location counter (this [address](../../../../glossary/terms.md#address) onward), `*(.multiboot)` pulls every multiboot header first, `ALIGN(4K)` pads to page boundaries (Memory phases will bless you for this). `ENTRY(_start)` stamps where the first jump lands. On host Linux, the default script + loader do this invisibly; kernels ship their own because *they* are the bottom.
+You compile two files and each `.o` carries *sections* (`.text` code, `.rodata` constants, `.data` initialized globals, `.bss` zeroed globals) — your bytes, waiting for placement. The linker script's `SECTIONS` block concatenates them into one image at chosen addresses: `. = 1M` sets the location counter (this [address](../../../../glossary/terms.md#address) onward), `*(.multiboot)` pulls every multiboot header first, `ALIGN(4K)` pads to page boundaries (Memory phases will bless you for this). `ENTRY(_start)` stamps where the first jump lands. On host Linux, the default script + loader do this invisibly; kernels ship their own because *they* are the bottom.
 
 ## Simulate It (host — sections you can touch, no QEMU)
 

@@ -20,7 +20,7 @@
 
 <!-- source: ../figures/no-std.excalidraw — open in excalidraw.com to redraw -->
 
-`std` = `core` (always available: types, traits, `Option`/`Result`, atomics) + `alloc` (needs an allocator: `Vec`/`String`) + OS services (threads, files, `println!`, backtraces). `#![no_std]` unplugs the last two: your crate links `core` only. Two debts come due: (1) a `#[panic_handler]` (nowhere to print + unwind — usually log-to-serial + halt, like Tooling 02's `hlt` loop); (2) no `main` convention (`#![no_main]` + your own entry, like `_start`). `unsafe` marks the five sharp powers (raw-pointer deref, mutable statics, inline ASM, `extern`, unsafe-trait impls) — fenced in tiny blocks, wrapped in safe functions whose *contracts* callers can trust without reading the blade.
+You boot with no OS beneath you, so `std` leaves and `core` stays: `std` = `core` (always available: types, traits, `Option`/`Result`, atomics) + `alloc` (needs an allocator: `Vec`/`String`) + OS services (threads, files, `println!`, backtraces). `#![no_std]` unplugs the last two: your crate links `core` only. Two debts come due: (1) a `#[panic_handler]` (nowhere to print + unwind — usually log-to-serial + halt, like Tooling 02's `hlt` loop); (2) no `main` convention (`#![no_main]` + your own entry, like `_start`). `unsafe` marks the five sharp powers (raw-pointer deref, mutable statics, inline ASM, `extern`, unsafe-trait impls) — fenced in tiny blocks, wrapped in safe functions whose *contracts* callers can trust without reading the blade.
 
 ## Simulate It (host rustc — both floors, side by side)
 

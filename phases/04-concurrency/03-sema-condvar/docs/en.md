@@ -20,11 +20,11 @@
 
 <!-- source: ../figures/bounded-buffer.excalidraw — open in excalidraw.com to redraw -->
 
-A semaphore is a *count* with atomic sleep: `wait` blocks while 0, `post` wakes one. Bounded buffer needs two: `empty` (starts N=slots, producer waits/posts) and `full` (starts 0, consumer waits/posts), plus a mutex for the indices (counts pace, mutex protects). A condvar is dumber + sharper: `wait(mutex, cond)` sleeps *until signaled for a reason* — always recheck in `while` (wakeups can be spurious or stolen). Deadlock = circular wait (A→B vs B→A): four Coffman conditions, one practical cure — global lock order (always A-then-B, in *every* path).
+Imagine a kitchen with eight plates and a cook who refuses to spin in circles waiting. You need pacing, not polling. A semaphore is a *count* with atomic sleep: `wait` blocks while it reads 0, `post` wakes one waiter. Your bounded buffer needs two counts: `empty` (starts at N slots — the producer waits on it, then posts) and `full` (starts at 0 — the consumer waits on it, then posts), plus a mutex guarding the indices. Counts pace; the mutex protects. A condvar is dumber and sharper: `wait(mutex, cond)` sleeps *until signaled for a reason* — so you always recheck inside `while`, never `if`, because wakeups can be spurious or stolen. Deadlock is circular wait (A→B versus B→A): four Coffman conditions, one practical cure — a global lock order, always A-then-B, in *every* path.
 
 ## Simulate It (host pthreads — portable hand-rolled semaphores, no `sem.h`)
 
-Three files: `code/sem.h` + `code/sem.c` (counter from mutex+cond) + `code/pc.c` (200-item pipeline).
+You build it in three files: `code/sem.h` + `code/sem.c` (a counter from mutex+cond) + `code/pc.c` (a 200-item pipeline).
 
 ```c
 // sem.h -- counting semaphore shape.
@@ -221,7 +221,7 @@ Change X → Y: `time` the ticket demo beside this. Verify: ticket user-time hig
 
 ## Ship It
 
-Artifact: `outputs/sync-card.md` — sem/wait/post, empty+full+mutex trio recipe, `while`-not-`if`, global-order rule, spin-vs-sleep costs. The synchronization pocket reference through capstone.
+Artifact: `outputs/sync-card.md` — sem/wait/post, empty+full+mutex trio recipe, `while`-not-`if`, global-order rule, spin-vs-sleep costs. The synchronization pocket reference through capstone. You now own sleeping synchronization — memory gives it new rooms next.
 
 ## Exercises
 

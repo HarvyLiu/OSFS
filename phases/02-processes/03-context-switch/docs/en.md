@@ -20,7 +20,7 @@
 
 <!-- source: ../figures/ctx-switch.excalidraw — open in excalidraw.com to redraw -->
 
-Each task owns a [PCB](../../../../glossary/terms.md#pcb) (pid, state, saved `%rsp`, trapframe) plus its own [stack](../../../../glossary/terms.md#stack). Switching = (1) push live [registers](../../../../glossary/terms.md#register) onto old stack, (2) stash old `%rsp` in old PCB, (3) load new `%rsp` from new PCB, (4) pop new registers, (5) `ret` into new code. `fork()` created the cards; the scheduler deals them. Interrupts (`cli/sti`) fence the critical middle — P-02/04 topic, named here only.
+Picture two tasks, each with its own [PCB](../../../../glossary/terms.md#pcb) (pid, state, saved `%rsp`, trapframe) and its own [stack](../../../../glossary/terms.md#stack). You switch in five moves: (1) push live [registers](../../../../glossary/terms.md#register) onto the old stack, (2) stash old `%rsp` in the old PCB, (3) load new `%rsp` from the new PCB, (4) pop the new registers, (5) `ret` into the new code. `fork()` created the cards; the scheduler deals them. Interrupts (`cli/sti`) fence the critical middle — a P-02/04 topic, named here only.
 
 ## Simulate It (host C — scheduler you can read top to bottom)
 

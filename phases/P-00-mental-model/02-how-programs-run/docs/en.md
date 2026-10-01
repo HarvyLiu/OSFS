@@ -20,11 +20,11 @@
 
 <!-- source: ../figures/pipeline-stages.excalidraw — open in excalidraw.com to redraw -->
 
-`cc hello.c -o hello` hides four steps: **preprocess** (`#include` paste, `#define` expand → translation unit), **compile** (C → assembly `.s`), **assemble** (assembly → object `.o`: machine code + unresolved symbols), **link** (objects + libraries → executable with [addresses](../../../../glossary/terms.md#address) resolved). Then the **loader** (`exec`) maps the binary into a fresh [address](../../../../glossary/terms.md#address) space and jumps to `_start` → `main(argc, argv)`. Errors name their stage: `error: stdio.h: No such file` (preprocess), `expected ';'` (compile), `undefined reference` (link), `No such file` at run (loader). Read the *first* error: later stages echo earlier breakage.
+You type `cc hello.c -o hello` and one short command quietly does four jobs. First the preprocessor pastes `#include` headers and expands `#define` macros into a single translation unit. Then the compiler translates that C into assembly (`.s`), the assembler turns assembly into an object (`.o`) — machine code plus unresolved symbols — and the linker resolves [addresses](../../../../glossary/terms.md#address) into an executable. Finally the loader (`exec`) maps the binary into a fresh [address](../../../../glossary/terms.md#address) space and jumps to `_start` → `main(argc, argv)`. Each stage signs its failures: `error: stdio.h: No such file` (preprocess), `expected ';'` (compile), `undefined reference` (link), `No such file` at run (loader). Read the *first* error — later stages only echo earlier breakage.
 
 ## Simulate It (host C — argv/echo/exit, the runtime half)
 
-Full program: `code/args.c`. The loader calls *this* shape every time.
+Start at the running end. `code/args.c` is the shape the loader calls every single time.
 
 ```c
 #include <stdio.h>
@@ -103,7 +103,7 @@ Change X → Y: `cc -static` the hello (if static libc present). Verify: `file` 
 
 ## Ship It
 
-Artifact: `outputs/stages-card.md` — stage/flag/artifact/error-signature table (`-E/-S/-c`, `.i/.s/.o`, paste/compile/link/loader errors). Triage card for every future build failure (read the first error, name its stage, fix there).
+Artifact: `outputs/stages-card.md` — stage/flag/artifact/error-signature table (`-E/-S/-c`, `.i/.s/.o`, paste/compile/link/loader errors). Triage card for every future build failure (read the first error, name its stage, fix there). You will reach for it again when fork and exec start loading real binaries.
 
 ## Exercises
 

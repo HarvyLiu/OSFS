@@ -20,11 +20,11 @@
 
 <!-- source: ../figures/mlfq-queues.excalidraw — open in excalidraw.com to redraw -->
 
-Three queues, top priority Q0 (quantum 2), mid Q1 (quantum 4), bottom Q2 (FCFS). Rules: new jobs enter Q0; exhaust your quantum → demote one level; finish → leave; higher non-empty queue always preempts lower. Short jobs finish high before hogs drag them down — SJF's effect *learned*, not foretold. Pathology: a steady hog sinks to Q2 and starves if shorts keep arriving. Fix: periodic boost (every N ticks, all jobs back to Q0) — bounds waiting at the price of forgetting history. Same workload as 03/01 for calibration: A(arr 0, burst 3), B(arr 0, burst 10), C(arr 0, burst 3).
+You cannot ask a job how long it will run, so you watch what it does. That is the whole trick here. Everyone starts at the top, in Q0 (quantum 2). Spend your quantum and you drop one level, to Q1 (quantum 4), then to Q2 (FCFS). Finish and you leave, and a higher non-empty queue always preempts a lower one. Short jobs finish high before hogs drag them down — SJF's effect learned, not foretold. The failure mode is honest: a steady hog sinks to Q2 and starves while shorts keep arriving. The fix is periodic boost — every N ticks, everyone returns to Q0 — which bounds waiting at the price of forgetting history. You will trace the same trio as 03/01: A(arr 0, burst 3), B(arr 0, burst 10), C(arr 0, burst 3).
 
 ## Simulate It (host — the engine, no QEMU)
 
-Core: `code/mlfq_engine.c` (+`mlfq.h`). One tick = pick highest runnable, run 1 unit, account, demote/boost.
+Your engine lives in `code/mlfq_engine.c` (+`mlfq.h`). You pick the highest runnable job, run one unit, account for it, then demote or boost.
 
 ```c
 #include "mlfq.h"
@@ -156,7 +156,7 @@ Change X → Y: `nice -n 10 sleep 30 & ps -o pid,ni,pri,comm -p $!` then kill it
 
 ## Ship It
 
-Artifact: `outputs/mlfq-card.md` — the 4 rules + quantum guidance (small top for response, big bottom for throughput, boost ~50–100ms real systems) + starvation symptoms (`Q2 age` growing in your future telemetry). Cite when justifying any priority scheme to capstone reviewers.
+Artifact: `outputs/mlfq-card.md` — the 4 rules + quantum guidance (small top for response, big bottom for throughput, boost ~50–100ms real systems) + starvation symptoms (`Q2 age` growing in your future telemetry). Cite when justifying any priority scheme to capstone reviewers. You now own learned priorities — CFS prices them differently next.
 
 ## Exercises
 

@@ -20,7 +20,7 @@
 
 <!-- source: ../figures/block-layer.excalidraw — open in excalidraw.com to redraw -->
 
-Disks speak blocks (ours: 64 × 64B toy; real: 512B–4K sectors, millions). `write(bno)` lands in RAM cache marked *dirty* (fast lie); `flush` pushes dirties to the file (slow truth). `crash` = drop dirties (the power-cut simulator — whatever wasn't flushed never happened). HDDs: spinning rust, seeks ~ms (random I/O dies); SSDs: flash pages, no seeks, but erase-blocks + wear (random *writes* cost differently). Torn write = crash mid-flush (half a block new — checksums detect, journals repair). Stats count everything (reads/writes/flushes/drops — the observability habit from 04's counters, continued).
+Your RAM forgets when the power dies — disks remember, but only in fixed-size blocks, at glacial speed, and they can die mid-sentence. Our toy speaks 64 blocks of 64 bytes; real disks speak 512-byte to 4K sectors by the million. `write(bno)` lands in a RAM cache marked *dirty* — a fast promise — and `flush` pushes the dirty blocks to the file, the slow truth. `crash` drops whatever is still dirty, a power cut on demand: unflushed writes never happened. Spinning HDDs fear seeks measured in milliseconds, so random I/O dies; SSDs have no seeks but pay in erase-blocks and wear, so random writes cost differently. A crash mid-flush tears a write — half a block new — and checksums detect what journals repair. The stats count every read, write, flush, and drop, the counter habit from phase 04 carried forward.
 
 ## Simulate It (host C — file-backed disk, portable stdio)
 
@@ -225,7 +225,7 @@ Change X → Y: `cat /sys/block/*/queue/scheduler 2>/dev/null | head -3`. Verify
 
 ## Ship It
 
-Artifact: `outputs/blk-card.md` — writeback-vs-writethrough rule, flush/crash verbs, torn-write note, `lsblk`/`df` readers. Persistence reference page one (VSFS builds blocks into files next).
+Artifact: `outputs/blk-card.md` — writeback-vs-writethrough rule, flush/crash verbs, torn-write note, `lsblk`/`df` readers. Persistence reference page one (VSFS builds blocks into files next). You now own durability's ground floor — the RAMdisk next door replays these same verbs with the platters removed.
 
 ## Exercises
 

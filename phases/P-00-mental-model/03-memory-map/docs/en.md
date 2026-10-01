@@ -20,11 +20,11 @@
 
 <!-- source: ../figures/memory-regions.excalidraw — open in excalidraw.com to redraw -->
 
-Four neighborhoods: **code/text** (your functions, read-only residents), **static** (globals: initialized in `.data`, zeroed in `.bss` — born at load, die at exit), **[heap](../../../../glossary/terms.md#heap)** (`malloc` arena: lives until `free`), **[stack](../../../../glossary/terms.md#stack)** (frames: locals born at `{`, die at `}` — returning `&local` hands out a corpse's address). Same lesson as P-01/04's ownership and P-02/02's frames, now as *geography*: lifetime questions become "which neighborhood?" questions. (Virtual-vs-physical + paging come in 05 — here, regions and rules suffice.)
+You have met ownership and frames already — now see them as geography. Picture four neighborhoods. **Code/text** holds your functions, read-only residents. **Static** holds globals: initialized ones in `.data`, zeroed ones in `.bss`, born at load and dying at exit. The [heap](../../../../glossary/terms.md#heap) is the `malloc` arena: it lives until you `free` it. The [stack](../../../../glossary/terms.md#stack) is frames: locals born at `{` and dying at `}` — return `&local` and you hand out a corpse's address. Lifetime questions become "which neighborhood?" questions. (Virtual-vs-physical and paging wait for 05 — regions and rules are enough for now.)
 
 ## Simulate It (host C — one resident per region, portable)
 
-Full program: `code/regions.c`. Prints addresses grouped by neighborhood.
+Walk the neighborhoods yourself. `code/regions.c` prints one address per region.
 
 ```c
 #include <stdio.h>
@@ -89,7 +89,7 @@ Change X → Y: add `-Werror` to the build. Verify: build *fails* on the warning
 
 ## Use It (Linux)
 
-Neighborhoods observable from outside:
+Step outside the program. The kernel will show you the same neighborhoods from the other side:
 
 ```bash
 ./build/regions | head -3
@@ -108,7 +108,7 @@ Change X → Y: `s_persistent` — find it in `nm` output (mangled static name, 
 
 ## Ship It
 
-Artifact: `outputs/regions-card.md` — four neighborhoods (lifetime + section + example), dangling-frame rule, ASan verbs. The lifetime pocket reference through capstone (every use-after-free is a neighborhood violation).
+Artifact: `outputs/regions-card.md` — four neighborhoods (lifetime + section + example), dangling-frame rule, ASan verbs. The lifetime pocket reference through capstone (every use-after-free is a neighborhood violation). Paging in 05 will redraw the map, but these lifetimes stay.
 
 ## Exercises
 

@@ -20,7 +20,7 @@
 
 <!-- source: ../figures/ownership-move.excalidraw — open in excalidraw.com to redraw -->
 
-Three rules: (1) each value has exactly one owner; (2) assigning/moving transfers ownership (old name dies — using it is a *compile* error, not a crash); (3) borrows (`&` shared, `&mut` exclusive) let others touch without owning — either many readers or one writer, never both (data races rejected *before* running). `String`/`Vec` own [heap](../../../../glossary/terms.md#heap) bytes and free on drop (scope exit = automatic `free`, exactly once). `&str`/`&[T]` are borrowed views (pointer+length, no free). Copy types (`int`-shaped: `i32`, `bool`) duplicate instead of moving. P-01/04's trilogy (leak/double-free/use-after-free) becomes: leaks need explicit effort, double-free impossible, use-after-move doesn't compile.
+You have chased a double-free at midnight — Rust moves that crash to compile time. Three rules: (1) each value has exactly one owner; (2) assigning/moving transfers ownership (old name dies — using it is a *compile* error, not a crash); (3) borrows (`&` shared, `&mut` exclusive) let others touch without owning — either many readers or one writer, never both (data races rejected *before* running). `String`/`Vec` own [heap](../../../../glossary/terms.md#heap) bytes and free on drop (scope exit = automatic `free`, exactly once). `&str`/`&[T]` are borrowed views (pointer+length, no free). Copy types (`int`-shaped: `i32`, `bool`) duplicate instead of moving. P-01/04's trilogy (leak/double-free/use-after-free) becomes: leaks need explicit effort, double-free impossible, use-after-move doesn't compile.
 
 ## Simulate It (host — rustc single file, no Cargo needed yet)
 

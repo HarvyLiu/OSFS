@@ -20,7 +20,7 @@
 
 <!-- source: ../figures/rings-gates.excalidraw — open in excalidraw.com to redraw -->
 
-Four rings, two used: 0 (kernel, all powers: `cli`, `inb`, page-table writes, CR3) and 3 (user, asking powers). Rule (one!): access allowed iff `cpl <= dpl` *numerically* (low number = high privilege; you may reach *up* toward your own number, never *down* below it). Gate DPL 3 (`syscall` entry): user 3 ≤ 3 ✓ (the door exists for you). Kernel-only gate DPL 0: user 3 ≤ 0 ✗ (#GP fault — P-02/04's userspace-`cli` death, generalized). Kernel data DPL 0: user read faults; kernel (0 ≤ 0/3) reads all. User data DPL 3: everyone reads (0 ≤ 3 ✓, 3 ≤ 3 ✓ — sharing downward is safe). `syscall`/`sysret` are fast gates (MSRs hold entry, no IDT walk); `int` gates are the slow teaching path.
+You live in ring 3 and the kernel lives in ring 0 — you can ask, it can do everything: `cli`, `inb`, page-table writes, CR3. Rings 1 and 2 exist but sit empty. There is exactly one rule: access is allowed iff `cpl <= dpl`, numerically — a low number means high privilege, so you may reach up toward your own number and never down below it. The `syscall` gate carries DPL 3, so your call at 3 ≤ 3 passes through the door built for you. A kernel-only gate at DPL 0 refuses you at 3 ≤ 0 with a #GP fault — the userspace-`cli` death from P-02/04, generalized. Kernel data at DPL 0 faults your reads while the kernel (0 ≤ 0/3) reads everything; user data at DPL 3 reads for all, since sharing downward is safe. Fast `syscall`/`sysret` gates carry you through MSRs with no IDT walk, while `int` gates take the slow teaching path.
 
 ## Simulate It (host C — the rule, no QEMU)
 
@@ -105,7 +105,7 @@ Change X → Y: run a userspace `cli` (inline ASM from P-02/05 in a scratch file
 
 ## Ship It
 
-Artifact: `outputs/rings-card.md` — THE rule, CPL/DPL glossary, gate-vs-segment shapes, `syscall` vs `int` note, SMEP/SMAP one-liners (kernel can't execute/read user memory accidentally — walls inside walls). Protection reference page one.
+Artifact: `outputs/rings-card.md` — THE rule, CPL/DPL glossary, gate-vs-segment shapes, `syscall` vs `int` note, SMEP/SMAP one-liners (kernel can't execute/read user memory accidentally — walls inside walls). Protection reference page one. You now own the silicon boundary — users and capabilities in 09/02 put names on its doors.
 
 ## Exercises
 

@@ -20,7 +20,7 @@
 
 <!-- source: ../figures/toolchain-map.excalidraw — open in excalidraw.com to redraw -->
 
-You have two doors into the same Linux room. Door 1: **WSL2 / native Linux** — fastest, real `fork()`, real `/proc`. Door 2: **Docker** — same Ubuntu 24.04 image for Mac/Windows-without-WSL or CI. Both doors give you `gcc + qemu-system-x86_64 + gdb + rustc + make`. Every later lesson runs `make run` identically inside either door. Pick Door 1 if you can; keep Door 2 as fallback. See [syscall](../../../../glossary/terms.md#syscall).
+You have two doors into the same Linux room. Door 1 is **WSL2 / native Linux** — fastest, with real `fork()` and real `/proc`. Door 2 is **Docker** — the same Ubuntu 24.04 image for Mac, Windows-without-WSL, or CI. Both doors hand you `gcc + qemu-system-x86_64 + gdb + rustc + make`. Every later lesson runs `make run` the same way inside either door. Pick Door 1 if you can. Keep Door 2 as fallback. See [syscall](../../../../glossary/terms.md#syscall).
 
 ## Simulate It (host, no QEMU)
 

@@ -20,7 +20,7 @@
 
 <!-- source: ../figures/trapframe.excalidraw — open in excalidraw.com to redraw -->
 
-Pausing = saving: 16 general [registers](../../../../glossary/terms.md#register) + program counter + [stack](../../../../glossary/terms.md#stack) pointer + flags (the trapframe — pushed by stub + handler on entry). Plus scheduler state (RUNNABLE/RUNNING/ZOMBIE), identity (pid/parent/name), resources (open files, address-space root, cwd), accounting (ticks, exit code). Resume = restoring in reverse. The PCB *is* this card; the table of cards *is* the process list; `fork` photocopies a row (new pid, shared-then-COW space); `wait` deletes one (after collecting the exit code). P-01/05 built the shape; this lesson fills every drawer.
+Imagine you must pause a process mid-step and resume it later without it noticing. You save 16 general [registers](../../../../glossary/terms.md#register) plus the program counter, the [stack](../../../../glossary/terms.md#stack) pointer, and flags — that bundle is the trapframe, pushed by stub and handler on entry. You also save scheduler state (RUNNABLE/RUNNING/ZOMBIE), identity (pid/parent/name), resources (open files, address-space root, cwd), and accounting (ticks, exit code). Resume means restoring all of it in reverse. The PCB *is* this card. The table of cards *is* the process list. `fork` photocopies a row (new pid, shared-then-COW space). `wait` deletes one after collecting the exit code. P-01/05 built the shape; here you fill every drawer.
 
 ## Simulate It (host C — save/clobber/restore, no QEMU)
 

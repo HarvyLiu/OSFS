@@ -20,7 +20,7 @@
 
 <!-- source: ../figures/qemu-gdb-map.excalidraw — open in excalidraw.com to redraw -->
 
-No `printf` here. QEMU emulates a PC; your `kernel.elf` *is* the OS. `_start` sets a [stack](../../../../glossary/terms.md#stack), calls C, C pokes bytes at serial port `0x3F8`, QEMU forwards them to your terminal (`-nographic`). GDB attaches over TCP `:1234` (`-S -s`) to freeze and inspect — same GDB you'll use for every later crash. See [freestanding](../../../../glossary/terms.md#freestanding), [register](../../../../glossary/terms.md#register).
+No `printf` here. QEMU emulates a PC, and your `kernel.elf` *is* the OS. `_start` sets a [stack](../../../../glossary/terms.md#stack), calls C, and C pokes bytes at serial port `0x3F8`. QEMU forwards them to your terminal (`-nographic`). GDB attaches over TCP `:1234` (`-S -s`) to freeze the guest while you inspect it — the same GDB you will reach for at every later crash. See [freestanding](../../../../glossary/terms.md#freestanding), [register](../../../../glossary/terms.md#register).
 
 ## Simulate It (host — understand serial math first, no QEMU)
 

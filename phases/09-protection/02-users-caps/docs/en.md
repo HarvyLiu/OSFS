@@ -20,7 +20,7 @@
 
 <!-- source: ../figures/perms-caps.excalidraw — open in excalidraw.com to redraw -->
 
-Every process carries uid+gid (who) and cap bitmask (may-what). Every file carries owner-uid + group-gid + 9 mode bits (`rwxr-x---` = 0750: owner all, group read+enter, others nothing). `open` for write: root (uid 0)? always yes (the skeleton key — capabilities retire it piece by piece). Else pick the *first* matching class (owner? else group? else other — first match wins, no OR-ing down) and test the bit. Raw disk (`/dev/sda`) additionally demands `CAP_SYS_RAWIO` (even rightful owners kneel without the bit — defense in depth: identity *and* capability). setuid binaries run as the *file's* owner (borrowed root for `passwd`'s minute — the sharpest door in Unix, audited accordingly).
+Try to open a file that isn't yours and three questions answer before the disk moves. Your process carries a uid and gid — who you are — plus a capability bitmask — what you may do. The file carries its owner's uid, its group's gid, and 9 mode bits: `rwxr-x---`, 0750, everything for the owner, read-plus-enter for the group, nothing for the rest. Root (uid 0) holds the skeleton key and always passes — capabilities retire that key one bit at a time. Everyone else takes the first matching class only: owner, else group, else other, with no OR-ing downward, then tests the needed bit. Raw disks like `/dev/sda` add a second lock: without `CAP_SYS_RAWIO` even rightful owners kneel, because identity *and* capability are defense in depth. And setuid binaries borrow the file owner's identity for a minute — `passwd`'s borrowed root — the sharpest door in Unix, audited accordingly.
 
 ## Simulate It (host C — the matrix, no QEMU)
 
@@ -122,7 +122,7 @@ Change X → Y: `capsh --print 2>/dev/null | head -5 || echo no-capsh`. Verify: 
 
 ## Ship It
 
-Artifact: `outputs/perms-card.md` — mode-bit reading (rwx × ugo, octal fluency), first-match rule, root/cap/setuid trio, `id`/`ls -l`/`capsh` verbs. Protection reference complete (09: rings + names + bits).
+Artifact: `outputs/perms-card.md` — mode-bit reading (rwx × ugo, octal fluency), first-match rule, root/cap/setuid trio, `id`/`ls -l`/`capsh` verbs. Protection reference complete (09: rings + names + bits). You now own the full denial stack — every `EACCES` from here on reads like a sentence.
 
 ## Exercises
 

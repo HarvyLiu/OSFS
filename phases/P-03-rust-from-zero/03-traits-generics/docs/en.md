@@ -20,7 +20,7 @@
 
 <!-- source: ../figures/traits-generics.excalidraw — open in excalidraw.com to redraw -->
 
-A trait is a promise set (`fn describe(&self) -> String`); any struct can keep it, differently. A generic function (`fn first<T>(s: &[T]) -> Option<&T>`) works for *all* `T` — the compiler stamps a copy per type used (monomorphization: no runtime cost, bigger binary). `Vec<T>` owns a growable [heap](../../../../glossary/terms.md#heap) array (P-01/04's doubling, compiler-counted). `Box<T>` owns one heap value of unknown-at-compile size (trait objects, linked lists — anywhere `size_of` can't finish). `Display` controls `{}` printing; `Drop` runs at scope end (the automatic `free` from P-03/01, now custom).
+You run one queue that must announce both PCBs and jobs — one promise, two shapes. A trait is a promise set (`fn describe(&self) -> String`); any struct can keep it, differently. A generic function (`fn first<T>(s: &[T]) -> Option<&T>`) works for *all* `T` — the compiler stamps a copy per type used (monomorphization: no runtime cost, bigger binary). `Vec<T>` owns a growable [heap](../../../../glossary/terms.md#heap) array (P-01/04's doubling, compiler-counted). `Box<T>` owns one heap value of unknown-at-compile size (trait objects, linked lists — anywhere `size_of` can't finish). `Display` controls `{}` printing; `Drop` runs at scope end (the automatic `free` from P-03/01, now custom).
 
 ## Simulate It (host rustc, no Cargo needed)
 

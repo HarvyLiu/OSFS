@@ -20,7 +20,7 @@
 
 <!-- source: ../figures/interrupt-path.excalidraw — open in excalidraw.com to redraw -->
 
-Hardware raises IRQ n. If interrupts are enabled (`sti` state), the CPU looks up slot n in the IDT (Interrupt Descriptor Table — 256 entries, each "run this code at this privilege"), pushes [registers](../../../../glossary/terms.md#register) + flags, jumps to the handler. Handler saves the rest, does minimal work (ack device, wake a task), restores, `iret` pops back to the interrupted code — which never knew it paused. `cli` clears the enable flag: IRQs wait (pending), they don't vanish. Non-maskable few excepted. [Syscalls](../../../../glossary/terms.md#syscall) ride the same rails (software-raised trap instead of wire-raised IRQ).
+You are typing and hardware raises IRQ n — the CPU knocks while your code runs. If interrupts are enabled (`sti` state), the CPU looks up slot n in the IDT (Interrupt Descriptor Table — 256 entries, each "run this code at this privilege"), pushes [registers](../../../../glossary/terms.md#register) + flags, and jumps to the handler. The handler saves the rest, does minimal work (ack device, wake a task), restores, and `iret` pops back to the interrupted code — which never knew it paused. `cli` clears the enable flag: IRQs wait (pending), they don't vanish. A non-maskable few excepted. [Syscalls](../../../../glossary/terms.md#syscall) ride the same rails (software-raised trap instead of wire-raised IRQ).
 
 ## Simulate It (host C — IDT as an array, no QEMU)
 

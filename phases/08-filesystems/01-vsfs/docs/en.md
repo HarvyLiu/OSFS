@@ -20,7 +20,7 @@
 
 <!-- source: ../figures/vsfs-layout.excalidraw — open in excalidraw.com to redraw -->
 
-64 blocks × 64B: block 0 = superblock (magic + geometry: nblocks, ninodes, inode/data starts), block 1 = bitmap (1 bit per block: 8 bytes cover 64), blocks 2–5 = 8 inodes × 32B (type/size/direct[4]/pad), blocks 6+ = data; root dir = inode 0, its data holds 16B entries (12B name + u32 inum, 4 per block). `create("hi")`: find free inode (scan types), append dir entry to root, done (empty file, size 0). `write(inum, data, len)`: allocate `ceil(len/64)` bitmap blocks, stamp `direct[]`, set size. `read`: walk direct blocks to `size` (never past — short final block handled by `size`, not block count). Backend = two function pointers (RAM array here — 07/02's verbs wearing a vtable; file/disk backends plug unchanged).
+Imagine carving your 64 blocks of 64 bytes into neighborhoods with fixed addresses. Block 0 is the superblock — magic plus geometry, the counts of blocks and inodes and where each region starts. Block 1 is the bitmap, one bit per block, so 8 bytes govern all 64. Blocks 2–5 hold 8 inodes of 32 bytes each: type, size, four direct pointers, padding. Block 6 onward is data, and the root directory is simply inode 0, whose data blocks hold 16-byte entries — a 12-byte name plus a 4-byte inode number, four per block. To `create("hi")` you scan for a free inode, append one entry to the root, and stop: an empty file with size 0. To `write` you allocate `ceil(len/64)` bitmap blocks, stamp them into `direct[]`, and set the size; to `read` you walk those direct blocks but stop at `size`, so a short final block needs no special case. The backend is just two function pointers, so the RAM array here and a real disk later look identical to the code above them.
 
 ## Simulate It (host C — RAM backend, portable)
 
@@ -167,7 +167,7 @@ Change X → Y: `df -i /tmp` vs `df -i /` (if tmpfs present). Verify: different 
 
 ## Ship It
 
-Artifact: `outputs/vsfs-card.md` — layout map (0/1/2–5/6+), inode/dir entry structs, verb contracts, ceiling note (256B direct-only), bitmap verbs. 08/02 journals *these exact blocks* (the card becomes the journal's vocabulary).
+Artifact: `outputs/vsfs-card.md` — layout map (0/1/2–5/6+), inode/dir entry structs, verb contracts, ceiling note (256B direct-only), bitmap verbs. 08/02 journals *these exact blocks* (the card becomes the journal's vocabulary). You now own files on blocks — journaling in 08/02 makes these exact updates crash-proof.
 
 ## Exercises
 

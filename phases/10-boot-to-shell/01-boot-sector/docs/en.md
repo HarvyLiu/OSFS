@@ -20,7 +20,21 @@
 
 <!-- source: ../figures/boot-map.excalidraw — open in excalidraw.com to redraw -->
 
-Power on: BIOS POSTs, finds a disk with bytes 510–511 = `0xAA55` (the "I'm bootable" handshake), loads sector 0 to physical `0x7C00`, jumps there in 16-bit real mode (1 MiB addressable, segments × 16). Your code: zero `%ds` (so addresses mean what you think), park a [stack](../../../../glossary/terms.md#stack) below `0x7C00` (it grows *down* into free low RAM), print via direct VGA cells at `0xB8000` (for humans) + COM1 serial (for CI — Tooling 02's dance, real-mode edition), `cli`/`hlt` forever. One wire, one writer: BIOS teletype (`int $0x10`) is banned on the screen path because firmware with a serial console (SeaBIOS sercon) echoes it to the wire — our CI banner once arrived as `OOSSFFSS  bboooott!`. 510 bytes code+message, 2 bytes magic. That's a bootloader's whole childhood.
+Power on, and the machine knows almost nothing: it POSTs, finds a disk whose
+bytes 510–511 read `0xAA55` (the "I'm bootable" handshake), loads sector 0 to
+physical `0x7C00`, and jumps there — into 16-bit real mode, one megabyte of
+address space, segments times sixteen.
+
+Your code has one job: announce itself, then sleep. Zero `%ds` (so addresses
+mean what you think), park a [stack](../../../../glossary/terms.md#stack)
+below `0x7C00` (it grows *down* into free low RAM), print through direct VGA
+cells at `0xB8000` (for humans) plus COM1 serial (for CI — Tooling 02's dance,
+real-mode edition), then `cli`/`hlt` forever.
+
+One wire, one writer. BIOS teletype (`int $0x10`) is banned on the screen path
+because firmware with a serial console (SeaBIOS sercon) echoes it to the
+wire — our CI banner once arrived as `OOSSFFSS  bboooott!`. 510 bytes of
+code plus message, 2 bytes of magic. That is a bootloader's whole childhood.
 
 ## Simulate It (host — the arithmetic of layout, no QEMU)
 
@@ -120,7 +134,7 @@ serial_init:
 
 serial_putc:            # char in %al
     pushw %dx
-    pushw %ax           # saves char AND %ah (caller's 0x0E survives!)
+    pushw %ax           # saves char AND %ah (caller's 0x07 survives!)
 wait_ser:
     movw $0x3FD, %dx
     inb %dx, %al
@@ -165,7 +179,7 @@ make
 make qemu     # timeout 5 qemu ... -nographic; expect "OSFS boot!" then timeout (124)
 ```
 
-What this does: assembles 16-bit, links flat at... note: no `-Ttext` needed — `.org`? Our labels resolve from 0; `ld --oformat binary` lays from 0, and `$msg` = file offset; DS=0 + loaded at 0x7C00 means... wait: `$msg` assembles to its *file offset* (~0x30), but at runtime DS=0 and code runs at 0x7C00 → `movw $msg,%si` loads 0x30, but the message sits at 0x7C30! BUG — need origin. Fix: `ld -Ttext 0x7c00` makes `$msg` = 0x7Cxx. The Makefile below does exactly that (same as Tooling 02's linker thinking). This paragraph stays as the trap explained:
+What this does: assembles 16-bit, links flat — and here is the trap, explained before you meet it: without an origin, labels resolve from 0, so `$msg` assembles to its *file offset* (~0x30) while the message actually sits at 0x7C30 at runtime. The fix is `ld -Ttext 0x7c00`, which the Makefile applies (same linker thinking as Tooling 02):
 
 | Lines | Code | Why it exists |
 |---|---|---|
@@ -175,7 +189,7 @@ What this does: assembles 16-bit, links flat at... note: no `-Ttext` needed — 
 
 ## Use It (Linux)
 
-Forensics on 512 bytes:
+Autopsy time — 512 bytes, three tools, no emulator:
 
 ```bash
 ls -l build/boot.bin
@@ -200,7 +214,7 @@ Artifact: `outputs/boot-checklist.md` — `.code16`, segments-zero, stack-below,
 
 1. Easy — change the message, rebuild, show new serial line + still-512 (padding flexes — `.fill` earns trust).
 2. Medium — `objdump -m i8086 -D -b binary build/boot.bin | head -20` (read your boot as the CPU does — map 5 lines to source).
-3. Hard — print `%sp` in hex at entry (write a `print_hex` nibble loop with `0x0E`/`outb`): prove the stackRename below 0x7C00 (bring-up observability, hand-built).
+3. Hard — print `%sp` in hex at entry (write a `print_hex` nibble loop over cells/`outb`): prove the stackRename below 0x7C00 (bring-up observability, hand-built).
 
 ## Key Terms
 

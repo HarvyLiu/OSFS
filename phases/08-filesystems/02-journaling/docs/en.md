@@ -20,7 +20,7 @@
 
 <!-- source: ../figures/commit-protocol.excalidraw — open in excalidraw.com to redraw -->
 
-Updating a file touches 2+ blocks (bitmap + inode + data — VSFS's trio). Crash between them = half-updated = corrupt. Write-ahead rule: (1) *stage* new contents into the journal area (home untouched), (2) *commit* (one flag write: "this txn is whole"), (3) *checkpoint* (copy journaled blocks home), (4) free the txn. Crash before commit → discard journal (home never touched: nothing happened). Crash after commit → replay journal home on reboot (redo to completion: everything happened). Replay is idempotent (copy twice = copy once — safe to re-run after *another* crash mid-replay). One flag separates nothing from all.
+Your file update touches two or three blocks at once — bitmap, inode, data, the VSFS trio — and a crash between those writes leaves the filesystem half-updated, which is corrupt. So you write the intent before the effect. First *stage* the new block contents into the journal area while home stays untouched. Then *commit* with a single flag write: this transaction is whole. Then *checkpoint*, copying the journaled blocks home, and free the transaction. Crash before the commit and you discard the journal — home was never touched, so nothing happened. Crash after it and you replay the journal home on reboot — redo to completion, so everything happened. Replay just copies bytes, so running it twice is the same as once: idempotent, and safe even if you crash mid-replay. One flag separates nothing from all.
 
 ## Simulate It (host C — journal over RAM blocks, portable)
 
@@ -195,7 +195,7 @@ Change X → Y: `mount | grep -E "data=" | head -2`. Verify: `data=ordered` typi
 
 ## Ship It
 
-Artifact: `outputs/journal-card.md` — stage/commit/checkpoint/recover verbs, crash-point matrix (0 discard / 1 replay / 2 noop), idempotence rule, torn-write definition. Crash-consistency pocket reference: VSFS card's blocks + this card's protocol = durable files.
+Artifact: `outputs/journal-card.md` — stage/commit/checkpoint/recover verbs, crash-point matrix (0 discard / 1 replay / 2 noop), idempotence rule, torn-write definition. Crash-consistency pocket reference: VSFS card's blocks + this card's protocol = durable files. You now own all-or-nothing updates — FFS in 08/03 decides where those blocks should live.
 
 ## Exercises
 

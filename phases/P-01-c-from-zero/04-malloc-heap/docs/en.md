@@ -20,11 +20,11 @@
 
 <!-- source: ../figures/heap-map.excalidraw — open in excalidraw.com to redraw -->
 
-[Stack](../../../../glossary/terms.md#stack) frames die at `}`. The [heap](../../../../glossary/terms.md#heap) lives until *you* free it — across calls, across files, until process exit (or forever, if you leak). `malloc(n)` asks for `n` bytes, returns an [address](../../../../glossary/terms.md#address) or `NULL`. `realloc` grows (maybe moving). `free` gives back. Ownership rule: exactly one owner frees, exactly once, never touches after. Break it three ways: leak (never free), double-free (free twice → heap metadata corrupt), use-after-free (touch after free → somebody else's bytes now).
+You return from a function and its [stack](../../../../glossary/terms.md#stack) frames are gone. The [heap](../../../../glossary/terms.md#heap) answers the opposite wish: memory that lives until *you* release it — across calls, across files, until process exit, or forever if you leak. `malloc(n)` asks for `n` bytes and returns an [address](../../../../glossary/terms.md#address) or `NULL`. `realloc` grows the block, possibly by moving it. `free` gives it back. The ownership rule is strict: exactly one owner frees, exactly once, and never touches the bytes after. Break it three ways — leak by never freeing, double-free by freeing twice and corrupting the heap metadata, use-after-free by touching bytes that belong to someone else now.
 
 ## Simulate It (host, no QEMU)
 
-Full program: `code/heap.c` — a tiny vector that grows 4 → 8, prints, frees.
+You build the pattern yourself. `code/heap.c` grows a tiny vector 4 → 8, prints it, and frees it.
 
 ```c
 #include <stdio.h>
@@ -68,7 +68,7 @@ What this does: owns a resizable array end-to-end — allocate on demand, double
 
 Change X → Y: push `20` items instead of 6. Verify: `make run` shows `len=20 cap=32` (4→8→16→32 doublings — count them, that's amortized growth working).
 
-Sin gallery (run each under ASan, read the scream — then never ship one):
+Tour the sins one at a time. Run each under ASan, read the scream — then never ship one:
 
 ```bash
 cc -fsanitize=address,undefined -std=c11 code/sins.c -o /tmp/sins-leak && /tmp/sins-leak; echo "exit=$?"
@@ -102,7 +102,7 @@ Change X → Y: comment out `free(v.data);`. Verify: `make run` looks fine but `
 
 ## Use It (Linux)
 
-Real heaps are observable:
+Step outside and look at a real heap:
 
 ```bash
 ./build/heap

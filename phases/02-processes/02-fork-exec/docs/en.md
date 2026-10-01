@@ -20,7 +20,7 @@
 
 <!-- source: ../figures/fork-tree.excalidraw — open in excalidraw.com to redraw -->
 
-A [PCB](../../../../glossary/terms.md#pcb) is the kernel's index card per process (pid, state, registers, page-table pointer, open files). `fork()` photocopies the card + memory (lazily, copy-on-write): parent gets child's pid, child gets 0 — same code, two futures. `exec()` throws away the memory and loads a new program into the same card. `wait()` lets the parent collect the child's exit code so no zombie lingers. No pointers here yet — just "who am I after the call".
+Call `fork()` and one process becomes two. The kernel keeps a [PCB](../../../../glossary/terms.md#pcb) per process — its index card (pid, state, registers, page-table pointer, open files). `fork()` photocopies the card plus memory (lazily, copy-on-write). The parent gets the child's pid and the child gets 0 — same code, two futures. `exec()` throws the memory away and loads a new program into the same card. `wait()` lets the parent collect the child's exit code so no zombie lingers. No pointers here yet. You ask only "who am I after the call".
 
 ## Simulate It (host Linux, no QEMU)
 

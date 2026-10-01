@@ -20,11 +20,11 @@
 
 <!-- source: ../figures/pointer-map.excalidraw — open in excalidraw.com to redraw -->
 
-Think of RAM as numbered mailboxes. `int x = 42;` puts `42` in some mailbox, say #1000. `int *p = &x;` writes `#1000` on a slip of paper called `p`. `*p` means "open the mailbox whose number is on the slip". `p+1` means "next mailbox that fits an `int`", i.e. #1004 if `int` is 4 bytes — not #1001. Every OS structure (see [pointer](../../../../glossary/terms.md#pointer), [address](../../../../glossary/terms.md#address), [heap](../../../../glossary/terms.md#heap)) is built from this trick.
+Picture RAM as numbered mailboxes. You put `42` in some mailbox, say #1000. You write `#1000` on a slip of paper called `p` with `int *p = &x;`. Reading `*p` means opening the mailbox whose number is on the slip. Writing `p+1` means the next mailbox that fits a whole `int` — #1004 when `int` is 4 bytes, not #1001. This is the whole trick, and every OS structure (see [pointer](../../../../glossary/terms.md#pointer), [address](../../../../glossary/terms.md#address), [heap](../../../../glossary/terms.md#heap)) is built from it.
 
 ## Simulate It (host, no QEMU)
 
-Full program: `code/main.c`. Build with `make run`. No QEMU, no root needed.
+You need no QEMU and no root here. `code/main.c` plus `make run` is the whole lab.
 
 ```c
 #include <stdio.h>
@@ -54,7 +54,7 @@ What this does: stores 42, points at it, reads through the pointer, writes throu
 
 Change X → Y: change `*p = 99;` to `*p = 7;`. Verify: `make run` → expected second line `after *p=99: x=7` becomes `x=7` (proves write went through the pointer, not a copy).
 
-Heap version — same idea, longer lifetime:
+Same trick, longer lifetime — now on the heap:
 
 ```c
 #include <stdio.h>
@@ -83,7 +83,7 @@ Change X → Y: change `sizeof(int)` to `sizeof(int)*3` and loop `q[0]=1; q[1]=2
 
 ## Build It (QEMU-adjacent — hosted sim is enough here)
 
-This lesson is primer, so "bare-metal" means: notice what disappears. Hosted C gave you `printf`, `malloc`, `free`. In `kernel.*` (freestanding, `-ffreestanding`) none of those exist until you write a UART print + a page allocator. Try compiling the same file freestanding to feel the gap:
+This lesson is a primer, so "bare-metal" means one thing: notice what disappears. Hosted C gave you `printf`, `malloc`, and `free`. In `kernel.*` (freestanding, `-ffreestanding`) none of those exist until you write a UART print and a page allocator yourself. Compile the same file freestanding and feel the gap:
 
 ```bash
 cc -ffreestanding -nostdlib -c main.c -o /tmp/main.o && echo "compiled, but nothing to print with yet"
@@ -101,7 +101,7 @@ Change X → Y: remove `-ffreestanding` → links fine on host. Verify: output s
 
 ## Use It (Linux)
 
-Watch real addresses move on your machine:
+Look at real addresses on your own machine:
 
 ```bash
 ./build/sim && echo "exit=$?"
@@ -122,7 +122,7 @@ Change X → Y: run `cat /proc/$$/maps | head -5` (your shell instead of `cat`).
 
 Artifact: `outputs/runbook-pointers.md` — one-page "pointer triage" checklist (null? freed? off-by-sizeof?). Use it whenever GDB prints a weird address in later phases.
 
-Reuse in 2 lines: open the runbook next to GDB; when a crash prints an address, walk the 3 checks (NULL → freed → `p+1` stride).
+Reuse it in 2 lines: keep the runbook open next to GDB, and when a crash prints an address, walk the 3 checks (NULL → freed → `p+1` stride).
 
 ## Exercises
 

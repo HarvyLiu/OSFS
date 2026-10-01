@@ -20,9 +20,9 @@
 
 <!-- source: ../figures/debug-loop.excalidraw — open in excalidraw.com to redraw -->
 
-Debugging is a loop with four stations: **reproduce** (same input, same death — "bob" kills, "amy" doesn't), **observe** (compiler warnings, prints, `gdb`), **hypothesize** (which [pointer](../../../../glossary/terms.md#pointer) is NULL? which bound is off?), **pin** (an `assert` that fails before the fix, passes after). Beginners skip station one and guess. Don't guess — the machine will tell you the line number for free.
+You will meet this moment: one input kills the program, another does not, and the code looks innocent. Work the loop with four stations. **Reproduce** with the same input and the same death ("bob" kills, "amy" doesn't). **Observe** through compiler warnings, prints, and `gdb`. **Hypothesize** about which [pointer](../../../../glossary/terms.md#pointer) is NULL or which bound is off. **Pin** it with an `assert` that fails before the fix and passes after. Beginners skip station one and guess. Don't guess — the machine will tell you the line number for free.
 
-Our patient `code/buggy.c` carries two classic diseases: BUG 1, `lookup` returns `NULL` for unknown names and `main` uses it unchecked (crash); BUG 2, `average` loops `i <= n` (one past the end — reads whatever lives next door, P-00/03's stack neighbor). One kills loudly, one corrupts silently. Guess which one is scarier.
+Our patient `code/buggy.c` carries two classic diseases. BUG 1: `lookup` returns `NULL` for unknown names and `main` uses it unchecked, so the program crashes. BUG 2: `average` loops `i <= n`, one past the end, and reads whatever lives next door (P-00/03's stack neighbor). One kills loudly and one corrupts silently. Guess which one is scarier.
 
 ## Simulate It (host — meet the patient)
 
@@ -112,7 +112,7 @@ What this does: visits exactly `a[0..n-1]` — `<` means "n elements", `<=` mean
 
 ## Use It (Linux — and Windows)
 
-Same session, both platforms (gdb ships with MinGW too):
+You run the same session on Linux or Windows — gdb ships with MinGW too:
 
 ```bash
 make
@@ -132,7 +132,7 @@ Change X → Y: delete the `if (!id)` line, `make test` still passes but `./fixe
 
 ## Ship It
 
-Artifact: `outputs/debug-card.md` — reproduce → observe → hypothesize → pin; `-g` always; `gdb -batch -ex run -ex bt`; check nullable returns at use; `<` for n elements; distinct exit codes. Tape it to the monitor — every phase after this assumes it.
+Artifact: `outputs/debug-card.md` — reproduce → observe → hypothesize → pin; `-g` always; `gdb -batch -ex run -ex bt`; check nullable returns at use; `<` for n elements; distinct exit codes. Tape it to the monitor — every phase after this assumes you can run it cold.
 
 ## Exercises
 

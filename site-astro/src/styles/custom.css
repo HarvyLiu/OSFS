@@ -22,20 +22,18 @@
   --sl-color-bg-sidebar: #181825;
 }
 
-/* ---- Footer: yellowish-orange band ---- */
+/* ---- Footer: no fill, just a yellow outline ---- */
+footer {
+  background: transparent;
+}
 :root[data-theme='light'] footer {
-  background: #df8e1d; /* Latte yellow */
-  color: #11111b;
+  border-top: 2px solid #df8e1d; /* Latte yellow */
 }
 :root[data-theme='dark'] footer {
-  background: #f9e2af; /* Mocha yellow */
-  color: #11111b;
+  border-top: 2px solid #f9e2af; /* Mocha yellow */
 }
 footer a {
-  color: #11111b;
-}
-footer a:hover {
-  color: #000000;
+  color: var(--sl-color-text-accent);
 }
 
 /* ---- Lesson niceties ---- */

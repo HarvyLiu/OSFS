@@ -136,9 +136,9 @@ Artifact: `outputs/policy-card.md` — FIFO/SJF/RR one-liners (when each wins, p
 
 | Term | Plain meaning | Link |
 |---|---|---|
-| PCB | the card the scheduler deals (state RUNNABLE→RUNNING) | ../../glossary/terms.md#pcb |
-| syscall | `sched_yield`/sleep block voluntarily; timer preempts involuntarily | ../../glossary/terms.md#syscall |
-| heap | where real runqueues live (arrays/lists of PCBs) | ../../glossary/terms.md#heap |
+| PCB | the card the scheduler deals (state RUNNABLE→RUNNING) | [pcb](../../../../glossary/terms.md#pcb) |
+| syscall | `sched_yield`/sleep block voluntarily; timer preempts involuntarily | [syscall](../../../../glossary/terms.md#syscall) |
+| heap | where real runqueues live (arrays/lists of PCBs) | [heap](../../../../glossary/terms.md#heap) |
 
 ## Further Reading
 

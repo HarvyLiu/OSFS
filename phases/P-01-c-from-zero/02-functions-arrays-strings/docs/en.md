@@ -20,7 +20,7 @@
 
 <!-- source: ../figures/array-string.excalidraw — open in excalidraw.com to redraw -->
 
-`int add(int a, int b)` gets *copies*: changing `a` inside never touches the caller. But `void fill(int *arr, int n)` gets an [address](../../glossary/terms.md#address) — the array *decays* to `&arr[0]`, so writes go through. A C string is `char buf[N]` ending at the first `'\0'` (zero byte); `strlen` counts until zero, `strcpy` copies until zero *including* it. No length stored anywhere — forget the zero and every function runs off the end. That's the bug behind half of OS CVEs.
+`int add(int a, int b)` gets *copies*: changing `a` inside never touches the caller. But `void fill(int *arr, int n)` gets an [address](../../../../glossary/terms.md#address) — the array *decays* to `&arr[0]`, so writes go through. A C string is `char buf[N]` ending at the first `'\0'` (zero byte); `strlen` counts until zero, `strcpy` copies until zero *including* it. No length stored anywhere — forget the zero and every function runs off the end. That's the bug behind half of OS CVEs.
 
 ## Simulate It (host, no QEMU)
 
@@ -60,8 +60,8 @@ What this does: proves value-args don't alias, array-args do, and strings are ze
 
 | Lines | Code | Why it exists |
 |---|---|---|
-| 3 | `add(int a, int b)` | by-value: `a`/`b` are fresh [stack](../../glossary/terms.md#stack) copies; writing them never touches caller |
-| 5–7 | `fill(int *arr, int n)` | `int *` + explicit length: arrays decay to [pointer](../../glossary/terms.md#pointer), so length must travel separately (no bounds checking in C) |
+| 3 | `add(int a, int b)` | by-value: `a`/`b` are fresh [stack](../../../../glossary/terms.md#stack) copies; writing them never touches caller |
+| 5–7 | `fill(int *arr, int n)` | `int *` + explicit length: arrays decay to [pointer](../../../../glossary/terms.md#pointer), so length must travel separately (no bounds checking in C) |
 | 6 | `arr[i] = i*10` | sugar for `*(arr+i)`; writes land in *caller's* `buf` (P-01/03 in action) |
 | 9–13 | `my_strlen` | counts until `'\0'`; `const` = "I promise not to write through `s`" |
 | 16–17 | `add(x,3)` + print | `x` stays 5 after the call — proof of copying |
@@ -144,9 +144,9 @@ Artifact: `outputs/c-strings-card.md` — decay rule, zero rule, `strncpy` vs `s
 
 | Term | Plain meaning | Link |
 |---|---|---|
-| pointer | array name decays to address of element 0 | ../../glossary/terms.md#pointer |
-| stack | where `buf`, `name`, `x` live; gone at `}` | ../../glossary/terms.md#stack |
-| heap | where big/long-lived buffers go (`malloc`) | ../../glossary/terms.md#heap |
+| pointer | array name decays to address of element 0 | [pointer](../../../../glossary/terms.md#pointer) |
+| stack | where `buf`, `name`, `x` live; gone at `}` | [stack](../../../../glossary/terms.md#stack) |
+| heap | where big/long-lived buffers go (`malloc`) | [heap](../../../../glossary/terms.md#heap) |
 
 ## Further Reading
 

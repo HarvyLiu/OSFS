@@ -20,7 +20,7 @@
 
 <!-- source: ../figures/syscall-trap.excalidraw — open in excalidraw.com to redraw -->
 
-Userspace can't touch hardware (rings forbid it — P-02/04's `cli` fault was the demo). So it *asks*: load a number (`__NR_write` = 1 on x86-64 Linux) + args into registers, execute `syscall` (the trap instruction): CPU switches to ring 0, indexes the dispatch table (`syscall.c`'s array of function pointers — an IDT for software), runs the handler with *your* args, returns with result in `%rax` (or `-errno`). Library calls (`printf`) are userspace formatting + this trap. `strace` prints each crossing: name(args) = result. See [syscall](../../glossary/terms.md#syscall).
+Userspace can't touch hardware (rings forbid it — P-02/04's `cli` fault was the demo). So it *asks*: load a number (`__NR_write` = 1 on x86-64 Linux) + args into registers, execute `syscall` (the trap instruction): CPU switches to ring 0, indexes the dispatch table (`syscall.c`'s array of function pointers — an IDT for software), runs the handler with *your* args, returns with result in `%rax` (or `-errno`). Library calls (`printf`) are userspace formatting + this trap. `strace` prints each crossing: name(args) = result. See [syscall](../../../../glossary/terms.md#syscall).
 
 ## Simulate It (host C — fd-level I/O, portable, no strace needed)
 
@@ -121,10 +121,10 @@ Artifact: `outputs/strace-card.md` — `-f/-e/-c/-p/-o` verbs, `%process/%file/%
 
 | Term | Plain meaning | Link |
 |---|---|---|
-| syscall | ring-0 request via trap instruction; `strace` shows each | ../../glossary/terms.md#syscall |
-| address | trap args pass pointers (kernel copies in/out — protection's first job) | ../../glossary/terms.md#address |
-| heap | trap buffers often heap (`malloc`'d I/O arenas in servers) | ../../glossary/terms.md#heap |
-| PCB | kernel side of `getpid` (your card, read back to you) | ../../glossary/terms.md#pcb |
+| syscall | ring-0 request via trap instruction; `strace` shows each | [syscall](../../../../glossary/terms.md#syscall) |
+| address | trap args pass pointers (kernel copies in/out — protection's first job) | [address](../../../../glossary/terms.md#address) |
+| heap | trap buffers often heap (`malloc`'d I/O arenas in servers) | [heap](../../../../glossary/terms.md#heap) |
+| PCB | kernel side of `getpid` (your card, read back to you) | [pcb](../../../../glossary/terms.md#pcb) |
 
 ## Further Reading
 

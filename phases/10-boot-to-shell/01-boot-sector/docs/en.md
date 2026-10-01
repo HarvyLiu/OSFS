@@ -20,7 +20,7 @@
 
 <!-- source: ../figures/boot-map.excalidraw — open in excalidraw.com to redraw -->
 
-Power on: BIOS POSTs, finds a disk with bytes 510–511 = `0xAA55` (the "I'm bootable" handshake), loads sector 0 to physical `0x7C00`, jumps there in 16-bit real mode (1 MiB addressable, segments × 16). Your code: zero `%ds` (so addresses mean what you think), park a [stack](../../glossary/terms.md#stack) below `0x7C00` (it grows *down* into free low RAM), print via direct VGA cells at `0xB8000` (for humans) + COM1 serial (for CI — Tooling 02's dance, real-mode edition), `cli`/`hlt` forever. One wire, one writer: BIOS teletype (`int $0x10`) is banned on the screen path because firmware with a serial console (SeaBIOS sercon) echoes it to the wire — our CI banner once arrived as `OOSSFFSS  bboooott!`. 510 bytes code+message, 2 bytes magic. That's a bootloader's whole childhood.
+Power on: BIOS POSTs, finds a disk with bytes 510–511 = `0xAA55` (the "I'm bootable" handshake), loads sector 0 to physical `0x7C00`, jumps there in 16-bit real mode (1 MiB addressable, segments × 16). Your code: zero `%ds` (so addresses mean what you think), park a [stack](../../../../glossary/terms.md#stack) below `0x7C00` (it grows *down* into free low RAM), print via direct VGA cells at `0xB8000` (for humans) + COM1 serial (for CI — Tooling 02's dance, real-mode edition), `cli`/`hlt` forever. One wire, one writer: BIOS teletype (`int $0x10`) is banned on the screen path because firmware with a serial console (SeaBIOS sercon) echoes it to the wire — our CI banner once arrived as `OOSSFFSS  bboooott!`. 510 bytes code+message, 2 bytes magic. That's a bootloader's whole childhood.
 
 ## Simulate It (host — the arithmetic of layout, no QEMU)
 
@@ -206,10 +206,10 @@ Artifact: `outputs/boot-checklist.md` — `.code16`, segments-zero, stack-below,
 
 | Term | Plain meaning | Link |
 |---|---|---|
-| register | `%ax/%dx/%si` run the show (16-bit slices, segment regs zeroed) | ../../glossary/terms.md#register |
-| stack | parked at 0x7C00 growing down (`call` needs it before first use) | ../../glossary/terms.md#stack |
-| address | physical = seg×16+off (real mode has no paging — 05's world starts after) | ../../glossary/terms.md#address |
-| syscall | none yet (BIOS `int` services instead — firmware, not kernel) | ../../glossary/terms.md#syscall |
+| register | `%ax/%dx/%si` run the show (16-bit slices, segment regs zeroed) | [register](../../../../glossary/terms.md#register) |
+| stack | parked at 0x7C00 growing down (`call` needs it before first use) | [stack](../../../../glossary/terms.md#stack) |
+| address | physical = seg×16+off (real mode has no paging — 05's world starts after) | [address](../../../../glossary/terms.md#address) |
+| syscall | none yet (BIOS `int` services instead — firmware, not kernel) | [syscall](../../../../glossary/terms.md#syscall) |
 
 ## Further Reading
 

@@ -207,10 +207,10 @@ Artifact: `outputs/journal-card.md` — stage/commit/checkpoint/recover verbs, c
 
 | Term | Plain meaning | Link |
 |---|---|---|
-| inode | journaled cargo (with bitmap+data: the atomic set) | ../../glossary/terms.md#inode |
-| journal | intent log: stage → commit → checkpoint → replay | ../../glossary/terms.md#journal |
-| syscall | `fsync` forces commit-to-platter (the durability verb beneath) | ../../glossary/terms.md#syscall |
-| address | journal + home are block-numbered spaces (offsets by convention) | ../../glossary/terms.md#address |
+| inode | journaled cargo (with bitmap+data: the atomic set) | [inode](../../../../glossary/terms.md#inode) |
+| journal | intent log: stage → commit → checkpoint → replay | [journal](../../../../glossary/terms.md#journal) |
+| syscall | `fsync` forces commit-to-platter (the durability verb beneath) | [syscall](../../../../glossary/terms.md#syscall) |
+| address | journal + home are block-numbered spaces (offsets by convention) | [address](../../../../glossary/terms.md#address) |
 
 ## Further Reading
 

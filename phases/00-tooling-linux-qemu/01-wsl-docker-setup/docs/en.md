@@ -20,7 +20,7 @@
 
 <!-- source: ../figures/toolchain-map.excalidraw — open in excalidraw.com to redraw -->
 
-You have two doors into the same Linux room. Door 1: **WSL2 / native Linux** — fastest, real `fork()`, real `/proc`. Door 2: **Docker** — same Ubuntu 24.04 image for Mac/Windows-without-WSL or CI. Both doors give you `gcc + qemu-system-x86_64 + gdb + rustc + make`. Every later lesson runs `make run` identically inside either door. Pick Door 1 if you can; keep Door 2 as fallback. See [syscall](../../glossary/terms.md#syscall).
+You have two doors into the same Linux room. Door 1: **WSL2 / native Linux** — fastest, real `fork()`, real `/proc`. Door 2: **Docker** — same Ubuntu 24.04 image for Mac/Windows-without-WSL or CI. Both doors give you `gcc + qemu-system-x86_64 + gdb + rustc + make`. Every later lesson runs `make run` identically inside either door. Pick Door 1 if you can; keep Door 2 as fallback. See [syscall](../../../../glossary/terms.md#syscall).
 
 ## Simulate It (host, no QEMU)
 
@@ -135,8 +135,8 @@ Reuse in 2 lines: re-run `python3 code/verify.py` before each phase; if it fails
 
 | Term | Plain meaning | Link |
 |---|---|---|
-| syscall | user→kernel trap; Linux-only behavior we depend on | ../../glossary/terms.md#syscall |
-| freestanding | kernel C without libc; why we need multilib + linker later | ../../glossary/terms.md#freestanding |
+| syscall | user→kernel trap; Linux-only behavior we depend on | [syscall](../../../../glossary/terms.md#syscall) |
+| freestanding | kernel C without libc; why we need multilib + linker later | [freestanding](../../../../glossary/terms.md#freestanding) |
 
 ## Further Reading
 

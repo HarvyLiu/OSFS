@@ -11,7 +11,7 @@
 ## Learning Objectives
 - Load a multi-sector kernel with BIOS `int $0x13` (drive byte saved from `%dl`)
 - Explain A20, GDT entries, `CR0.PE`, and why the far jump is mandatory
-- Implement a 32-bit entry stub (segments, [stack](../../glossary/terms.md#stack), `call kmain`) plus freestanding C kernel
+- Implement a 32-bit entry stub (segments, [stack](../../../../glossary/terms.md#stack), `call kmain`) plus freestanding C kernel
 - Link with a script (`ENTRY`, origin `0x8000`) and boot it in QEMU
 
 ## Concept in 60s
@@ -106,7 +106,7 @@ kentry:
     call kmain
 ```
 
-What this does: points every data segment at GDT entry 2 (selector `0x10`), parks a 32-bit [stack](../../glossary/terms.md#stack), calls C.
+What this does: points every data segment at GDT entry 2 (selector `0x10`), parks a 32-bit [stack](../../../../glossary/terms.md#stack), calls C.
 
 | Lines | Code | Why it exists |
 |---|---|---|
@@ -161,10 +161,10 @@ Artifact: `outputs/pmode-checklist.md` — drive saved, kernel at 0x8000, A20, G
 
 | Term | Plain meaning | Link |
 |---|---|---|
-| register | `%cr0`/`%cs` run the switch (control + segment, one bit + one jump) | ../../glossary/terms.md#register |
-| address | segments now add protection (base 0/limit 4G today, real limits in 05) | ../../glossary/terms.md#address |
-| stack | re-parked at 0x7000 for 32-bit (grows down, still sacred) | ../../glossary/terms.md#stack |
-| syscall | none (BIOS abandoned after the jump — drivers are future lessons) | ../../glossary/terms.md#syscall |
+| register | `%cr0`/`%cs` run the switch (control + segment, one bit + one jump) | [register](../../../../glossary/terms.md#register) |
+| address | segments now add protection (base 0/limit 4G today, real limits in 05) | [address](../../../../glossary/terms.md#address) |
+| stack | re-parked at 0x7000 for 32-bit (grows down, still sacred) | [stack](../../../../glossary/terms.md#stack) |
+| syscall | none (BIOS abandoned after the jump — drivers are future lessons) | [syscall](../../../../glossary/terms.md#syscall) |
 
 ## Further Reading
 

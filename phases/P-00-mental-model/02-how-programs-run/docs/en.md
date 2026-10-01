@@ -20,7 +20,7 @@
 
 <!-- source: ../figures/pipeline-stages.excalidraw — open in excalidraw.com to redraw -->
 
-`cc hello.c -o hello` hides four steps: **preprocess** (`#include` paste, `#define` expand → translation unit), **compile** (C → assembly `.s`), **assemble** (assembly → object `.o`: machine code + unresolved symbols), **link** (objects + libraries → executable with [addresses](../../glossary/terms.md#address) resolved). Then the **loader** (`exec`) maps the binary into a fresh [address](../../glossary/terms.md#address) space and jumps to `_start` → `main(argc, argv)`. Errors name their stage: `error: stdio.h: No such file` (preprocess), `expected ';'` (compile), `undefined reference` (link), `No such file` at run (loader). Read the *first* error: later stages echo earlier breakage.
+`cc hello.c -o hello` hides four steps: **preprocess** (`#include` paste, `#define` expand → translation unit), **compile** (C → assembly `.s`), **assemble** (assembly → object `.o`: machine code + unresolved symbols), **link** (objects + libraries → executable with [addresses](../../../../glossary/terms.md#address) resolved). Then the **loader** (`exec`) maps the binary into a fresh [address](../../../../glossary/terms.md#address) space and jumps to `_start` → `main(argc, argv)`. Errors name their stage: `error: stdio.h: No such file` (preprocess), `expected ';'` (compile), `undefined reference` (link), `No such file` at run (loader). Read the *first* error: later stages echo earlier breakage.
 
 ## Simulate It (host C — argv/echo/exit, the runtime half)
 
@@ -115,9 +115,9 @@ Artifact: `outputs/stages-card.md` — stage/flag/artifact/error-signature table
 
 | Term | Plain meaning | Link |
 |---|---|---|
-| address | linker assigns final ones; loader maps them into a fresh space | ../../glossary/terms.md#address |
-| syscall | `execve` starts the loader (the trap that begins processes) | ../../glossary/terms.md#syscall |
-| freestanding | kernels skip hosted startup (no `_start`-from-libc — own entry instead) | ../../glossary/terms.md#freestanding |
+| address | linker assigns final ones; loader maps them into a fresh space | [address](../../../../glossary/terms.md#address) |
+| syscall | `execve` starts the loader (the trap that begins processes) | [syscall](../../../../glossary/terms.md#syscall) |
+| freestanding | kernels skip hosted startup (no `_start`-from-libc — own entry instead) | [freestanding](../../../../glossary/terms.md#freestanding) |
 
 ## Further Reading
 

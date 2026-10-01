@@ -20,7 +20,7 @@
 
 <!-- source: ../figures/myos-map.excalidraw — open in excalidraw.com to redraw -->
 
-Every phase converges here. **Paging** (06): one directory + one table mapping virtual = physical for the first 4 MiB — translation on, but transparent (prove the machinery before using it for isolation). **Interrupts** (04): the PIT fires IRQ0 100×/second; the PIC (remapped past CPU faults at `0x20`) vectors it through your IDT to `timer_stub`, which counts `ticks` and raises `need_resched`. **Tasks** (02/03): `switch_to` parks one [stack](../../glossary/terms.md#stack) and rides another — the shell yields every loop, the spinner counts, `tasks` prints both `esp` values as proof. **FS** (08): a ROM table of name→content (inodes without the disk — the interface is the lesson). **Shell** (01): `readline` + `dispatch` over serial — the same read-eval loop Thompson wrote, minus sixty years of features.
+Every phase converges here. **Paging** (06): one directory + one table mapping virtual = physical for the first 4 MiB — translation on, but transparent (prove the machinery before using it for isolation). **Interrupts** (04): the PIT fires IRQ0 100×/second; the PIC (remapped past CPU faults at `0x20`) vectors it through your IDT to `timer_stub`, which counts `ticks` and raises `need_resched`. **Tasks** (02/03): `switch_to` parks one [stack](../../../../glossary/terms.md#stack) and rides another — the shell yields every loop, the spinner counts, `tasks` prints both `esp` values as proof. **FS** (08): a ROM table of name→content (inodes without the disk — the interface is the lesson). **Shell** (01): `readline` + `dispatch` over serial — the same read-eval loop Thompson wrote, minus sixty years of features.
 
 Honest label: the switch is *timer-flagged, cooperatively executed* — the timer contests the CPU, the shell yields at loop top. True async preemption (switch inside the ISR) is exercise 3.
 
@@ -55,7 +55,7 @@ for (int i = 0; i < 1024; i++) page_tab[i] = (i * 4096) | 3;
 page_dir[0] = (uint32_t)(uintptr_t)page_tab | 3;
 ```
 
-What this does: maps virtual `0–4 MiB` to physical `0–4 MiB` (identity — every [address](../../glossary/terms.md#address) still works, now *translated*).
+What this does: maps virtual `0–4 MiB` to physical `0–4 MiB` (identity — every [address](../../../../glossary/terms.md#address) still works, now *translated*).
 
 | Lines | Code | Why it exists |
 |---|---|---|
@@ -165,10 +165,10 @@ Artifact: `outputs/myos-tour.md` — the five-subsystem demo script above plus t
 
 | Term | Plain meaning | Link |
 |---|---|---|
-| address | virtual = physical today (identity), but translated — isolation is one table away | ../../glossary/terms.md#address |
-| stack | two of them, switched live (`esp` printed as evidence) | ../../glossary/terms.md#stack |
-| syscall | shell commands are syscalls without the trap (dispatch table = syscall table, minus rings) | ../../glossary/terms.md#syscall |
-| register | `pushal/iret` preserve the world across ticks (preemption = manners) | ../../glossary/terms.md#register |
+| address | virtual = physical today (identity), but translated — isolation is one table away | [address](../../../../glossary/terms.md#address) |
+| stack | two of them, switched live (`esp` printed as evidence) | [stack](../../../../glossary/terms.md#stack) |
+| syscall | shell commands are syscalls without the trap (dispatch table = syscall table, minus rings) | [syscall](../../../../glossary/terms.md#syscall) |
+| register | `pushal/iret` preserve the world across ticks (preemption = manners) | [register](../../../../glossary/terms.md#register) |
 
 ## Further Reading
 

@@ -20,7 +20,7 @@
 
 <!-- source: ../figures/abstractions.excalidraw — open in excalidraw.com to redraw -->
 
-Disks store numbered blocks (no names, no appends). The OS sells *files*: named byte streams with offsets (FS phases). CPUs run instruction streams; the OS sells *processes*: private machines with memory + files + a pid (Processes phases). RAM is one shared array; the OS sells *address spaces*: every process its own private mailboxes 0…max (Memory phases). Your program below touches all three in 20 lines: an fd (file handle), its own pid-less self (`/proc/self` later), and pointers into its private space. [Syscalls](../../glossary/terms.md#syscall) are the shop counter where you request each lie.
+Disks store numbered blocks (no names, no appends). The OS sells *files*: named byte streams with offsets (FS phases). CPUs run instruction streams; the OS sells *processes*: private machines with memory + files + a pid (Processes phases). RAM is one shared array; the OS sells *address spaces*: every process its own private mailboxes 0…max (Memory phases). Your program below touches all three in 20 lines: an fd (file handle), its own pid-less self (`/proc/self` later), and pointers into its private space. [Syscalls](../../../../glossary/terms.md#syscall) are the shop counter where you request each lie.
 
 ## Simulate It (host C — all three lies, portable, no QEMU)
 
@@ -56,7 +56,7 @@ What this does: buys the file lie (named stream round-trip), then exhibits its o
 |---|---|---|
 | 5–8 | `fopen w` + `fprintf` + `fclose` | file as stream: open-by-name, write-at-offset-0, close-flushes (blocks+inodes underneath, FS phases) |
 | 10–14 | `fopen r` + `fgets` + `fclose` | same name, fresh handle, independent offset (fds track position *per open*, not per file — the fact behind `fork`+file bugs later) |
-| 16 | `stack_var` | one [stack](../../glossary/terms.md#stack) resident: its [address](../../glossary/terms.md#address) vs `main`'s shows the space's spread |
+| 16 | `stack_var` | one [stack](../../../../glossary/terms.md#stack) resident: its [address](../../../../glossary/terms.md#address) vs `main`'s shows the space's spread |
 | 17–18 | two prints | content proof + layout proof (compare hex: stack high, code low — P-02/06's map, live) |
 | 19 | `strcmp != 0` | exit code = round-trip fidelity (parents/CI read it — Processes-phase contract) |
 
@@ -115,10 +115,10 @@ Artifact: `outputs/lies-card.md` — file/proc/space one-liners (hides/what/phas
 
 | Term | Plain meaning | Link |
 |---|---|---|
-| syscall | open/read/write/fork: the counter where lies are requested | ../../glossary/terms.md#syscall |
-| address | private per process (same number, different bytes across procs) | ../../glossary/terms.md#address |
-| heap | per-process region (malloc bytes invisible to siblings) | ../../glossary/terms.md#heap |
-| PCB | kernel's per-process card (pid, fds, address-space root) | ../../glossary/terms.md#pcb |
+| syscall | open/read/write/fork: the counter where lies are requested | [syscall](../../../../glossary/terms.md#syscall) |
+| address | private per process (same number, different bytes across procs) | [address](../../../../glossary/terms.md#address) |
+| heap | per-process region (malloc bytes invisible to siblings) | [heap](../../../../glossary/terms.md#heap) |
+| PCB | kernel's per-process card (pid, fds, address-space root) | [pcb](../../../../glossary/terms.md#pcb) |
 
 ## Further Reading
 

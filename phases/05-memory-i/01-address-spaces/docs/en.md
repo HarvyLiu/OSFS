@@ -20,7 +20,7 @@
 
 <!-- source: ../figures/address-space.excalidraw — open in excalidraw.com to redraw -->
 
-Low addresses: code+data (your ELF's sections, P-02/06). Then heap (grows up via `brk`/`mmap`). Then mmap gaps (shared libs, big allocs). High: stack (grows down) + kernel half (top, yours to trap into, never to touch). Every process sees this *same shape* with *different contents* — virtual numbers translated per-process by page tables (4 KiB pages: the atom of honesty) into physical frames. `mmap(ANONYMOUS)` asks the lie directly: "give me N zeroed pages, nowhere-file-backed." `/proc/self/maps` prints your space live. See [address](../../glossary/terms.md#address), [heap](../../glossary/terms.md#heap), [page](../../glossary/terms.md#page).
+Low addresses: code+data (your ELF's sections, P-02/06). Then heap (grows up via `brk`/`mmap`). Then mmap gaps (shared libs, big allocs). High: stack (grows down) + kernel half (top, yours to trap into, never to touch). Every process sees this *same shape* with *different contents* — virtual numbers translated per-process by page tables (4 KiB pages: the atom of honesty) into physical frames. `mmap(ANONYMOUS)` asks the lie directly: "give me N zeroed pages, nowhere-file-backed." `/proc/self/maps` prints your space live. See [address](../../../../glossary/terms.md#address), [heap](../../../../glossary/terms.md#heap), [page](../../../../glossary/terms.md#page).
 
 ## Simulate It (host — selfie first, portable)
 
@@ -142,10 +142,10 @@ Artifact: `outputs/vm-card.md` — region order, page facts (4 KiB, fault-on-tou
 
 | Term | Plain meaning | Link |
 |---|---|---|
-| address | virtual number; translated per-process in 4 KiB pages | ../../glossary/terms.md#address |
-| page | 4 KiB translation atom (the honest unit under all lies) | ../../glossary/terms.md#page |
-| heap | one region among many (grows up; big allocs bypass via mmap) | ../../glossary/terms.md#heap |
-| syscall | `mmap`/`munmap`/`mprotect`/`brk`: the space-shaping traps | ../../glossary/terms.md#syscall |
+| address | virtual number; translated per-process in 4 KiB pages | [address](../../../../glossary/terms.md#address) |
+| page | 4 KiB translation atom (the honest unit under all lies) | [page](../../../../glossary/terms.md#page) |
+| heap | one region among many (grows up; big allocs bypass via mmap) | [heap](../../../../glossary/terms.md#heap) |
+| syscall | `mmap`/`munmap`/`mprotect`/`brk`: the space-shaping traps | [syscall](../../../../glossary/terms.md#syscall) |
 
 ## Further Reading
 

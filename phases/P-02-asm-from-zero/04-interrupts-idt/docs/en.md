@@ -20,7 +20,7 @@
 
 <!-- source: ../figures/interrupt-path.excalidraw — open in excalidraw.com to redraw -->
 
-Hardware raises IRQ n. If interrupts are enabled (`sti` state), the CPU looks up slot n in the IDT (Interrupt Descriptor Table — 256 entries, each "run this code at this privilege"), pushes [registers](../../glossary/terms.md#register) + flags, jumps to the handler. Handler saves the rest, does minimal work (ack device, wake a task), restores, `iret` pops back to the interrupted code — which never knew it paused. `cli` clears the enable flag: IRQs wait (pending), they don't vanish. Non-maskable few excepted. [Syscalls](../../glossary/terms.md#syscall) ride the same rails (software-raised trap instead of wire-raised IRQ).
+Hardware raises IRQ n. If interrupts are enabled (`sti` state), the CPU looks up slot n in the IDT (Interrupt Descriptor Table — 256 entries, each "run this code at this privilege"), pushes [registers](../../../../glossary/terms.md#register) + flags, jumps to the handler. Handler saves the rest, does minimal work (ack device, wake a task), restores, `iret` pops back to the interrupted code — which never knew it paused. `cli` clears the enable flag: IRQs wait (pending), they don't vanish. Non-maskable few excepted. [Syscalls](../../../../glossary/terms.md#syscall) ride the same rails (software-raised trap instead of wire-raised IRQ).
 
 ## Simulate It (host C — IDT as an array, no QEMU)
 
@@ -136,7 +136,7 @@ What this does: documents the 6-step bare-metal dance next to a symbol that prov
 | Lines | Code | Why it exists |
 |---|---|---|
 | `cli` position | first, before save | a second IRQ mid-save would corrupt the frame being built (fence first, work second) |
-| push/call/pop | [registers](../../glossary/terms.md#register) round-trip | interrupted code resumes bit-identical (the context-switch promise, per-interrupt) |
+| push/call/pop | [registers](../../../../glossary/terms.md#register) round-trip | interrupted code resumes bit-identical (the context-switch promise, per-interrupt) |
 | `iretq` (not `ret`) | pops flags + far return | restores interrupt-flag state atomically — `sti`+`ret` separately would race a window |
 
 Change X → Y: mentally move `cli` after the pushes. Verify by reasoning: nested IRQ lands mid-frame → double-push chaos (this ordering bug bricked real bring-ups; fence-first is law).
@@ -189,9 +189,9 @@ Artifact: `outputs/irq-card.md` — fence-first order, save/call/restore/`iret` 
 
 | Term | Plain meaning | Link |
 |---|---|---|
-| register | what stubs save; what `iret` restores alongside flags | ../../glossary/terms.md#register |
-| stack | handler frames nest on the interrupted stack (or IST in 64-bit) | ../../glossary/terms.md#stack |
-| syscall | software trap through the same descriptor table (vector ~0x80/64+) | ../../glossary/terms.md#syscall |
+| register | what stubs save; what `iret` restores alongside flags | [register](../../../../glossary/terms.md#register) |
+| stack | handler frames nest on the interrupted stack (or IST in 64-bit) | [stack](../../../../glossary/terms.md#stack) |
+| syscall | software trap through the same descriptor table (vector ~0x80/64+) | [syscall](../../../../glossary/terms.md#syscall) |
 
 ## Further Reading
 

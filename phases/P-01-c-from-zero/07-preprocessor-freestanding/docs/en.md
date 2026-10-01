@@ -20,7 +20,7 @@
 
 <!-- source: ../figures/build-modes.excalidraw — open in excalidraw.com to redraw -->
 
-The preprocessor runs *before* the compiler: dumb text paste withsharp knives. `#define MIN(a,b)` pastes expressions (parenthesize everything or precedence eats you). `#ifdef DEBUG` compiles two programs from one file. `#include` pastes headers (P-01/06's promises). Hosted C = libc + `_start` + `main` + `exit` provided (your sims so far). Freestanding C = language only: no `printf`, no `malloc`, `main` means nothing until a linker script + your entry say so. Kernels compile `-ffreestanding -nostdlib` and provide UART print + page alloc themselves. See [freestanding](../../glossary/terms.md#freestanding).
+The preprocessor runs *before* the compiler: dumb text paste withsharp knives. `#define MIN(a,b)` pastes expressions (parenthesize everything or precedence eats you). `#ifdef DEBUG` compiles two programs from one file. `#include` pastes headers (P-01/06's promises). Hosted C = libc + `_start` + `main` + `exit` provided (your sims so far). Freestanding C = language only: no `printf`, no `malloc`, `main` means nothing until a linker script + your entry say so. Kernels compile `-ffreestanding -nostdlib` and provide UART print + page alloc themselves. See [freestanding](../../../../glossary/terms.md#freestanding).
 
 ## Simulate It (host — macros with teeth, no QEMU)
 
@@ -140,9 +140,9 @@ Artifact: `outputs/pp-card.md` — parenthesize-everything, two-step stringize, 
 
 | Term | Plain meaning | Link |
 |---|---|---|
-| freestanding | language without libc/startup; kernels live here | ../../glossary/terms.md#freestanding |
-| address | linker (not preprocessor) assigns final addresses post-paste | ../../glossary/terms.md#address |
-| heap | `malloc` is hosted-only; freestanding allocators are hand-built (Memory phases) | ../../glossary/terms.md#heap |
+| freestanding | language without libc/startup; kernels live here | [freestanding](../../../../glossary/terms.md#freestanding) |
+| address | linker (not preprocessor) assigns final addresses post-paste | [address](../../../../glossary/terms.md#address) |
+| heap | `malloc` is hosted-only; freestanding allocators are hand-built (Memory phases) | [heap](../../../../glossary/terms.md#heap) |
 
 ## Further Reading
 

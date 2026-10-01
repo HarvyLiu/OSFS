@@ -20,7 +20,7 @@
 
 <!-- source: ../figures/trapframe.excalidraw — open in excalidraw.com to redraw -->
 
-Pausing = saving: 16 general [registers](../../glossary/terms.md#register) + program counter + [stack](../../glossary/terms.md#stack) pointer + flags (the trapframe — pushed by stub + handler on entry). Plus scheduler state (RUNNABLE/RUNNING/ZOMBIE), identity (pid/parent/name), resources (open files, address-space root, cwd), accounting (ticks, exit code). Resume = restoring in reverse. The PCB *is* this card; the table of cards *is* the process list; `fork` photocopies a row (new pid, shared-then-COW space); `wait` deletes one (after collecting the exit code). P-01/05 built the shape; this lesson fills every drawer.
+Pausing = saving: 16 general [registers](../../../../glossary/terms.md#register) + program counter + [stack](../../../../glossary/terms.md#stack) pointer + flags (the trapframe — pushed by stub + handler on entry). Plus scheduler state (RUNNABLE/RUNNING/ZOMBIE), identity (pid/parent/name), resources (open files, address-space root, cwd), accounting (ticks, exit code). Resume = restoring in reverse. The PCB *is* this card; the table of cards *is* the process list; `fork` photocopies a row (new pid, shared-then-COW space); `wait` deletes one (after collecting the exit code). P-01/05 built the shape; this lesson fills every drawer.
 
 ## Simulate It (host C — save/clobber/restore, no QEMU)
 
@@ -146,10 +146,10 @@ Artifact: `outputs/trapframe.h` — `trapframe_t` + `pcb_t` + state enum as Phas
 
 | Term | Plain meaning | Link |
 |---|---|---|
-| PCB | the card: identity + state + trapframe + root + files | ../../glossary/terms.md#pcb |
-| register | trapframe contents (pause = save these; resume = restore) | ../../glossary/terms.md#register |
-| stack | `sp` field + kernel stack per task (two stacks per process in kernels!) | ../../glossary/terms.md#stack |
-| syscall | trap path fills trapframes (user regs arrive via this gate) | ../../glossary/terms.md#syscall |
+| PCB | the card: identity + state + trapframe + root + files | [pcb](../../../../glossary/terms.md#pcb) |
+| register | trapframe contents (pause = save these; resume = restore) | [register](../../../../glossary/terms.md#register) |
+| stack | `sp` field + kernel stack per task (two stacks per process in kernels!) | [stack](../../../../glossary/terms.md#stack) |
+| syscall | trap path fills trapframes (user regs arrive via this gate) | [syscall](../../../../glossary/terms.md#syscall) |
 
 ## Further Reading
 

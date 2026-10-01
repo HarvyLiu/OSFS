@@ -198,10 +198,10 @@ Artifact: `outputs/swap-card.md` — fault/evict/writeback trio, dirty-bit rule,
 
 | Term | Plain meaning | Link |
 |---|---|---|
-| page | unit of residency (present=swap-in, absent=fault-or-hole) | ../../glossary/terms.md#page |
-| TLB | caches translations (evicted pages need shootdowns — 06/02's coherence, continued) | ../../glossary/terms.md#tlb |
-| heap | `malloc` arenas ride demand paging (untouched = unresident = free) | ../../glossary/terms.md#heap |
-| syscall | `mmap`/`brk` grow promises; faults fulfill; OOM kills the unfundable | ../../glossary/terms.md#syscall |
+| page | unit of residency (present=swap-in, absent=fault-or-hole) | [page](../../../../glossary/terms.md#page) |
+| TLB | caches translations (evicted pages need shootdowns — 06/02's coherence, continued) | [tlb](../../../../glossary/terms.md#tlb) |
+| heap | `malloc` arenas ride demand paging (untouched = unresident = free) | [heap](../../../../glossary/terms.md#heap) |
+| syscall | `mmap`/`brk` grow promises; faults fulfill; OOM kills the unfundable | [syscall](../../../../glossary/terms.md#syscall) |
 
 ## Further Reading
 

@@ -20,7 +20,7 @@
 
 <!-- source: ../figures/fork-tree.excalidraw — open in excalidraw.com to redraw -->
 
-A [PCB](../../glossary/terms.md#pcb) is the kernel's index card per process (pid, state, registers, page-table pointer, open files). `fork()` photocopies the card + memory (lazily, copy-on-write): parent gets child's pid, child gets 0 — same code, two futures. `exec()` throws away the memory and loads a new program into the same card. `wait()` lets the parent collect the child's exit code so no zombie lingers. No pointers here yet — just "who am I after the call".
+A [PCB](../../../../glossary/terms.md#pcb) is the kernel's index card per process (pid, state, registers, page-table pointer, open files). `fork()` photocopies the card + memory (lazily, copy-on-write): parent gets child's pid, child gets 0 — same code, two futures. `exec()` throws away the memory and loads a new program into the same card. `wait()` lets the parent collect the child's exit code so no zombie lingers. No pointers here yet — just "who am I after the call".
 
 ## Simulate It (host Linux, no QEMU)
 
@@ -51,7 +51,7 @@ What this does: clones the process, replaces the child with `echo`, then has the
 
 | Lines | Code | Why it exists |
 |---|---|---|
-| 1–4 | includes | `unistd.h` = `fork`/`exec`, `sys/wait.h` = `waitpid` + `WEXITSTATUS`; the [syscall](../../glossary/terms.md#syscall) wrappers |
+| 1–4 | includes | `unistd.h` = `fork`/`exec`, `sys/wait.h` = `waitpid` + `WEXITSTATUS`; the [syscall](../../../../glossary/terms.md#syscall) wrappers |
 | 7 | `fork()` | trap to kernel: copy PCB + mark pages copy-on-write; returns twice (parent=child pid, child=0) |
 | 8 | `pid < 0` | fork can fail (too many procs); always handle, like `malloc` NULL |
 | 9–13 | child branch | `pid==0` means "I am the copy"; `execlp` replaces my memory with `/bin/echo`; `_exit` (not `exit`) avoids flushing parent's stdio twice |
@@ -117,10 +117,10 @@ Artifact: `outputs/runbook-fork.md` — "zombie triage": if `ps` shows `Z`, pare
 
 | Term | Plain meaning | Link |
 |---|---|---|
-| PCB | kernel index card per process | ../../glossary/terms.md#pcb |
-| syscall | user→kernel trap (`fork`, `execve`, `wait4`) | ../../glossary/terms.md#syscall |
-| zombie | dead child not yet waited on | ../../glossary/terms.md#pcb |
-| copy-on-write | share pages until someone writes, then copy | ../../glossary/terms.md#page |
+| PCB | kernel index card per process | [pcb](../../../../glossary/terms.md#pcb) |
+| syscall | user→kernel trap (`fork`, `execve`, `wait4`) | [syscall](../../../../glossary/terms.md#syscall) |
+| zombie | dead child not yet waited on | [pcb](../../../../glossary/terms.md#pcb) |
+| copy-on-write | share pages until someone writes, then copy | [page](../../../../glossary/terms.md#page) |
 
 ## Further Reading
 

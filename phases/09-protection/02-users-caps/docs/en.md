@@ -134,9 +134,9 @@ Artifact: `outputs/perms-card.md` — mode-bit reading (rwx × ugo, octal fluenc
 
 | Term | Plain meaning | Link |
 |---|---|---|
-| syscall | `open` enforces all three layers (rings cross + perms check + cap test) | ../../glossary/terms.md#syscall |
-| heap | credential structs live per-process (kernel memory, user read-only via /proc) | ../../glossary/terms.md#heap |
-| PCB | carries uid/gid/caps (identity rides the card from 02/01) | ../../glossary/terms.md#pcb |
+| syscall | `open` enforces all three layers (rings cross + perms check + cap test) | [syscall](../../../../glossary/terms.md#syscall) |
+| heap | credential structs live per-process (kernel memory, user read-only via /proc) | [heap](../../../../glossary/terms.md#heap) |
+| PCB | carries uid/gid/caps (identity rides the card from 02/01) | [pcb](../../../../glossary/terms.md#pcb) |
 
 ## Further Reading
 

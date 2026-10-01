@@ -20,7 +20,7 @@
 
 <!-- source: ../figures/inline-asm.excalidraw — open in excalidraw.com to redraw -->
 
-Extended ASM is a function call to the compiler's allocator: `__asm__ (TEMPLATE : OUTPUTS : INPUTS : CLOBBERS)`. `%0`, `%1`… name the operands *in order* (outputs first, then inputs). `"=r"(x)` = write-only, any [register](../../glossary/terms.md#register); `"+r"(x)` = read-write; `"a"` = must be `%eax`; `"Nd"` = imm8-or-`%dx` (port shapes). `volatile` = never delete/reorder (hardware pokes). Clobbers confess side effects: `"cc"` (flags changed), `"memory"` (RAM touched beyond listed outputs — blocks caching across the ASM). Get one letter wrong and the compiler "optimizes" your hardware access into nothing.
+Extended ASM is a function call to the compiler's allocator: `__asm__ (TEMPLATE : OUTPUTS : INPUTS : CLOBBERS)`. `%0`, `%1`… name the operands *in order* (outputs first, then inputs). `"=r"(x)` = write-only, any [register](../../../../glossary/terms.md#register); `"+r"(x)` = read-write; `"a"` = must be `%eax`; `"Nd"` = imm8-or-`%dx` (port shapes). `volatile` = never delete/reorder (hardware pokes). Clobbers confess side effects: `"cc"` (flags changed), `"memory"` (RAM touched beyond listed outputs — blocks caching across the ASM). Get one letter wrong and the compiler "optimizes" your hardware access into nothing.
 
 ## Simulate It (host C — the contract in plain C first)
 
@@ -168,9 +168,9 @@ Artifact: `outputs/constraints-card.md` — template/output/input/clobber anatom
 
 | Term | Plain meaning | Link |
 |---|---|---|
-| register | constraint letters pick them (`r` any, `a` eax, `Nd` port) | ../../glossary/terms.md#register |
-| address | ports are addresses too (`outb` writes one); `lea` computes them | ../../glossary/terms.md#address |
-| syscall | `cpuid`/`rdtsc` are *instructions*, not traps — no kernel crossing (contrast!) | ../../glossary/terms.md#syscall |
+| register | constraint letters pick them (`r` any, `a` eax, `Nd` port) | [register](../../../../glossary/terms.md#register) |
+| address | ports are addresses too (`outb` writes one); `lea` computes them | [address](../../../../glossary/terms.md#address) |
+| syscall | `cpuid`/`rdtsc` are *instructions*, not traps — no kernel crossing (contrast!) | [syscall](../../../../glossary/terms.md#syscall) |
 
 ## Further Reading
 

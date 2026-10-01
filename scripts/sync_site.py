@@ -60,7 +60,7 @@ def sync_lesson(en_path):
             shutil.copyfile(svg, LESSONS_DIR / dest_name)
             body = body.replace(f"](../figures/{svg.name})", f"](./{dest_name})")
     # glossary links: repo-relative -> site page (anchors survive: ## pointer)
-    body = body.replace("](../../glossary/terms.md", "](../glossary/")
+    body = body.replace("](../../../../glossary/terms.md", "](../glossary/")
     (LESSONS_DIR / f"{slug}.md").write_text(
         frontmatter(title, hook or title) + body, encoding="utf-8"
     )

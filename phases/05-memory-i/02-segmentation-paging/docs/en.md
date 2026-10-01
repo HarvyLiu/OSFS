@@ -20,7 +20,7 @@
 
 <!-- source: ../figures/vpn-offset.excalidraw — open in excalidraw.com to redraw -->
 
-Segmentation: `phys = base[seg] + offset`, fault if `offset >= limit[seg]` (variable-sized chunks — simple, fragments externally like a bad malloc). Paging: chop the virtual [address](../../glossary/terms.md#address) into `VPN | offset` (32-bit VA, 4 KiB pages → 20-bit VPN + 12-bit offset: `vpn = va >> 12`, `off = va & 0xFFF`): look up `frame = table[vpn]`, fault if `!present`, then `phys = frame*4096 + off`. Fixed-size pages → no external fragmentation; per-[page](../../glossary/terms.md#page) flags (present/read-write/user) → protection + swap for free. The table *is* the address space (per-process root — the field your PCB will carry).
+Segmentation: `phys = base[seg] + offset`, fault if `offset >= limit[seg]` (variable-sized chunks — simple, fragments externally like a bad malloc). Paging: chop the virtual [address](../../../../glossary/terms.md#address) into `VPN | offset` (32-bit VA, 4 KiB pages → 20-bit VPN + 12-bit offset: `vpn = va >> 12`, `off = va & 0xFFF`): look up `frame = table[vpn]`, fault if `!present`, then `phys = frame*4096 + off`. Fixed-size pages → no external fragmentation; per-[page](../../../../glossary/terms.md#page) flags (present/read-write/user) → protection + swap for free. The table *is* the address space (per-process root — the field your PCB will carry).
 
 ## Simulate It (host C — both translators, no QEMU)
 
@@ -133,9 +133,9 @@ Artifact: `outputs/translate-card.md` — seg formula + faults, VPN/offset split
 
 | Term | Plain meaning | Link |
 |---|---|---|
-| page | 4 KiB translation atom (VPN→frame + offset passthrough) | ../../glossary/terms.md#page |
-| address | split into VPN\|offset before lookup (never translated whole) | ../../glossary/terms.md#address |
-| TLB | cache of recent translations (why walks don't run per access — 06 Memory II) | ../../glossary/terms.md#tlb |
+| page | 4 KiB translation atom (VPN→frame + offset passthrough) | [page](../../../../glossary/terms.md#page) |
+| address | split into VPN\|offset before lookup (never translated whole) | [address](../../../../glossary/terms.md#address) |
+| TLB | cache of recent translations (why walks don't run per access — 06 Memory II) | [tlb](../../../../glossary/terms.md#tlb) |
 
 ## Further Reading
 

@@ -179,10 +179,10 @@ Artifact: `outputs/vsfs-card.md` — layout map (0/1/2–5/6+), inode/dir entry 
 
 | Term | Plain meaning | Link |
 |---|---|---|
-| inode | number → (type/size/blocks) card; names live in dirs, not here | ../../glossary/terms.md#inode |
-| address | block numbers address disk (super/bitmap/inode/data regions by convention) | ../../glossary/terms.md#address |
-| syscall | `open/read/write/stat` resolve through exactly these structures (dents+inodes) | ../../glossary/terms.md#syscall |
-| heap | bitmaps/inode bufs live caller-side (FS code is allocation-disciplined, like 06) | ../../glossary/terms.md#heap |
+| inode | number → (type/size/blocks) card; names live in dirs, not here | [inode](../../../../glossary/terms.md#inode) |
+| address | block numbers address disk (super/bitmap/inode/data regions by convention) | [address](../../../../glossary/terms.md#address) |
+| syscall | `open/read/write/stat` resolve through exactly these structures (dents+inodes) | [syscall](../../../../glossary/terms.md#syscall) |
+| heap | bitmaps/inode bufs live caller-side (FS code is allocation-disciplined, like 06) | [heap](../../../../glossary/terms.md#heap) |
 
 ## Further Reading
 

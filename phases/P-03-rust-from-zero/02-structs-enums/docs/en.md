@@ -153,9 +153,9 @@ Artifact: `outputs/rust-pcb.rs` — the `State`/`Pcb`/`Table` trio as a starter 
 
 | Term | Plain meaning | Link |
 |---|---|---|
-| heap | `String` bytes live here; moved/freed by rules, not calls | ../../glossary/terms.md#heap |
-| pointer | `&self`/`&mut self` methods borrow the table (no raw addresses in sight) | ../../glossary/terms.md#pointer |
-| PCB | this lesson's struct, states now unrepresentable-to-misuse | ../../glossary/terms.md#pcb |
+| heap | `String` bytes live here; moved/freed by rules, not calls | [heap](../../../../glossary/terms.md#heap) |
+| pointer | `&self`/`&mut self` methods borrow the table (no raw addresses in sight) | [pointer](../../../../glossary/terms.md#pointer) |
+| PCB | this lesson's struct, states now unrepresentable-to-misuse | [pcb](../../../../glossary/terms.md#pcb) |
 
 ## Further Reading
 

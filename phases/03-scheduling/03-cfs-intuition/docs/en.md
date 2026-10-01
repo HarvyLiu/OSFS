@@ -131,9 +131,9 @@ Artifact: `outputs/cfs-card.md` — weight table excerpt (−5/0/5), charge form
 
 | Term | Plain meaning | Link |
 |---|---|---|
-| syscall | `nice`/`sched_setscheduler` adjust weight/placement from userspace | ../../glossary/terms.md#syscall |
-| heap | CFS runqueue is an rbtree of tasks keyed by vr (our array scan is its O(n) toy) | ../../glossary/terms.md#heap |
-| PCB | vr + weight live per-task (new card fields beyond 02/03's) | ../../glossary/terms.md#pcb |
+| syscall | `nice`/`sched_setscheduler` adjust weight/placement from userspace | [syscall](../../../../glossary/terms.md#syscall) |
+| heap | CFS runqueue is an rbtree of tasks keyed by vr (our array scan is its O(n) toy) | [heap](../../../../glossary/terms.md#heap) |
+| PCB | vr + weight live per-task (new card fields beyond 02/03's) | [pcb](../../../../glossary/terms.md#pcb) |
 
 ## Further Reading
 

@@ -145,10 +145,10 @@ Artifact: `outputs/nostd-starter.rs` — `#![no_std/#![no_main]`, panic room, `k
 
 | Term | Plain meaning | Link |
 |---|---|---|
-| panic_handler | `no_std`'s required never-returning panic room (serial + halt) | ../../glossary/terms.md#panic_handler |
-| freestanding | C's word for the same floorlessness (`-ffreestanding` ≈ `#![no_std]`) | ../../glossary/terms.md#freestanding |
-| heap | gone in bare `no_std` (no `Vec`/`String` until *you* provide `alloc` — Memory II) | ../../glossary/terms.md#heap |
-| address | raw pointers *are* addresses with lifetimes erased (handle like P-01/03, fenced) | ../../glossary/terms.md#address |
+| panic_handler | `no_std`'s required never-returning panic room (serial + halt) | [panic_handler](../../../../glossary/terms.md#panic_handler) |
+| freestanding | C's word for the same floorlessness (`-ffreestanding` ≈ `#![no_std]`) | [freestanding](../../../../glossary/terms.md#freestanding) |
+| heap | gone in bare `no_std` (no `Vec`/`String` until *you* provide `alloc` — Memory II) | [heap](../../../../glossary/terms.md#heap) |
+| address | raw pointers *are* addresses with lifetimes erased (handle like P-01/03, fenced) | [address](../../../../glossary/terms.md#address) |
 
 ## Further Reading
 

@@ -134,9 +134,9 @@ Artifact: `outputs/locality-card.md` — first-fit vs clustered rule, span/gap m
 
 | Term | Plain meaning | Link |
 |---|---|---|
-| inode | lives in groups too (its block anchors the affinity search) | ../../glossary/terms.md#inode |
-| address | block numbers cluster by policy (placement is addressing with taste) | ../../glossary/terms.md#address |
-| heap | bitmaps are heap/cached RAM (placement scans must be fast — 64 bits here, 32k bits there) | ../../glossary/terms.md#heap |
+| inode | lives in groups too (its block anchors the affinity search) | [inode](../../../../glossary/terms.md#inode) |
+| address | block numbers cluster by policy (placement is addressing with taste) | [address](../../../../glossary/terms.md#address) |
+| heap | bitmaps are heap/cached RAM (placement scans must be fast — 64 bits here, 32k bits there) | [heap](../../../../glossary/terms.md#heap) |
 
 ## Further Reading
 

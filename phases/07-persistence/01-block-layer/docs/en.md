@@ -237,9 +237,9 @@ Artifact: `outputs/blk-card.md` — writeback-vs-writethrough rule, flush/crash 
 
 | Term | Plain meaning | Link |
 |---|---|---|
-| syscall | `read`/`write`/`fsync` under every block op (durability bottoms at `fsync`) | ../../glossary/terms.md#syscall |
-| heap | cache lives in heap RAM (dirty bitmap = the truth ledger) | ../../glossary/terms.md#heap |
-| address | block numbers address disk the way VPNs address RAM (numbers spaces) | ../../glossary/terms.md#address |
+| syscall | `read`/`write`/`fsync` under every block op (durability bottoms at `fsync`) | [syscall](../../../../glossary/terms.md#syscall) |
+| heap | cache lives in heap RAM (dirty bitmap = the truth ledger) | [heap](../../../../glossary/terms.md#heap) |
+| address | block numbers address disk the way VPNs address RAM (numbers spaces) | [address](../../../../glossary/terms.md#address) |
 
 ## Further Reading
 

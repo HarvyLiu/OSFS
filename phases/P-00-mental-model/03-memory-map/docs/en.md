@@ -20,7 +20,7 @@
 
 <!-- source: ../figures/memory-regions.excalidraw — open in excalidraw.com to redraw -->
 
-Four neighborhoods: **code/text** (your functions, read-only residents), **static** (globals: initialized in `.data`, zeroed in `.bss` — born at load, die at exit), **[heap](../../glossary/terms.md#heap)** (`malloc` arena: lives until `free`), **[stack](../../glossary/terms.md#stack)** (frames: locals born at `{`, die at `}` — returning `&local` hands out a corpse's address). Same lesson as P-01/04's ownership and P-02/02's frames, now as *geography*: lifetime questions become "which neighborhood?" questions. (Virtual-vs-physical + paging come in 05 — here, regions and rules suffice.)
+Four neighborhoods: **code/text** (your functions, read-only residents), **static** (globals: initialized in `.data`, zeroed in `.bss` — born at load, die at exit), **[heap](../../../../glossary/terms.md#heap)** (`malloc` arena: lives until `free`), **[stack](../../../../glossary/terms.md#stack)** (frames: locals born at `{`, die at `}` — returning `&local` hands out a corpse's address). Same lesson as P-01/04's ownership and P-02/02's frames, now as *geography*: lifetime questions become "which neighborhood?" questions. (Virtual-vs-physical + paging come in 05 — here, regions and rules suffice.)
 
 ## Simulate It (host C — one resident per region, portable)
 
@@ -63,7 +63,7 @@ What this does: exhibits all four neighborhoods' addresses plus the two lifetime
 | Lines | Code | Why it exists |
 |---|---|---|
 | 4–5 | `.data`/`.bss` pair | initialized vs zeroed globals (P-02/06's sections, now as *lifetimes*: both live whole-run) |
-| 7–11 | `make_heap` | returns heap [address](../../glossary/terms.md#address) (valid after return — ownership transfers to caller, P-01/04's rule in action) |
+| 7–11 | `make_heap` | returns heap [address](../../../../glossary/terms.md#address) (valid after return — ownership transfers to caller, P-01/04's rule in action) |
 | 13–16 | `make_mistake` | returns frame address (dead at `}` — the bug; compiler *warns* `return-local-addr`: read it, never silence it) |
 | 19 | function-`static` | local scope + global lifetime (the hybrid: sees-like-local, lives-like-global — singletons wear this) |
 | 21–26 | address parade + values | order varies by OS (05/01's lesson: regions universal, order OS-specific — compare with a friend's output!) |
@@ -120,9 +120,9 @@ Artifact: `outputs/regions-card.md` — four neighborhoods (lifetime + section +
 
 | Term | Plain meaning | Link |
 |---|---|---|
-| stack | frames: born at `{`, die at `}` (never return their addresses) | ../../glossary/terms.md#stack |
-| heap | malloc arena: lives until `free` (ownership transfers on return) | ../../glossary/terms.md#heap |
-| address | neighborhood by number range (order OS-specific, membership universal) | ../../glossary/terms.md#address |
+| stack | frames: born at `{`, die at `}` (never return their addresses) | [stack](../../../../glossary/terms.md#stack) |
+| heap | malloc arena: lives until `free` (ownership transfers on return) | [heap](../../../../glossary/terms.md#heap) |
+| address | neighborhood by number range (order OS-specific, membership universal) | [address](../../../../glossary/terms.md#address) |
 
 ## Further Reading
 

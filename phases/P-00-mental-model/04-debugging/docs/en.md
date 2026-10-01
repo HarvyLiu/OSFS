@@ -20,7 +20,7 @@
 
 <!-- source: ../figures/debug-loop.excalidraw — open in excalidraw.com to redraw -->
 
-Debugging is a loop with four stations: **reproduce** (same input, same death — "bob" kills, "amy" doesn't), **observe** (compiler warnings, prints, `gdb`), **hypothesize** (which [pointer](../../glossary/terms.md#pointer) is NULL? which bound is off?), **pin** (an `assert` that fails before the fix, passes after). Beginners skip station one and guess. Don't guess — the machine will tell you the line number for free.
+Debugging is a loop with four stations: **reproduce** (same input, same death — "bob" kills, "amy" doesn't), **observe** (compiler warnings, prints, `gdb`), **hypothesize** (which [pointer](../../../../glossary/terms.md#pointer) is NULL? which bound is off?), **pin** (an `assert` that fails before the fix, passes after). Beginners skip station one and guess. Don't guess — the machine will tell you the line number for free.
 
 Our patient `code/buggy.c` carries two classic diseases: BUG 1, `lookup` returns `NULL` for unknown names and `main` uses it unchecked (crash); BUG 2, `average` loops `i <= n` (one past the end — reads whatever lives next door, P-00/03's stack neighbor). One kills loudly, one corrupts silently. Guess which one is scarier.
 
@@ -66,7 +66,7 @@ What this does: runs the killer input under the debugger, prints the backtrace a
 | Lines | Code | Why it exists |
 |---|---|---|
 | `-ex run` | execute | starts the program with following args (`--args ./buggy bob` — the reproducer, station one, automated) |
-| `-ex bt` | backtrace | prints the call [stack](../../glossary/terms.md#stack) at the crash (P-02/02's frames, now as a crime scene) |
+| `-ex bt` | backtrace | prints the call [stack](../../../../glossary/terms.md#stack) at the crash (P-02/02's frames, now as a crime scene) |
 
 Expected output:
 
@@ -144,10 +144,10 @@ Artifact: `outputs/debug-card.md` — reproduce → observe → hypothesize → 
 
 | Term | Plain meaning | Link |
 |---|---|---|
-| pointer | `id` is NULL-able — the type doesn't say so, the function does | ../../glossary/terms.md#pointer |
-| stack | the backtrace *is* the stack, frozen at death (frames with names) | ../../glossary/terms.md#stack |
-| address | `strlen(NULL)` reads address 0 — unmapped by design, crash by design | ../../glossary/terms.md#address |
-| syscall | exit codes are the process's last syscall (`exit_group(2)` — scripts read it) | ../../glossary/terms.md#syscall |
+| pointer | `id` is NULL-able — the type doesn't say so, the function does | [pointer](../../../../glossary/terms.md#pointer) |
+| stack | the backtrace *is* the stack, frozen at death (frames with names) | [stack](../../../../glossary/terms.md#stack) |
+| address | `strlen(NULL)` reads address 0 — unmapped by design, crash by design | [address](../../../../glossary/terms.md#address) |
+| syscall | exit codes are the process's last syscall (`exit_group(2)` — scripts read it) | [syscall](../../../../glossary/terms.md#syscall) |
 
 ## Further Reading
 

@@ -20,7 +20,7 @@
 
 <!-- source: ../figures/registers-map.excalidraw — open in excalidraw.com to redraw -->
 
-x86-64 gives each function its args in [registers](../../glossary/terms.md#register): first int in `%edi`, second in `%esi`, return in `%eax` (32-bit slices of `%rdi/%rsi/%rax`). `movl $1, %eax` means "copy immediate 1 into eax": `$`=number, `%`=register, `l`=32 bits, order is source-then-destination. `addl %esi, %eax` adds esi *into* eax. `ret` jumps back. That's the whole lesson — everything else is vocabulary.
+x86-64 gives each function its args in [registers](../../../../glossary/terms.md#register): first int in `%edi`, second in `%esi`, return in `%eax` (32-bit slices of `%rdi/%rsi/%rax`). `movl $1, %eax` means "copy immediate 1 into eax": `$`=number, `%`=register, `l`=32 bits, order is source-then-destination. `addl %esi, %eax` adds esi *into* eax. `ret` jumps back. That's the whole lesson — everything else is vocabulary.
 
 ## Simulate It (host — C model of registers, no ASM yet)
 
@@ -42,7 +42,7 @@ What this does: mimics exactly what the 3-instruction ASM does, so when GDB show
 
 | Lines | Code | Why it exists |
 |---|---|---|
-| 4 | `edi/esi` vars | stand-ins for incoming [registers](../../glossary/terms.md#register); System V puts arg1/arg2 here |
+| 4 | `edi/esi` vars | stand-ins for incoming [registers](../../../../glossary/terms.md#register); System V puts arg1/arg2 here |
 | 5 | `eax = edi` | the `movl`: copy, don't move (source keeps its value — `mov` is a bad name, it's `copy`) |
 | 6 | `eax + esi` | the `addl`: result accumulates in destination (`%eax`) |
 | 8 | `return eax != 42` | exit 0 iff math right — machine-checkable proof, same as `make test` |
@@ -72,7 +72,7 @@ What this does: takes two ints from their registers, returns the sum in `%eax` �
 | 2 | `.globl add2` | export symbol so `call add2` links (ELF builds may add optional `.type add2, @function`; omitted here so Windows GAS also assembles) |
 | 5 | `movl %edi, %eax` | copy arg1 into return reg; `l` = 32-bit ints; AT&T order `src, dst` |
 | 6 | `addl %esi, %eax` | `eax += esi`; destination holds the running result |
-| 7 | `ret` | pop return [address](../../glossary/terms.md#address) into `%rip` — back to C |
+| 7 | `ret` | pop return [address](../../../../glossary/terms.md#address) into `%rip` — back to C |
 
 Change X → Y: swap to `addl %edi, %esi` + `movl %esi, %eax` (same sum, extra step). Verify: `make run` still prints 42 (proves destination choice is convention + efficiency, not magic).
 
@@ -154,9 +154,9 @@ Artifact: `outputs/asm-cheatsheet.md` — `$`/`%`/suffixes/order + 15 instructio
 
 | Term | Plain meaning | Link |
 |---|---|---|
-| register | CPU-home storage (`%eax/%edi/%esi`); fastest, smallest | ../../glossary/terms.md#register |
-| address | where code lives (`nm`/`objdump` print these in hex) | ../../glossary/terms.md#address |
-| stack | where `call` pushes return addresses (next lesson) | ../../glossary/terms.md#stack |
+| register | CPU-home storage (`%eax/%edi/%esi`); fastest, smallest | [register](../../../../glossary/terms.md#register) |
+| address | where code lives (`nm`/`objdump` print these in hex) | [address](../../../../glossary/terms.md#address) |
+| stack | where `call` pushes return addresses (next lesson) | [stack](../../../../glossary/terms.md#stack) |
 
 ## Further Reading
 

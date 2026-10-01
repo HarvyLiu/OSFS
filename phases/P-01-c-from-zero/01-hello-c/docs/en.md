@@ -20,7 +20,7 @@
 
 <!-- source: ../figures/compile-pipeline.excalidraw — open in excalidraw.com to redraw -->
 
-You write text (`main.c`). The compiler translates it to machine code (`hello`). The OS loads it and runs `main()`. `printf` asks the OS to put bytes on your terminal; `return 0` tells the parent "success" (any other number = "something failed", read via `$?` / `wait()` later). Types are just "how many bytes + how to read them": `char`=1, `int`=usually 4, addresses later. No [heap](../../glossary/terms.md#heap) yet, no [pointers](../../glossary/terms.md#pointer) yet — just the loop.
+You write text (`main.c`). The compiler translates it to machine code (`hello`). The OS loads it and runs `main()`. `printf` asks the OS to put bytes on your terminal; `return 0` tells the parent "success" (any other number = "something failed", read via `$?` / `wait()` later). Types are just "how many bytes + how to read them": `char`=1, `int`=usually 4, addresses later. No [heap](../../../../glossary/terms.md#heap) yet, no [pointers](../../../../glossary/terms.md#pointer) yet — just the loop.
 
 ## Simulate It (host, no QEMU)
 
@@ -51,7 +51,7 @@ What this does: defines a helper, loops 0–4, branches on even/odd, prints each
 | 1 | `#include <stdio.h>` | declares `printf`; hosted-only (freestanding kernels reimplement output) |
 | 3–5 | `int square(int x)` | function: takes int, returns int; OS-why: every helper (e.g. `alloc`, `schedule`) has this shape |
 | 7 | `int main(void)` | OS entry: runs after libc startup, return value becomes process exit code |
-| 8 | `for (int i=0; i<5; i++)` | loop 5 times; `int i` lives on the [stack](../../glossary/terms.md#stack), dies at `}` |
+| 8 | `for (int i=0; i<5; i++)` | loop 5 times; `int i` lives on the [stack](../../../../glossary/terms.md#stack), dies at `}` |
 | 9 | `if (i % 2 == 0)` | `%` = remainder; `==` = compare (single `=` would assign — classic beginner bug `-Wall` catches) |
 | 10–12 | `printf(...)` | formatted print: `%d` = decimal int; `\n` = newline + flush line |
 | 14 | `return 0;` | exit code 0 = success; parent reads via `$?` or `wait()` (Processes phase) |
@@ -118,7 +118,7 @@ echo $?
 strace -e trace=write ./build/hello 2>&1 | head -8
 ```
 
-What this does: runs your binary, shows its exit code, then reveals the `write` [syscall](../../glossary/terms.md#syscall) hiding inside every `printf`.
+What this does: runs your binary, shows its exit code, then reveals the `write` [syscall](../../../../glossary/terms.md#syscall) hiding inside every `printf`.
 
 | Lines | Code | Why it exists |
 |---|---|---|
@@ -142,9 +142,9 @@ Artifact: `outputs/c-loop-card.md` — the 4-line loop (edit → `make run` → 
 
 | Term | Plain meaning | Link |
 |---|---|---|
-| stack | where `i`, `x` live; freed at `}` | ../../glossary/terms.md#stack |
-| syscall | `printf` → `write` trap underneath | ../../glossary/terms.md#syscall |
-| freestanding | kernel C without `printf`; coming in Tooling 02 | ../../glossary/terms.md#freestanding |
+| stack | where `i`, `x` live; freed at `}` | [stack](../../../../glossary/terms.md#stack) |
+| syscall | `printf` → `write` trap underneath | [syscall](../../../../glossary/terms.md#syscall) |
+| freestanding | kernel C without `printf`; coming in Tooling 02 | [freestanding](../../../../glossary/terms.md#freestanding) |
 
 ## Further Reading
 

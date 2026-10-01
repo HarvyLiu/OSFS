@@ -168,9 +168,9 @@ Artifact: `outputs/mlfq-card.md` — the 4 rules + quantum guidance (small top f
 
 | Term | Plain meaning | Link |
 |---|---|---|
-| PCB | rows the queues hold (state + queue level live here in real kernels) | ../../glossary/terms.md#pcb |
-| syscall | `nice`/`sched_setscheduler` move jobs between levels from userspace | ../../glossary/terms.md#syscall |
-| heap | runqueues are heap lists/arrays of PCB pointers | ../../glossary/terms.md#heap |
+| PCB | rows the queues hold (state + queue level live here in real kernels) | [pcb](../../../../glossary/terms.md#pcb) |
+| syscall | `nice`/`sched_setscheduler` move jobs between levels from userspace | [syscall](../../../../glossary/terms.md#syscall) |
+| heap | runqueues are heap lists/arrays of PCB pointers | [heap](../../../../glossary/terms.md#heap) |
 
 ## Further Reading
 

@@ -20,7 +20,7 @@
 
 <!-- source: ../figures/pointer-map.excalidraw — open in excalidraw.com to redraw -->
 
-Think of RAM as numbered mailboxes. `int x = 42;` puts `42` in some mailbox, say #1000. `int *p = &x;` writes `#1000` on a slip of paper called `p`. `*p` means "open the mailbox whose number is on the slip". `p+1` means "next mailbox that fits an `int`", i.e. #1004 if `int` is 4 bytes — not #1001. Every OS structure (see [pointer](../../glossary/terms.md#pointer), [address](../../glossary/terms.md#address), [heap](../../glossary/terms.md#heap)) is built from this trick.
+Think of RAM as numbered mailboxes. `int x = 42;` puts `42` in some mailbox, say #1000. `int *p = &x;` writes `#1000` on a slip of paper called `p`. `*p` means "open the mailbox whose number is on the slip". `p+1` means "next mailbox that fits an `int`", i.e. #1004 if `int` is 4 bytes — not #1001. Every OS structure (see [pointer](../../../../glossary/terms.md#pointer), [address](../../../../glossary/terms.md#address), [heap](../../../../glossary/terms.md#heap)) is built from this trick.
 
 ## Simulate It (host, no QEMU)
 
@@ -46,7 +46,7 @@ What this does: stores 42, points at it, reads through the pointer, writes throu
 | Lines | Code | Why it exists |
 |---|---|---|
 | 1 | `#include <stdio.h>` | brings in `printf`; hosted C only (kernels can't use this) |
-| 4 | `int x = 42;` | reserves 4 bytes on the [stack](../../glossary/terms.md#stack), fills with 42 |
+| 4 | `int x = 42;` | reserves 4 bytes on the [stack](../../../../glossary/terms.md#stack), fills with 42 |
 | 5 | `int *p = &x;` | `&x` = address of x; `int *` = "slip of paper holding an int's address" |
 | 6 | `printf(... *p ...)` | `*p` = go to address in `p` and read the int there; proves `p` points at `x` |
 | 7 | `*p = 99;` | go to address in `p` and overwrite with 99; `x` changes too (same mailbox) |
@@ -70,7 +70,7 @@ int main(void) {
 }
 ```
 
-What this does: asks the [heap](../../glossary/terms.md#heap) for 4 bytes, writes through the returned pointer, then gives the bytes back.
+What this does: asks the [heap](../../../../glossary/terms.md#heap) for 4 bytes, writes through the returned pointer, then gives the bytes back.
 
 | Lines | Code | Why it exists |
 |---|---|---|
@@ -116,7 +116,7 @@ What this does: runs your simulator, prints its exit code, then shows your shell
 | `echo "exit=$?"` | show exit status | `return 0` in `main` becomes `$?`; OS-why: parent reads this via `wait()` (next OS lesson) |
 | `cat /proc/self/maps` | inspect mappings | `cat`'s own stack/heap/code layout — the same boxes from the 60s diagram, live |
 
-Change X → Y: run `cat /proc/$$/maps | head -5` (your shell instead of `cat`). Verify: addresses differ per process — each process has its own virtual [address](../../glossary/terms.md#address) space (OSTEP Ch.13 preview).
+Change X → Y: run `cat /proc/$$/maps | head -5` (your shell instead of `cat`). Verify: addresses differ per process — each process has its own virtual [address](../../../../glossary/terms.md#address) space (OSTEP Ch.13 preview).
 
 ## Ship It
 
@@ -134,11 +134,11 @@ Reuse in 2 lines: open the runbook next to GDB; when a crash prints an address, 
 
 | Term | Plain meaning | Link |
 |---|---|---|
-| pointer | variable holding a memory address | ../../glossary/terms.md#pointer |
-| address | numbered byte slot; `&x` takes it | ../../glossary/terms.md#address |
-| dereference | `*p` = go to the address and touch what's there | ../../glossary/terms.md#pointer |
-| heap | long-lived bytes via malloc/free | ../../glossary/terms.md#heap |
-| freestanding | C with no libc; you provide print/alloc | ../../glossary/terms.md#freestanding |
+| pointer | variable holding a memory address | [pointer](../../../../glossary/terms.md#pointer) |
+| address | numbered byte slot; `&x` takes it | [address](../../../../glossary/terms.md#address) |
+| dereference | `*p` = go to the address and touch what's there | [pointer](../../../../glossary/terms.md#pointer) |
+| heap | long-lived bytes via malloc/free | [heap](../../../../glossary/terms.md#heap) |
+| freestanding | C with no libc; you provide print/alloc | [freestanding](../../../../glossary/terms.md#freestanding) |
 
 ## Further Reading
 

@@ -20,7 +20,7 @@
 
 <!-- source: ../figures/link-layout.excalidraw — open in excalidraw.com to redraw -->
 
-Each `.o` carries *sections* (`.text` code, `.rodata` constants, `.data` initialized globals, `.bss` zeroed globals). The linker script's `SECTIONS` block concatenates them into one image at chosen addresses: `. = 1M` sets the location counter (this [address](../../glossary/terms.md#address) onward), `*(.multiboot)` pulls every multiboot header first, `ALIGN(4K)` pads to page boundaries (Memory phases will bless you for this). `ENTRY(_start)` stamps where the first jump lands. On host Linux, the default script + loader do this invisibly; kernels ship their own because *they* are the bottom.
+Each `.o` carries *sections* (`.text` code, `.rodata` constants, `.data` initialized globals, `.bss` zeroed globals). The linker script's `SECTIONS` block concatenates them into one image at chosen addresses: `. = 1M` sets the location counter (this [address](../../../../glossary/terms.md#address) onward), `*(.multiboot)` pulls every multiboot header first, `ALIGN(4K)` pads to page boundaries (Memory phases will bless you for this). `ENTRY(_start)` stamps where the first jump lands. On host Linux, the default script + loader do this invisibly; kernels ship their own because *they* are the bottom.
 
 ## Simulate It (host — sections you can touch, no QEMU)
 
@@ -54,7 +54,7 @@ What this does: plants one resident in each section class, then prints addresses
 |---|---|---|
 | 3–5 | three globals | initialized → `.data`, zero → `.bss`, `const` → `.rodata`: storage class *is* section destiny |
 | 6 | `section(".mysec")` | custom section: linker collects all `.mysec` inputs together (kernels isolate multiboot/init code this way) |
-| 8–9 | statics + local | `static` = global lifetime, function scope (`.data`/`.bss` again); `local` = [stack](../../glossary/terms.md#stack) (far away in address — compare the hex!) |
+| 8–9 | statics + local | `static` = global lifetime, function scope (`.data`/`.bss` again); `local` = [stack](../../../../glossary/terms.md#stack) (far away in address — compare the hex!) |
 | 11–13 | address print | `%p` parade: text lowest (code), then ro/data/bss clump, stack far high (ASLR jitters run to run — order stable, digits not) |
 
 Change X → Y: change `mysec_var` init `99` → `100`. Verify: values line shows `100`, address unchanged (proves content vs placement are independent axes — compiler owns one, linker the other).
@@ -71,7 +71,7 @@ What this does: runs the sim, lists section addresses/sizes, and resolves your s
 
 | Lines | Code | Why it exists |
 |---|---|---|
-| `objdump -h` | section table | `VMA` = runtime [address](../../glossary/terms.md#address), `Size` = footprint; spot `.mysec` sitting apart (your custom island, listed) |
+| `objdump -h` | section table | `VMA` = runtime [address](../../../../glossary/terms.md#address), `Size` = footprint; spot `.mysec` sitting apart (your custom island, listed) |
 | `nm ... grep` | symbol → section | `T main` (text), `D init_global` (data), `B zero_global` (bss), `R ro_const` (rodata): the letter *is* the section |
 
 Change X → Y: `objdump -h` on `/bin/ls` instead. Verify: same section names, wildly different VMAs (host loader relocates; kernels can't rely on that — hence scripts).
@@ -132,9 +132,9 @@ Artifact: `outputs/linker-card.md` — `ENTRY`/dot/`ALIGN`/section-order checkli
 
 | Term | Plain meaning | Link |
 |---|---|---|
-| address | linker assigns final ones (host: suggestion; kernel script: law) | ../../glossary/terms.md#address |
-| stack | not in the image (runtime-erected by `boot.s` — the one section money can't buy) | ../../glossary/terms.md#stack |
-| freestanding | no default script/services: you specify layout + entry + libs(=none) | ../../glossary/terms.md#freestanding |
+| address | linker assigns final ones (host: suggestion; kernel script: law) | [address](../../../../glossary/terms.md#address) |
+| stack | not in the image (runtime-erected by `boot.s` — the one section money can't buy) | [stack](../../../../glossary/terms.md#stack) |
+| freestanding | no default script/services: you specify layout + entry + libs(=none) | [freestanding](../../../../glossary/terms.md#freestanding) |
 
 ## Further Reading
 

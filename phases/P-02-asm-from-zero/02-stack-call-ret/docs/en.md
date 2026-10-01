@@ -20,7 +20,7 @@
 
 <!-- source: ../figures/stack-frames.excalidraw — open in excalidraw.com to redraw -->
 
-`call f` pushes the return [address](../../glossary/terms.md#address) and jumps. The classic prologue then pushes old `%rbp` and copies `%rsp` into `%rbp` — now `%rbp` anchors this frame while `%rsp` dances with pushes/locals. Locals live at negative offsets (`-8(%rbp)`), args that spilled at positive ones. `leave` (= `mov %rbp,%rsp; pop %rbp`) tears down, `ret` pops home. Stacks grow *down*: deeper calls = smaller `%rsp`. See [stack](../../glossary/terms.md#stack), [register](../../glossary/terms.md#register).
+`call f` pushes the return [address](../../../../glossary/terms.md#address) and jumps. The classic prologue then pushes old `%rbp` and copies `%rsp` into `%rbp` — now `%rbp` anchors this frame while `%rsp` dances with pushes/locals. Locals live at negative offsets (`-8(%rbp)`), args that spilled at positive ones. `leave` (= `mov %rbp,%rsp; pop %rbp`) tears down, `ret` pops home. Stacks grow *down*: deeper calls = smaller `%rsp`. See [stack](../../../../glossary/terms.md#stack), [register](../../../../glossary/terms.md#register).
 
 ## Simulate It (host C — watch depth move rsp, no ASM yet)
 
@@ -159,9 +159,9 @@ Artifact: `outputs/stack-card.md` — prologue/epilogue pair, `bt` + `x/` recipe
 
 | Term | Plain meaning | Link |
 |---|---|---|
-| stack | per-task frames; `%rsp` = live top, `%rbp` = frame anchor | ../../glossary/terms.md#stack |
-| register | `%rbp/%rsp/%rip` run the dance; rest ride along | ../../glossary/terms.md#register |
-| address | return addresses live on the stack (why overflow = control) | ../../glossary/terms.md#address |
+| stack | per-task frames; `%rsp` = live top, `%rbp` = frame anchor | [stack](../../../../glossary/terms.md#stack) |
+| register | `%rbp/%rsp/%rip` run the dance; rest ride along | [register](../../../../glossary/terms.md#register) |
+| address | return addresses live on the stack (why overflow = control) | [address](../../../../glossary/terms.md#address) |
 
 ## Further Reading
 

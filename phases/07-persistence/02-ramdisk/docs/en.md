@@ -199,9 +199,9 @@ Artifact: `outputs/ramdisk-card.md` — verb parity table (blk vs rd, per-verb d
 
 | Term | Plain meaning | Link |
 |---|---|---|
-| heap | the "platters" are malloc'd (device dies with the process) | ../../glossary/terms.md#heap |
-| address | block numbers address store like VPNs address RAM (numbered spaces) | ../../glossary/terms.md#address |
-| syscall | none inside (pure userspace); real `brd` crosses via block layer | ../../glossary/terms.md#syscall |
+| heap | the "platters" are malloc'd (device dies with the process) | [heap](../../../../glossary/terms.md#heap) |
+| address | block numbers address store like VPNs address RAM (numbered spaces) | [address](../../../../glossary/terms.md#address) |
+| syscall | none inside (pure userspace); real `brd` crosses via block layer | [syscall](../../../../glossary/terms.md#syscall) |
 
 ## Further Reading
 

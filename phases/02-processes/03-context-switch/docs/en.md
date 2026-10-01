@@ -20,7 +20,7 @@
 
 <!-- source: ../figures/ctx-switch.excalidraw — open in excalidraw.com to redraw -->
 
-Each task owns a [PCB](../../glossary/terms.md#pcb) (pid, state, saved `%rsp`, trapframe) plus its own [stack](../../glossary/terms.md#stack). Switching = (1) push live [registers](../../glossary/terms.md#register) onto old stack, (2) stash old `%rsp` in old PCB, (3) load new `%rsp` from new PCB, (4) pop new registers, (5) `ret` into new code. `fork()` created the cards; the scheduler deals them. Interrupts (`cli/sti`) fence the critical middle — P-02/04 topic, named here only.
+Each task owns a [PCB](../../../../glossary/terms.md#pcb) (pid, state, saved `%rsp`, trapframe) plus its own [stack](../../../../glossary/terms.md#stack). Switching = (1) push live [registers](../../../../glossary/terms.md#register) onto old stack, (2) stash old `%rsp` in old PCB, (3) load new `%rsp` from new PCB, (4) pop new registers, (5) `ret` into new code. `fork()` created the cards; the scheduler deals them. Interrupts (`cli/sti`) fence the critical middle — P-02/04 topic, named here only.
 
 ## Simulate It (host C — scheduler you can read top to bottom)
 
@@ -107,7 +107,7 @@ What this does: the 5-step dance from Concept — push, stash, load, pop, land �
 |---|---|---|
 | `pushq callee-saved` | save old task's guts on *its* stack | caller-saved regs already spilled by compiler or live only in trapframe; callee-saved must survive calls |
 | `movq %rsp,(%rdi)` / `movq %rsi,%rsp` | the actual switch | two moves = whole OS trick: which stack `%rsp` names *is* which task runs |
-| `popq + ret` | become new task | new stack's top holds its return [address](../../glossary/terms.md#address); `ret` jumps there |
+| `popq + ret` | become new task | new stack's top holds its return [address](../../../../glossary/terms.md#address); `ret` jumps there |
 
 Change X → Y: mentally drop the `pushq` block. Verify by reasoning + GDB later: new task inherits old `%rbx` — silent corruption (this is why the list is *callee-saved-complete*, never partial).
 
@@ -167,10 +167,10 @@ Artifact: `outputs/runbook-ctx.md` — "is it the switch?" triage (wrong task re
 
 | Term | Plain meaning | Link |
 |---|---|---|
-| PCB | card per task: pid, state, saved rsp, trapframe | ../../glossary/terms.md#pcb |
-| register | what gets pushed/popped; `%rsp` picks the stack | ../../glossary/terms.md#register |
-| stack | per-task call memory; switch = swap which one `%rsp` names | ../../glossary/terms.md#stack |
-| syscall | the fenced gate that will trigger kernel-side switches | ../../glossary/terms.md#syscall |
+| PCB | card per task: pid, state, saved rsp, trapframe | [pcb](../../../../glossary/terms.md#pcb) |
+| register | what gets pushed/popped; `%rsp` picks the stack | [register](../../../../glossary/terms.md#register) |
+| stack | per-task call memory; switch = swap which one `%rsp` names | [stack](../../../../glossary/terms.md#stack) |
+| syscall | the fenced gate that will trigger kernel-side switches | [syscall](../../../../glossary/terms.md#syscall) |
 
 ## Further Reading
 

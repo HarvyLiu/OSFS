@@ -20,7 +20,7 @@
 
 <!-- source: ../figures/struct-layout.excalidraw — open in excalidraw.com to redraw -->
 
-A `struct` is contiguous fields: `pid` at offset 0, `state` next, then `rsp`, then a name buffer. `sizeof` includes *padding* (alignment gaps — the compiler inserts them, `pahole`/offset prints reveal them). `p->pid` means "field pid of the struct at [address](../../glossary/terms.md#address) p" (sugar for `(*p).pid`). An `enum` names the states (`UNUSED=0, RUNNABLE, RUNNING, ZOMBIE`) so `p->state == ZOMBIE` reads like English and the compiler warns on missed cases in `switch`. A `typedef` gives the struct a short name (`pcb_t`). The OS keeps *arrays* of these: the process table. See [PCB](../../glossary/terms.md#pcb), [pointer](../../glossary/terms.md#pointer), [heap](../../glossary/terms.md#heap).
+A `struct` is contiguous fields: `pid` at offset 0, `state` next, then `rsp`, then a name buffer. `sizeof` includes *padding* (alignment gaps — the compiler inserts them, `pahole`/offset prints reveal them). `p->pid` means "field pid of the struct at [address](../../../../glossary/terms.md#address) p" (sugar for `(*p).pid`). An `enum` names the states (`UNUSED=0, RUNNABLE, RUNNING, ZOMBIE`) so `p->state == ZOMBIE` reads like English and the compiler warns on missed cases in `switch`. A `typedef` gives the struct a short name (`pcb_t`). The OS keeps *arrays* of these: the process table. See [PCB](../../../../glossary/terms.md#pcb), [pointer](../../../../glossary/terms.md#pointer), [heap](../../../../glossary/terms.md#heap).
 
 ## Simulate It (host, no QEMU)
 
@@ -84,10 +84,10 @@ What this does: owns a tiny process table end-to-end — layout printed, two row
 | Lines | Code | Why it exists |
 |---|---|---|
 | 3 | `enum state_t` | names 0–3; `UNUSED` must be 0 so static zero-init = free slot (C guarantees `static` starts zeroed) |
-| 5–10 | `struct` + `typedef` | `pid/state/rsp/name` = identity/liveness/[stack](../../glossary/terms.md#stack)/label; `typedef` lets later code say `pcb_t` not `struct pcb` |
+| 5–10 | `struct` + `typedef` | `pid/state/rsp/name` = identity/liveness/[stack](../../../../glossary/terms.md#stack)/label; `typedef` lets later code say `pcb_t` not `struct pcb` |
 | 13 | `static table[NPROC]` | the process table itself; `static` = zeroed + file-private (no other file can corrupt it) |
 | 15–26 | `alloc_pid` | first-fit free slot; `snprintf` (not `strcpy`) caps the name at 15+zero (P-01/02 zero rule) |
-| 28–34 | `find_pid` | linear scan skipping `UNUSED`; returns [pointer](../../glossary/terms.md#pointer) or `0` (caller must check — like `malloc`) |
+| 28–34 | `find_pid` | linear scan skipping `UNUSED`; returns [pointer](../../../../glossary/terms.md#pointer) or `0` (caller must check — like `malloc`) |
 | 37–39 | `offsetof` print | byte offsets of fields: proves layout is numbers, reveals padding before it surprises you |
 | 40–44 | transitions | `->` writes through the pointer into the *shared* table (no copies — scheduler and fork see the same row) |
 | 45–49 | reap + count | `ZOMBIE→UNUSED` = what `wait()` does; count proves the table, not hope, tracks liveness |
@@ -164,9 +164,9 @@ Artifact: `outputs/pcb-template.h` — drop-in `pcb_t` + state enum + `alloc/fin
 
 | Term | Plain meaning | Link |
 |---|---|---|
-| PCB | one struct row per process; table = the OS's roster | ../../glossary/terms.md#pcb |
-| address | `&table[i]` locates row `i`; `->` reaches its fields | ../../glossary/terms.md#address |
-| heap | where a grown-up table lives when N isn't known at compile time | ../../glossary/terms.md#heap |
+| PCB | one struct row per process; table = the OS's roster | [pcb](../../../../glossary/terms.md#pcb) |
+| address | `&table[i]` locates row `i`; `->` reaches its fields | [address](../../../../glossary/terms.md#address) |
+| heap | where a grown-up table lives when N isn't known at compile time | [heap](../../../../glossary/terms.md#heap) |
 
 ## Further Reading
 

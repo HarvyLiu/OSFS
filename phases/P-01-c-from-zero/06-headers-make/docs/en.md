@@ -44,7 +44,7 @@ What this does: publishes the type + two function signatures with zero code — 
 |---|---|---|
 | 2–3 | `#ifndef/#define` | include guard: second paste in one translation unit becomes empty (headers including headers would otherwise redefine `vec_t`) |
 | 6 | `typedef struct...` | shared layout: both files must agree byte-for-byte or field writes corrupt (one definition of truth, pasted twice) |
-| 7–8 | declarations (`;`, no body) | "exists somewhere": compiler emits a *call*, linker later patches the [address](../../glossary/terms.md#address) |
+| 7–8 | declarations (`;`, no body) | "exists somewhere": compiler emits a *call*, linker later patches the [address](../../../../glossary/terms.md#address) |
 | 10 | `#endif` | closes the guard (forget it and nothing compiles — first error points at the *next* file, classic confusion) |
 
 Change X → Y: delete the `#ifndef` line (keep the rest). Verify: `make` fails with `redefinition of vec_t` (proves the guard was load-bearing — `vec.c` includes the header *and* `main.c` does, and the link sees both... actually the error fires at compile of either file that transitively includes twice; restore and it passes).
@@ -184,9 +184,9 @@ Artifact: `outputs/makefile-template` — parameterized 2-file starter (swap `sp
 
 | Term | Plain meaning | Link |
 |---|---|---|
-| address | linker patches call sites with callee addresses across objects | ../../glossary/terms.md#address |
-| heap | `vec` data still heap-owned; split changes organization, not lifetime | ../../glossary/terms.md#heap |
-| freestanding | kernels compile `-ffreestanding` per file the same way; only the link differs (linker script) | ../../glossary/terms.md#freestanding |
+| address | linker patches call sites with callee addresses across objects | [address](../../../../glossary/terms.md#address) |
+| heap | `vec` data still heap-owned; split changes organization, not lifetime | [heap](../../../../glossary/terms.md#heap) |
+| freestanding | kernels compile `-ffreestanding` per file the same way; only the link differs (linker script) | [freestanding](../../../../glossary/terms.md#freestanding) |
 
 ## Further Reading
 

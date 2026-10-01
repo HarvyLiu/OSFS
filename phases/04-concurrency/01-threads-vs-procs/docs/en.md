@@ -20,7 +20,7 @@
 
 <!-- source: ../figures/threads-procs.excalidraw — open in excalidraw.com to redraw -->
 
-`fork()` clones code+data+files (separate worlds; talking needs pipes). `pthread_create` adds a [stack](../../glossary/terms.md#stack) + [register](../../glossary/terms.md#register) set to the *same* world (all globals shared for free — and for danger). `counter++` compiles to load→add→store: two threads can load the same value, both add, both store — one update vanishes. Four threads × 100k increments *should* be 400k; racy builds land short (how short depends on cores/timing — nondeterminism is the symptom). A mutex serializes the triple into atomicity (next lesson derives *how*; here we use it as the control group).
+`fork()` clones code+data+files (separate worlds; talking needs pipes). `pthread_create` adds a [stack](../../../../glossary/terms.md#stack) + [register](../../../../glossary/terms.md#register) set to the *same* world (all globals shared for free — and for danger). `counter++` compiles to load→add→store: two threads can load the same value, both add, both store — one update vanishes. Four threads × 100k increments *should* be 400k; racy builds land short (how short depends on cores/timing — nondeterminism is the symptom). A mutex serializes the triple into atomicity (next lesson derives *how*; here we use it as the control group).
 
 ## Simulate It (host pthreads — Linux/WSL/Docker; MinGW also provides pthreads)
 
@@ -133,10 +133,10 @@ Artifact: `outputs/race-card.md` — sharing checklist (what's shared: globals/h
 
 | Term | Plain meaning | Link |
 |---|---|---|
-| stack | per-thread private (N threads = N stacks, 1 address space) | ../../glossary/terms.md#stack |
-| register | per-thread live state (switch saves/restores per thread, same as 02/03) | ../../glossary/terms.md#register |
-| heap | shared by default across threads (the bug factory + the feature) | ../../glossary/terms.md#heap |
-| syscall | `clone` creates threads; `futex` sleeps mutexes (next lesson's floor) | ../../glossary/terms.md#syscall |
+| stack | per-thread private (N threads = N stacks, 1 address space) | [stack](../../../../glossary/terms.md#stack) |
+| register | per-thread live state (switch saves/restores per thread, same as 02/03) | [register](../../../../glossary/terms.md#register) |
+| heap | shared by default across threads (the bug factory + the feature) | [heap](../../../../glossary/terms.md#heap) |
+| syscall | `clone` creates threads; `futex` sleeps mutexes (next lesson's floor) | [syscall](../../../../glossary/terms.md#syscall) |
 
 ## Further Reading
 

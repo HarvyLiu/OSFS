@@ -117,9 +117,9 @@ Artifact: `outputs/rings-card.md` — THE rule, CPL/DPL glossary, gate-vs-segmen
 
 | Term | Plain meaning | Link |
 |---|---|---|
-| syscall | the DPL-3 gate every lesson has knocked (now with its doorframe visible) | ../../glossary/terms.md#syscall |
-| register | CPL lives in CS register bits (RPL in selector — silicon-stored privilege) | ../../glossary/terms.md#register |
-| address | DPLs attach to segments/pages (protection rides addressing — 05 meets 09) | ../../glossary/terms.md#address |
+| syscall | the DPL-3 gate every lesson has knocked (now with its doorframe visible) | [syscall](../../../../glossary/terms.md#syscall) |
+| register | CPL lives in CS register bits (RPL in selector — silicon-stored privilege) | [register](../../../../glossary/terms.md#register) |
+| address | DPLs attach to segments/pages (protection rides addressing — 05 meets 09) | [address](../../../../glossary/terms.md#address) |
 
 ## Further Reading
 

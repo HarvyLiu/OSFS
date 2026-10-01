@@ -175,9 +175,9 @@ Artifact: `outputs/ffi-fence-check.md` — width table (never `long`/`int` acros
 
 | Term | Plain meaning | Link |
 |---|---|---|
-| address | raw pointers cross as addresses; validity is a *contract*, not a type | ../../glossary/terms.md#address |
-| heap | `Box` can't cross raw (ownership is Rust-only); cross with `into_raw`/`from_raw` pairs | ../../glossary/terms.md#heap |
-| PCB | the struct that crosses first (fields both sides read — keep widths fixed) | ../../glossary/terms.md#pcb |
+| address | raw pointers cross as addresses; validity is a *contract*, not a type | [address](../../../../glossary/terms.md#address) |
+| heap | `Box` can't cross raw (ownership is Rust-only); cross with `into_raw`/`from_raw` pairs | [heap](../../../../glossary/terms.md#heap) |
+| PCB | the struct that crosses first (fields both sides read — keep widths fixed) | [pcb](../../../../glossary/terms.md#pcb) |
 
 ## Further Reading
 

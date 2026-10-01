@@ -141,9 +141,9 @@ Artifact: `outputs/tlb-card.md` — hit/miss costs, EAT formula, FIFO-vs-LRU not
 
 | Term | Plain meaning | Link |
 |---|---|---|
-| TLB | cached VPN→frame answers (per-CPU, flushed or ASID-tagged) | ../../glossary/terms.md#tlb |
-| page | 4 KiB unit the cache keys on (huge pages: fewer keys, more reach) | ../../glossary/terms.md#page |
-| PCB | switch swaps roots → TLB flush (unless ASID); cost of context switch, part 2 | ../../glossary/terms.md#pcb |
+| TLB | cached VPN→frame answers (per-CPU, flushed or ASID-tagged) | [tlb](../../../../glossary/terms.md#tlb) |
+| page | 4 KiB unit the cache keys on (huge pages: fewer keys, more reach) | [page](../../../../glossary/terms.md#page) |
+| PCB | switch swaps roots → TLB flush (unless ASID); cost of context switch, part 2 | [pcb](../../../../glossary/terms.md#pcb) |
 
 ## Further Reading
 

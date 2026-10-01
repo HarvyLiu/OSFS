@@ -20,7 +20,7 @@
 
 <!-- source: ../figures/addressing-map.excalidraw — open in excalidraw.com to redraw -->
 
-AT&T memory syntax: `offset(base,index,scale)` = `base + index*scale + offset`, where scale ∈ {1,2,4,8}. `movl 8(%rdi), %eax` *loads* the 4 bytes at that [address](../../glossary/terms.md#address). `leal 8(%rdi), %eax` *computes* the address itself into `%eax` — no memory touched. Compilers abuse `lea` for fast multiply-add (`x*3` = `x + x*2`). Struct fields are just offsets (`rsp` at +8 when `pid` at +0 — your PCB from P-01/05). Array indexing is just scale (`int` = ×4).
+AT&T memory syntax: `offset(base,index,scale)` = `base + index*scale + offset`, where scale ∈ {1,2,4,8}. `movl 8(%rdi), %eax` *loads* the 4 bytes at that [address](../../../../glossary/terms.md#address). `leal 8(%rdi), %eax` *computes* the address itself into `%eax` — no memory touched. Compilers abuse `lea` for fast multiply-add (`x*3` = `x + x*2`). Struct fields are just offsets (`rsp` at +8 when `pid` at +0 — your PCB from P-01/05). Array indexing is just scale (`int` = ×4).
 
 ## Simulate It (host C — the math before the mnemonics)
 
@@ -80,7 +80,7 @@ What this does: loads `base[i]`, computes `x*3` without touching memory, loads a
 
 | Lines | Code | Why it exists |
 |---|---|---|
-| 5 | `movl (%rdi,%rsi,4),%eax` | dereference `base + i*4`: `%rdi`=base, `%rsi`=i, `4`=[sizeof](../../glossary/terms.md#address) int; parens = go there |
+| 5 | `movl (%rdi,%rsi,4),%eax` | dereference `base + i*4`: `%rdi`=base, `%rsi`=i, `4`=[sizeof](../../../../glossary/terms.md#address) int; parens = go there |
 | 10 | `leal (%rdi,%rdi,2),%eax` | *no* parens-in-spirit: compute `rdi + rdi*2` into `%eax`; `lea` never dereferences, even though the syntax looks like memory |
 | 15 | `movl 4(%rdi),%eax` | field at offset 4 (state after pid): `base+4`, scale implied 1 |
 
@@ -171,9 +171,9 @@ Artifact: `outputs/addressing-card.md` — the `offset(base,index,scale)` formul
 
 | Term | Plain meaning | Link |
 |---|---|---|
-| register | base/index holders (`%rdi/%rsi`); result in `%eax` | ../../glossary/terms.md#register |
-| address | `offset(base,index,scale)` computes one; `mov` visits it | ../../glossary/terms.md#address |
-| heap | arrays/tables live here at runtime; scales walk them | ../../glossary/terms.md#heap |
+| register | base/index holders (`%rdi/%rsi`); result in `%eax` | [register](../../../../glossary/terms.md#register) |
+| address | `offset(base,index,scale)` computes one; `mov` visits it | [address](../../../../glossary/terms.md#address) |
+| heap | arrays/tables live here at runtime; scales walk them | [heap](../../../../glossary/terms.md#heap) |
 
 ## Further Reading
 

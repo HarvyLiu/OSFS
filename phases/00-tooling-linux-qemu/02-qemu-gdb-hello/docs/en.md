@@ -20,7 +20,7 @@
 
 <!-- source: ../figures/qemu-gdb-map.excalidraw — open in excalidraw.com to redraw -->
 
-No `printf` here. QEMU emulates a PC; your `kernel.elf` *is* the OS. `_start` sets a [stack](../../glossary/terms.md#stack), calls C, C pokes bytes at serial port `0x3F8`, QEMU forwards them to your terminal (`-nographic`). GDB attaches over TCP `:1234` (`-S -s`) to freeze and inspect — same GDB you'll use for every later crash. See [freestanding](../../glossary/terms.md#freestanding), [register](../../glossary/terms.md#register).
+No `printf` here. QEMU emulates a PC; your `kernel.elf` *is* the OS. `_start` sets a [stack](../../../../glossary/terms.md#stack), calls C, C pokes bytes at serial port `0x3F8`, QEMU forwards them to your terminal (`-nographic`). GDB attaches over TCP `:1234` (`-S -s`) to freeze and inspect — same GDB you'll use for every later crash. See [freestanding](../../../../glossary/terms.md#freestanding), [register](../../../../glossary/terms.md#register).
 
 ## Simulate It (host — understand serial math first, no QEMU)
 
@@ -85,14 +85,14 @@ hang:
 stack_top:
 ```
 
-What this does: tells QEMU "I'm a bootable kernel" (multiboot magic), sets a [stack](../../glossary/terms.md#stack), calls C, then halts forever if C returns.
+What this does: tells QEMU "I'm a bootable kernel" (multiboot magic), sets a [stack](../../../../glossary/terms.md#stack), calls C, then halts forever if C returns.
 
 | Lines | Code | Why it exists |
 |---|---|---|
 | 1–3 | `MAGIC/FLAGS/CHECKSUM` | multiboot1 contract: QEMU scans for `0x1BADB002`; checksum must sum to zero or it refuses to boot |
 | 6–9 | `.long` trio | the actual 12-byte header the scanner finds; miss one and you get `not a bootable kernel` |
 | 14–15 | `.globl _start` | export entry so `linker.ld ENTRY(_start)` can find it |
-| 17 | `movl $stack_top, %esp` | AT&T `src→dst`: load stack address into `%esp`; C needs a [stack](../../glossary/terms.md#stack) before one `call` |
+| 17 | `movl $stack_top, %esp` | AT&T `src→dst`: load stack address into `%esp`; C needs a [stack](../../../../glossary/terms.md#stack) before one `call` |
 | 18 | `call kernel_main` | jump to C, push return address (never actually returns) |
 | 19–22 | `cli/hlt/jmp` | `cli` = ignore interrupts, `hlt` = sleep CPU, `jmp hang` = if woken, sleep again — safe park |
 
@@ -185,7 +185,7 @@ What this does: `qemu` boots and forwards serial to your terminal; `debug` freez
 | Lines | Code | Why it exists |
 |---|---|---|
 | `make qemu` | boot + watch serial | `timeout 5` = never hang CI; expect `OSFS hello on serial` then timeout kill (exit 124 = success-with-timeout) |
-| `make debug` | `-S -s` + GDB | `-S` = freeze, `-s` = `:1234`; `break kernel_main` + `c` lands you on your C with [registers](../../glossary/terms.md#register) inspectable |
+| `make debug` | `-S -s` + GDB | `-S` = freeze, `-s` = `:1234`; `break kernel_main` + `c` lands you on your C with [registers](../../../../glossary/terms.md#register) inspectable |
 
 Change X → Y: in GDB run `info registers esp` at `_start` vs inside `kernel_main`. Verify: same high value near `stack_top` — proves the ASM stack setup survived into C.
 
@@ -223,9 +223,9 @@ Artifacts in `outputs/`: `qemu-cheatsheet.md` (`run`/`debug`/`quit` keys: `Ctrl-
 
 | Term | Plain meaning | Link |
 |---|---|---|
-| register | CPU-owned slot (`%esp`, `%eax`); ASM lives here | ../../glossary/terms.md#register |
-| stack | call frames + locals; you built one in `boot.s` | ../../glossary/terms.md#stack |
-| freestanding | no libc; you are the runtime | ../../glossary/terms.md#freestanding |
+| register | CPU-owned slot (`%esp`, `%eax`); ASM lives here | [register](../../../../glossary/terms.md#register) |
+| stack | call frames + locals; you built one in `boot.s` | [stack](../../../../glossary/terms.md#stack) |
+| freestanding | no libc; you are the runtime | [freestanding](../../../../glossary/terms.md#freestanding) |
 
 ## Further Reading
 

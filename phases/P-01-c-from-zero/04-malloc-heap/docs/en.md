@@ -20,7 +20,7 @@
 
 <!-- source: ../figures/heap-map.excalidraw — open in excalidraw.com to redraw -->
 
-[Stack](../../glossary/terms.md#stack) frames die at `}`. The [heap](../../glossary/terms.md#heap) lives until *you* free it — across calls, across files, until process exit (or forever, if you leak). `malloc(n)` asks for `n` bytes, returns an [address](../../glossary/terms.md#address) or `NULL`. `realloc` grows (maybe moving). `free` gives back. Ownership rule: exactly one owner frees, exactly once, never touches after. Break it three ways: leak (never free), double-free (free twice → heap metadata corrupt), use-after-free (touch after free → somebody else's bytes now).
+[Stack](../../../../glossary/terms.md#stack) frames die at `}`. The [heap](../../../../glossary/terms.md#heap) lives until *you* free it — across calls, across files, until process exit (or forever, if you leak). `malloc(n)` asks for `n` bytes, returns an [address](../../../../glossary/terms.md#address) or `NULL`. `realloc` grows (maybe moving). `free` gives back. Ownership rule: exactly one owner frees, exactly once, never touches after. Break it three ways: leak (never free), double-free (free twice → heap metadata corrupt), use-after-free (touch after free → somebody else's bytes now).
 
 ## Simulate It (host, no QEMU)
 
@@ -133,9 +133,9 @@ Artifact: `outputs/heap-card.md` — ownership trilogy (one malloc→one free, n
 
 | Term | Plain meaning | Link |
 |---|---|---|
-| heap | owned-until-freed bytes; you are the lifetime manager | ../../glossary/terms.md#heap |
-| pointer | the address malloc returns; NULL = ask failed | ../../glossary/terms.md#pointer |
-| address | heap ranges show in `/proc/*/maps` as `[heap]` | ../../glossary/terms.md#address |
+| heap | owned-until-freed bytes; you are the lifetime manager | [heap](../../../../glossary/terms.md#heap) |
+| pointer | the address malloc returns; NULL = ask failed | [pointer](../../../../glossary/terms.md#pointer) |
+| address | heap ranges show in `/proc/*/maps` as `[heap]` | [address](../../../../glossary/terms.md#address) |
 
 ## Further Reading
 

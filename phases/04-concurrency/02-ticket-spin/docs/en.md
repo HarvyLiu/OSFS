@@ -76,7 +76,7 @@ What this does: numbers arrivals atomically, parks each on its number, hands off
 |---|---|---|
 | 5–8 | init stores | release-semantics reset (plain `=` would also work pre-sharing; atomics document intent from line one) |
 | 11 | `fetch_add` take | THE atomic step: read-and-bump as one (two threads can never draw the same number — hardware serializes) |
-| 12–16 | spin on load | reread `now_serving` every lap (`atomic_load` blocks hoisting into a [register](../../glossary/terms.md#register) — caching it would spin forever); `pause` hints the core (spin politely: power + sibling-hyperthread throughput) |
+| 12–16 | spin on load | reread `now_serving` every lap (`atomic_load` blocks hoisting into a [register](../../../../glossary/terms.md#register) — caching it would spin forever); `pause` hints the core (spin politely: power + sibling-hyperthread throughput) |
 | 20–22 | unlock bump | display advances; exactly one waiter matches and proceeds (no thundering herd — only the holder writes) |
 
 Change X → Y: delete the `pause` lines. Verify: still exact, slightly hotter under contention (measure with `time`: user-time climbs — politeness has a meter, impoliteness too).
@@ -170,10 +170,10 @@ Artifact: `outputs/lock-card.md` — take/wait/advance trio, spin-vs-sleep rule 
 
 | Term | Plain meaning | Link |
 |---|---|---|
-| register | `fetch_add` executes in hardware on cache lines backing these fields | ../../glossary/terms.md#register |
-| heap | lock + counter live shared (same factory as 04/01's bug, now fenced) | ../../glossary/terms.md#heap |
-| stack | each spinner has its own (spinning burns core, not stack — depth stays flat) | ../../glossary/terms.md#stack |
-| syscall | none here (pure userspace spin); futex sleeps need the kernel (next) | ../../glossary/terms.md#syscall |
+| register | `fetch_add` executes in hardware on cache lines backing these fields | [register](../../../../glossary/terms.md#register) |
+| heap | lock + counter live shared (same factory as 04/01's bug, now fenced) | [heap](../../../../glossary/terms.md#heap) |
+| stack | each spinner has its own (spinning burns core, not stack — depth stays flat) | [stack](../../../../glossary/terms.md#stack) |
+| syscall | none here (pure userspace spin); futex sleeps need the kernel (next) | [syscall](../../../../glossary/terms.md#syscall) |
 
 ## Further Reading
 

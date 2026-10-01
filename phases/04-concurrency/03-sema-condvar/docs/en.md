@@ -233,10 +233,10 @@ Artifact: `outputs/sync-card.md` — sem/wait/post, empty+full+mutex trio recipe
 
 | Term | Plain meaning | Link |
 |---|---|---|
-| heap | buffer + semaphores shared (fenced, paced — the civilized factory) | ../../glossary/terms.md#heap |
-| stack | per-thread; waiters' stacks persist while descheduled (sleep ≠ death) | ../../glossary/terms.md#stack |
-| syscall | `futex` underpins real sleep locks (this lesson's pure-userspace prequel) | ../../glossary/terms.md#syscall |
-| PCB | blocked state lives here (RUNNABLE→SLEEPING + wakeup channel) | ../../glossary/terms.md#pcb |
+| heap | buffer + semaphores shared (fenced, paced — the civilized factory) | [heap](../../../../glossary/terms.md#heap) |
+| stack | per-thread; waiters' stacks persist while descheduled (sleep ≠ death) | [stack](../../../../glossary/terms.md#stack) |
+| syscall | `futex` underpins real sleep locks (this lesson's pure-userspace prequel) | [syscall](../../../../glossary/terms.md#syscall) |
+| PCB | blocked state lives here (RUNNABLE→SLEEPING + wakeup channel) | [pcb](../../../../glossary/terms.md#pcb) |
 
 ## Further Reading
 

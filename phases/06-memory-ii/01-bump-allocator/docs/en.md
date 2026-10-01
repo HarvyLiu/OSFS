@@ -141,9 +141,9 @@ Artifact: `outputs/bump.rs` — `align_up` + `Bump` as Phase 10's boot allocator
 
 | Term | Plain meaning | Link |
 |---|---|---|
-| heap | this lesson *is* a heap (owned region + cursor + discipline) | ../../glossary/terms.md#heap |
-| address | handed-out pointers are arena offsets made absolute (base+cursor) | ../../glossary/terms.md#address |
-| page | page-granular bump (Exercise 2) feeds multi-level tables directly | ../../glossary/terms.md#page |
+| heap | this lesson *is* a heap (owned region + cursor + discipline) | [heap](../../../../glossary/terms.md#heap) |
+| address | handed-out pointers are arena offsets made absolute (base+cursor) | [address](../../../../glossary/terms.md#address) |
+| page | page-granular bump (Exercise 2) feeds multi-level tables directly | [page](../../../../glossary/terms.md#page) |
 
 ## Further Reading
 

@@ -20,7 +20,7 @@
 
 <!-- source: ../figures/bits-map.excalidraw — open in excalidraw.com to redraw -->
 
-One hex digit = 4 bits = one nibble. `0xA` = `1010` = 10. Two hex digits = one byte (`0x00`–`0xFF`). Addresses are hex because 64 bits in binary is unreadable but in hex is 16 chars (`0x7fff...`). Bit ops: `<<` = ×2ⁿ, `>>` = ÷2ⁿ, `&` = mask (keep these bits), `|` = set, `^` = flip. An [address](../../glossary/terms.md#address) is just a big number printed in hex.
+One hex digit = 4 bits = one nibble. `0xA` = `1010` = 10. Two hex digits = one byte (`0x00`–`0xFF`). Addresses are hex because 64 bits in binary is unreadable but in hex is 16 chars (`0x7fff...`). Bit ops: `<<` = ×2ⁿ, `>>` = ÷2ⁿ, `&` = mask (keep these bits), `|` = set, `^` = flip. An [address](../../../../glossary/terms.md#address) is just a big number printed in hex.
 
 ## Simulate It (host, no QEMU)
 
@@ -103,8 +103,8 @@ Artifact: `outputs/hex-card.md` — nibble table + `<<`/`>>`/`&` one-liners + GD
 
 | Term | Plain meaning | Link |
 |---|---|---|
-| address | byte number, printed hex by convention | ../../glossary/terms.md#address |
-| register | bit bucket (`%eax`); shifts/masks live here | ../../glossary/terms.md#register |
+| address | byte number, printed hex by convention | [address](../../../../glossary/terms.md#address) |
+| register | bit bucket (`%eax`); shifts/masks live here | [register](../../../../glossary/terms.md#register) |
 
 ## Further Reading
 

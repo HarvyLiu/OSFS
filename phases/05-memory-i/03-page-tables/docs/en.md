@@ -20,7 +20,7 @@
 
 <!-- source: ../figures/multilevel-walk.excalidraw — open in excalidraw.com to redraw -->
 
-A flat 32-bit table needs 2²⁰ entries × 4B = 4 MiB *per process* (sparse spaces mostly pay for air). Split the 20-bit VPN into dir(10b)+table(10b): 1024-entry directory, each live slot points at a 1024-entry page table (4 KiB exactly — one page per table, how convenient), each PTE holds frame+flags. Empty 4 MiB region = one NULL dir slot (4 bytes, not 1024×4). Walk: `pd = va>>22`, `pt = va>>12&0x3FF`, `off = va&0xFFF`: dir → table → frame → `frame*4096+off`. PTE bits: P(esent), RW, U(ser) — the enforcement trio. Root = the [PCB](../../glossary/terms.md#pcb)'s page-table pointer = CR3's value (one [register](../../glossary/terms.md#register) names a universe).
+A flat 32-bit table needs 2²⁰ entries × 4B = 4 MiB *per process* (sparse spaces mostly pay for air). Split the 20-bit VPN into dir(10b)+table(10b): 1024-entry directory, each live slot points at a 1024-entry page table (4 KiB exactly — one page per table, how convenient), each PTE holds frame+flags. Empty 4 MiB region = one NULL dir slot (4 bytes, not 1024×4). Walk: `pd = va>>22`, `pt = va>>12&0x3FF`, `off = va&0xFFF`: dir → table → frame → `frame*4096+off`. PTE bits: P(esent), RW, U(ser) — the enforcement trio. Root = the [PCB](../../../../glossary/terms.md#pcb)'s page-table pointer = CR3's value (one [register](../../../../glossary/terms.md#register) names a universe).
 
 ## Simulate It (host C — the walk, no QEMU)
 
@@ -204,10 +204,10 @@ Artifact: `outputs/walk-card.md` — 10/10/12 split, walk pseudocode (dir→tabl
 
 | Term | Plain meaning | Link |
 |---|---|---|
-| page | 4 KiB frame unit; tables map VPNs to frames, offsets ride free | ../../glossary/terms.md#page |
-| TLB | caches walk results (this walk runs on miss — 06 Memory II prices it) | ../../glossary/terms.md#tlb |
-| PCB | carries the root (per-process universe in one pointer — CR3's value) | ../../glossary/terms.md#pcb |
-| address | dir/table/offset fields *inside* the number (never translated whole) | ../../glossary/terms.md#address |
+| page | 4 KiB frame unit; tables map VPNs to frames, offsets ride free | [page](../../../../glossary/terms.md#page) |
+| TLB | caches walk results (this walk runs on miss — 06 Memory II prices it) | [tlb](../../../../glossary/terms.md#tlb) |
+| PCB | carries the root (per-process universe in one pointer — CR3's value) | [pcb](../../../../glossary/terms.md#pcb) |
+| address | dir/table/offset fields *inside* the number (never translated whole) | [address](../../../../glossary/terms.md#address) |
 
 ## Further Reading
 

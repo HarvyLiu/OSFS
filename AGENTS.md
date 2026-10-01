@@ -53,7 +53,7 @@ Required sections: `Concept in 60s`, `Simulate It`, `Build It`, `Use It (Linux)`
 - Host sim must build with `cc -Wall -Werror` or `cargo test` and exit 0, no QEMU needed.
 - Bare-metal must build with `make` and boot in `qemu-system-x86_64 -nographic` with serial output, timeout-safe.
 - 4–6 line header comment citing `docs/en.md` path.
-- `code/tests/` with ≥3 checks (C `assert` runner or `cargo test`).
+- `code/tests/` with ≥3 checks (C `assert` runner or `cargo test`). Single-file Rust lessons (`rustc`, no cargo) may pin ≥3 checks in an inline `#[cfg(test)] mod checks` run via `rustc --test` instead.
 - Tests run from `code/` as cwd (`make -C <lesson>/code test` → `python3 -m unittest discover -s tests -v`). Test files must `read_text(encoding="utf-8")` and fix `sys.path` to import sibling modules — never rely on repo-root cwd or locale default encoding.
 - Code sources (`*.c/*.s/*.rs/*.py`) stay plain ASCII in comments/strings where possible (no em-dashes/smart quotes); docs (`en.md`) may use full UTF-8.
 

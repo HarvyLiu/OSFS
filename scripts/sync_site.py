@@ -17,6 +17,32 @@ PHASES = ROOT / "phases"
 SITE = ROOT / "site-astro" / "src" / "content" / "docs"
 LESSONS_DIR = SITE / "lessons"
 
+# Pedagogical order (rglob sorts P- last; the book reads primer first).
+PHASE_ORDER = [
+    "P-00-mental-model", "P-01-c-from-zero", "P-02-asm-from-zero",
+    "P-03-rust-from-zero", "00-tooling-linux-qemu", "01-what-is-os",
+    "02-processes", "03-scheduling", "04-concurrency", "05-memory-i",
+    "06-memory-ii", "07-persistence", "08-filesystems", "09-protection",
+    "10-boot-to-shell",
+]
+PART_LABELS = {
+    "P-00-mental-model": "Primer · Mental Models",
+    "P-01-c-from-zero": "Primer · C",
+    "P-02-asm-from-zero": "Primer · Assembly",
+    "P-03-rust-from-zero": "Primer · Rust",
+    "00-tooling-linux-qemu": "Tooling",
+    "01-what-is-os": "Part I · What Is an OS",
+    "02-processes": "Part II · Processes",
+    "03-scheduling": "Part III · Scheduling",
+    "04-concurrency": "Part IV · Concurrency",
+    "05-memory-i": "Part V · Memory I",
+    "06-memory-ii": "Part VI · Memory II",
+    "07-persistence": "Part VII · Persistence",
+    "08-filesystems": "Part VIII · Filesystems",
+    "09-protection": "Part IX · Protection",
+    "10-boot-to-shell": "Part X · Capstone",
+}
+
 
 def frontmatter(title, description):
     def esc(s):
@@ -45,7 +71,25 @@ def strip_first_h1(text):
     return "".join(lines).lstrip("\n")
 
 
-def sync_lesson(en_path):
+def lesson_time(text):
+    m = re.search(r"\*\*Time:\*\*\s*(.+)", text)
+    return m.group(1).strip() if m else ""
+
+
+def chapter_kicker(number, phase, text):
+    part = PART_LABELS.get(phase, phase)
+    time = lesson_time(text) or "self-paced"
+    words = len(text.split())
+    return (
+        f'<p class="chapter-kicker">Chapter {number} · {part} · '
+        f'{time} · ~{words} words<br/>╌╌╌╌</p>\n\n'
+    )
+
+
+CHAPTER_END = '\n\n<p class="chapter-end">╌╌ END ╌╌</p>\n'
+
+
+def sync_lesson(en_path, number):
     phase = en_path.parents[2].name
     lesson = en_path.parents[1].name
     slug = f"{phase}--{lesson}"
@@ -62,7 +106,11 @@ def sync_lesson(en_path):
     # glossary links: repo-relative -> site page (anchors survive: ## pointer)
     body = body.replace("](../../../../glossary/terms.md", "](../glossary/")
     (LESSONS_DIR / f"{slug}.md").write_text(
-        frontmatter(title, hook or title) + body, encoding="utf-8"
+        frontmatter(title, hook or title)
+        + chapter_kicker(number, phase, text)
+        + body.rstrip("\n")
+        + CHAPTER_END,
+        encoding="utf-8",
     )
     return slug
 
@@ -77,13 +125,24 @@ def sync_page(src, dest_name, fallback_title):
     )
 
 
+def ordered_lessons():
+    found = list(PHASES.rglob("docs/en.md")) if PHASES.exists() else []
+    by_phase = {}
+    for en in found:
+        by_phase.setdefault(en.parents[2].name, []).append(en)
+    ordered = []
+    for phase in PHASE_ORDER:
+        ordered += sorted(by_phase.get(phase, []))
+    return ordered
+
+
 def main():
     if LESSONS_DIR.exists():
         shutil.rmtree(LESSONS_DIR)
     LESSONS_DIR.mkdir(parents=True)
-    lessons = sorted(PHASES.rglob("docs/en.md")) if PHASES.exists() else []
-    for en in lessons:
-        sync_lesson(en)
+    lessons = ordered_lessons()
+    for n, en in enumerate(lessons, 1):
+        sync_lesson(en, n)
     sync_page(ROOT / "ROADMAP.md", "roadmap.md", "Roadmap")
     sync_page(ROOT / "glossary" / "terms.md", "glossary.md", "Glossary")
     print(f"OK: synced {len(lessons)} lessons + roadmap + glossary to site-astro")

@@ -20,9 +20,23 @@
 
 <!-- source: ../figures/bits-map.excalidraw — open in excalidraw.com to redraw -->
 
-One hex digit = 4 bits = one nibble. `0xA` = `1010` = 10. Two hex digits = one byte (`0x00`–`0xFF`). Addresses are hex because 64 bits in binary is unreadable but in hex is 16 chars (`0x7fff...`). Bit ops: `<<` = ×2ⁿ, `>>` = ÷2ⁿ, `&` = mask (keep these bits), `|` = set, `^` = flip. An [address](../../../../glossary/terms.md#address) is just a big number printed in hex.
+Sooner or later — this book bets sooner — you will stare at a screenful of
+`7f3a9c...` and need to know what it says. Here is the whole trick, and it
+fits in one sentence: one hex digit is exactly four bits, one nibble, so
+`0xA6` is two handfuls of bits side by side (`1010 0110`).
+
+Unpack that and everything else follows. Two hex digits make a byte
+(`0x00`–`0xFF`). Sixty-four bits of address in binary would run off the
+screen; in hex they compress to sixteen calm characters (`0x7fff...`), which
+is why every dump, debugger, and linker script you will ever meet speaks hex.
+The bit operators are arithmetic in disguise: `<<` multiplies by powers of
+two, `>>` divides, `&` with a mask keeps only the bits you point at, `|` sets
+them, `^` flips them. And an [address](../../../../glossary/terms.md#address)
+is nothing mystical — a big number, printed in hex by convention.
 
 ## Simulate It (host, no QEMU)
+
+Your first act as a reader of memory: print one byte three ways.
 
 Full program: `code/main.c` — prints the same value three ways plus shifts.
 
@@ -53,6 +67,8 @@ Change X → Y: change `0xA6` to `0x0F`. Verify: `make run` → bits `00001111`,
 
 ## Build It (compile + dump — see your bytes)
 
+A program is a file, and a file is bytes. Look at yours.
+
 ```bash
 make run
 xxd build/bits | head -3
@@ -70,6 +86,8 @@ What this does: runs the sim, then shows its raw file bytes and disassembled `ma
 Change X → Y: pipe `xxd` into `grep OSFS` vs your bits binary. Verify: text binary contains strings, bits binary doesn't — proves `xxd` shows what's really inside, not what ran.
 
 ## Use It (Linux)
+
+Step outside your program. The whole system speaks hex out here.
 
 Addresses are hex in the wild:
 
@@ -91,7 +109,7 @@ Change X → Y: `p/x 4096` → `0x1000`. Verify: 4096 = one page (4 KiB) — the
 
 ## Ship It
 
-Artifact: `outputs/hex-card.md` — nibble table + `<<`/`>>`/`&` one-liners + GDB verbs. Keep open during every `objdump`/GDB session from here on.
+Artifact: `outputs/hex-card.md` — nibble table + `<<`/`>>`/`&` one-liners + GDB verbs. Keep it open during every `objdump`/GDB session from here on. This card never leaves your desk for the rest of the book.
 
 ## Exercises
 

@@ -57,3 +57,62 @@ figure.excalidraw svg { width: 100%; height: auto; background: var(--sl-color-bg
   background-clip: text;
   color: transparent;
 }
+
+/* ---- Book reading experience (after makingsoftware.com) ---- */
+
+/* Serif chapter + section titles. */
+.content-panel h1,
+.sl-markdown-content h2 {
+  font-family: Georgia, 'Iowan Old Style', 'Times New Roman', serif;
+  letter-spacing: -0.01em;
+}
+.content-panel > h1 {
+  text-align: center;
+  text-wrap: balance;
+}
+
+/* Chapter eyebrow: mono metadata under the title. */
+.chapter-kicker {
+  text-align: center;
+  font-family: var(--sl-font-mono, ui-monospace, monospace);
+  font-size: 0.6875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--sl-color-gray-3);
+  line-height: 2;
+}
+
+/* Paper card around the chapter on desktop. */
+@media (min-width: 50rem) {
+  html:not([data-has-hero]) .content-panel {
+    border-radius: 0.5rem;
+    padding: 3rem 4rem;
+    margin-top: 1.5rem;
+  }
+  html[data-theme='light']:not([data-has-hero]) .content-panel {
+    background: #ffffff;
+    border: 1px solid #e6e9ef;
+    box-shadow:
+      0 1px 4px 1px rgba(0, 0, 0, 0.05),
+      0 1px 1px 0 rgba(0, 0, 0, 0.5),
+      0 -1px 1px 1px #fff inset;
+  }
+  html[data-theme='dark']:not([data-has-hero]) .content-panel {
+    background: #181825;
+    border: 1px solid #313244;
+    box-shadow:
+      0 1px 4px 1px rgba(0, 0, 0, 0.4),
+      0 1px 1px 0 rgba(0, 0, 0, 0.6);
+  }
+}
+
+/* Chapter closer. */
+.chapter-end {
+  text-align: center;
+  font-family: var(--sl-font-mono, ui-monospace, monospace);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--sl-color-gray-3);
+  margin-top: 3rem;
+}

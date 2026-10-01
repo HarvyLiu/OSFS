@@ -3,6 +3,7 @@
 Operating manual for contributors and AI agents. Read before any PR.
 
 This repo is a curriculum, not an app. Lessons are the product. Beginners are the audience.
+Voice is book-author, not manual: see `VOICE.md` (binding).
 
 ## Philosophy
 

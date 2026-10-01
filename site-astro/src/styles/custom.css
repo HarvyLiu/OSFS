@@ -1,3 +1,51 @@
-/* Explain-toggle for line tables + figure captions. */
+/* OSFS theme: Catppuccin peach buttons, yellow footer. */
+
+/* ---- Light (Latte) ---- */
+:root[data-theme='light'] {
+  --sl-color-accent-low: #f9dcc3;
+  --sl-color-accent: #fe640b; /* Latte peach: buttons, links */
+  --sl-color-accent-high: #b34a06; /* burnt orange: text accents on light */
+  --sl-color-text-accent: #b34a06;
+  --sl-color-bg: #eff1f5;
+  --sl-color-bg-nav: #e6e9ef;
+  --sl-color-bg-sidebar: #e6e9ef;
+}
+
+/* ---- Dark (Mocha, default vibe) ---- */
+:root[data-theme='dark'] {
+  --sl-color-accent-low: #4a2c14;
+  --sl-color-accent: #fab387; /* Mocha peach: buttons, links */
+  --sl-color-accent-high: #f9e2af; /* Mocha yellow: highlights */
+  --sl-color-text-accent: #fab387;
+  --sl-color-bg: #1e1e2e;
+  --sl-color-bg-nav: #181825;
+  --sl-color-bg-sidebar: #181825;
+}
+
+/* ---- Footer: yellowish-orange band ---- */
+:root[data-theme='light'] footer {
+  background: #df8e1d; /* Latte yellow */
+  color: #11111b;
+}
+:root[data-theme='dark'] footer {
+  background: #f9e2af; /* Mocha yellow */
+  color: #11111b;
+}
+footer a {
+  color: #11111b;
+}
+footer a:hover {
+  color: #000000;
+}
+
+/* ---- Lesson niceties ---- */
 .explain-table { font-size: 0.92rem; }
 figure.excalidraw svg { width: 100%; height: auto; background: var(--sl-color-bg); }
+
+/* Hero title warms up with the palette. */
+.hero h1 {
+  background: linear-gradient(100deg, var(--sl-color-accent) 20%, var(--sl-color-accent-high) 80%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}

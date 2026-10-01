@@ -1,6 +1,18 @@
 ---
 title: OS From Scratch
 description: College OS for beginners — graphed, runnable, Linux-first.
+template: splash
+hero:
+  title: OS, from scratch.
+  tagline: College operating systems rewritten so a beginner can actually follow it — graphed, runnable, Linux-first.
+  actions:
+    - text: Start the primer
+      link: lessons/p-00-mental-model--01-bits-binary-hex/
+      icon: right-arrow
+    - text: Read the roadmap
+      link: roadmap/
+      icon: open-book
+      variant: minimal
 ---
 
 College OS, rewritten so a beginner can actually follow it.

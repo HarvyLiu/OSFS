@@ -20,12 +20,19 @@ make -C phases/10-boot-to-shell/01-boot-sector/code
 make -C phases/10-boot-to-shell/02-protected-mode/code
 make -C phases/10-boot-to-shell/03-shell-capstone/code
 
-timeout 5 qemu-system-x86_64 -drive format=raw,file=phases/10-boot-to-shell/01-boot-sector/code/build/boot.bin -nographic | grep -q 'OSFS boot!'
-echo "boot 10/01 banner OK"
-timeout 5 qemu-system-x86_64 -drive format=raw,file=phases/10-boot-to-shell/02-protected-mode/code/build/os.bin -nographic | grep -q 'protected! C runs.'
-echo "boot 10/02 banner OK"
-timeout 5 qemu-system-x86_64 -drive format=raw,file=phases/10-boot-to-shell/03-shell-capstone/code/build/os.bin -nographic | grep -q 'myos>'
-echo "boot 10/03 banner OK"
+boot_check() {
+  img=$1; banner=$2
+  log=/tmp/osfs-boot-$(echo "$img" | tr '/' '-').log
+  echo "== boot $img (expect: $banner)"
+  timeout 20 qemu-system-x86_64 -drive format=raw,file="$img" -nographic > "$log" 2>&1 || rc=$?
+  cat "$log"
+  test "${rc:-0}" -eq 124
+  grep -q "$banner" "$log"
+  echo "banner OK: $banner"
+}
+boot_check phases/10-boot-to-shell/01-boot-sector/code/build/boot.bin 'OSFS boot!'
+boot_check phases/10-boot-to-shell/02-protected-mode/code/build/os.bin 'protected! C runs.'
+boot_check phases/10-boot-to-shell/03-shell-capstone/code/build/os.bin 'myos>'
 
 test "$fails" -eq 0
 echo "LINUX-ALL-OK"
